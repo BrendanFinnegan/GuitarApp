@@ -5,3 +5,15 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+User.destroy_all
+User.reset_pk_sequence
+Song.reset_pk_sequence
+Song.destroy_all
+InterestedSong.destroy_all
+InterestedSong.reset_pk_sequence
+
+User.create(name: 'Brendan', email: 'Brendan@Brendan.com', password: '12345')
+Song.create(user_id: 1, title: 'Creep', artist: 'Radiohead', genre: 'Rock', date_learned: '2010-01-01 00:00:00', my_ability_level: 9, singable: true, lyrics: 'when you were here before', tabs: 'test tabs', notes: 'test notes', recording: 'test recording link')
+InterestedSong.create(user_id: 1, title: 'Aint no sunshine', artist: 'unknown', genre: 'notsure')
+puts 'Done Seeding!'
