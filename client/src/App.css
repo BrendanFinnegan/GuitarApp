@@ -48,13 +48,14 @@ nav.color-nav.navbar.navbar-expand.navbar-dark {
   cursor: pointer;
 }
 
-.nav-container.container {
+/* .nav-container.container {
   margin-left: 5%;
-}
+  justify-content: left;
+} */
 
-a.mr-auto.navbar-brand {
+/* a.mr-auto.navbar-brand {
   margin-right: 8%;
-}
+} */
 
 .game-card.card {
   margin-top: 4%;

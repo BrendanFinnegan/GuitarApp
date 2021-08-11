@@ -10,7 +10,7 @@ import MyInterestedSongs from './components/MyInterestedSongs';
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
-
+import Grid from '@material-ui/core/Grid'
 function App() {
 
   const [currentUser, setCurrentUser] = useState([])
@@ -57,15 +57,22 @@ function App() {
     }, [currentUser])
 
   return (
-    // <Router>
+
     <div className="App">
+      <Grid  container
+  direction="row"
+  justifyContent="flex-start"
+  alignItems="flex-start">
+    <Grid item xs={2}>
       <NavBar currentUser={currentUser}/>
+      </Grid>
+      <Grid item xs={9}>
       <Switch>
         <Route exact path="/login">
           <Login setCurrentUser={setCurrentUser}/>
         </Route>
         <Route exact path="/signup">
-          <SignUp />
+          <SignUp setCurrentUser={setCurrentUser}/>
         </Route>
         <Route exact path="/mylibrary">
           <MyLibrary userSongs={userSongs} />
@@ -77,8 +84,10 @@ function App() {
           <Home currentUser={currentUser}/>
         </Route>
       </Switch>
+      </Grid>
+      </Grid>
     </div>
-    // </Router>
+    
   );
 }
 

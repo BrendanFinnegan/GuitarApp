@@ -12,18 +12,18 @@ function NavBar({currentUser, setCurrentUser}){
 
     return(
         <>
-        <Navbar className="color-nav" variant="dark">
+        <Navbar className="color-nav" variant="dark" style={{height: '100vh', textAlign: 'left'}}>
             <Container className="nav-container">
-                <Navbar.Brand className="mr-auto" style={{fontFamily:'Reem Kufi', color: 'black', fontSize: 'larger'}} href="/">My Guitar Space</Navbar.Brand>
+                <Navbar.Brand className="color-links" style={{fontFamily:'Reem Kufi', color: 'black', fontSize: 'larger', margin: '10px'}} href="/">My Guitar Space</Navbar.Brand>
                 <Nav className="me-auto">
-                
+                <br/>
                     <Nav.Link style={{color: 'black', fontSize: 'large', fontWeight: 'bold', fontFamily:'Reem Kufi'}} className="color-links" href="/">Home</Nav.Link>
-
+                    <br/>
                    <Nav.Link style={{color: 'black', fontSize: 'large', fontWeight: 'bold', fontFamily:'Reem Kufi'}} className="color-links" href="/mylibrary">My Library</Nav.Link> 
-
+                   <br/>
                     <Nav.Link style={{color: 'black', fontSize: 'large', fontWeight: 'bold', fontFamily:'Reem Kufi'}} className="color-links" href="/myinterestedsongs">My Interested Songs</Nav.Link>
-
-                   {currentUser.id ? <Nav.Link style={{color: 'black', fontSize: 'large', fontWeight: 'bold', fontFamily:'Reem Kufi'}} className="ml-auto" href="/login"  onClick={handleLogout}>Logout</Nav.Link> : <Nav.Link style={{color: 'black', fontSize: 'large', fontWeight: 'bold', fontFamily:'Reem Kufi'}} className="ml-auto" href="/login" >Login</Nav.Link>} 
+                    <br/>
+                   {currentUser.id ? <Nav.Link style={{color: 'black', fontSize: 'large', fontWeight: 'bold', fontFamily:'Reem Kufi'}} className="color-links" href="/login"  onClick={handleLogout}>Logout</Nav.Link> : <Nav.Link style={{color: 'black', fontSize: 'large', fontWeight: 'bold', fontFamily:'Reem Kufi'}} className="color-links" href="/login" >Login</Nav.Link>} 
                     
                 </Nav>
             </Container>

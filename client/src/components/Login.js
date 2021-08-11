@@ -31,7 +31,9 @@ function Login({setCurrentUser}){
         }
     }
 
-
+    function handleClick(e) {
+        history.push('/signup')
+    }
     return(
 
         <div style={{margin: 'auto', align: 'center'}}>
@@ -54,7 +56,8 @@ function Login({setCurrentUser}){
            <br />
 
             <Button type="submit" className="gameButton" style={{}}>Login</Button>
-            {/* <Form.Label>Or</Form.Label> */}
+            <Form.Label>Or</Form.Label>
+            <Button onClick={handleClick} className="gameButton">Signup</Button>
             
 
         </Form>
