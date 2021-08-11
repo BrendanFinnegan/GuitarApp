@@ -1,6 +1,15 @@
 import { Navbar, Container, Nav } from "react-bootstrap"
 
-function NavBar(){
+function NavBar({currentUser, setCurrentUser}){
+
+    async function handleLogout(e){
+        const res = await fetch('/logout', {
+            method: 'DELETE'
+        })
+
+        setCurrentUser([])
+    }
+
     return(
         <>
         <Navbar className="color-nav" variant="dark">
@@ -14,7 +23,7 @@ function NavBar(){
 
                     <Nav.Link style={{color: 'black', fontSize: 'large', fontWeight: 'bold', fontFamily:'Reem Kufi'}} className="color-links" href="/myinterestedsongs">My Interested Songs</Nav.Link>
 
-                   <Nav.Link style={{color: 'black', fontSize: 'large', fontWeight: 'bold', fontFamily:'Reem Kufi'}} className="ml-auto" href="/login" >Login</Nav.Link> 
+                   {currentUser.id ? <Nav.Link style={{color: 'black', fontSize: 'large', fontWeight: 'bold', fontFamily:'Reem Kufi'}} className="ml-auto" href="/login"  onClick={handleLogout}>Logout</Nav.Link> : <Nav.Link style={{color: 'black', fontSize: 'large', fontWeight: 'bold', fontFamily:'Reem Kufi'}} className="ml-auto" href="/login" >Login</Nav.Link>} 
                     
                 </Nav>
             </Container>

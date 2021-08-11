@@ -18,12 +18,48 @@ function App() {
   const [interestedSongs, setInterestedSongs] = useState([])
 
 
-console.log(currentUser)
+  useEffect(() => {
+    fetch(`/me`)
+    .then(res => res.json())
+    .then(data => {
+      if (data.id) {
+        setCurrentUser(data)
+      } 
+    })
+    }, [])
+
+    useEffect(() => {
+      if (currentUser.id) {
+        fetch(`/getsongs/${currentUser.id}`)
+        .then(res => res.json())
+        .then(data =>{
+          if (data.length > 0){
+            setUserSongs(data)
+          }
+        })
+      } else {
+        setUserSongs([])
+      }
+    }, [currentUser])
+
+    useEffect(() => {
+      if (currentUser.id) {
+        fetch(`/getinterests/${currentUser.id}`)
+        .then(res => res.json())
+        .then(data =>{
+          if (data.length > 0){
+            setInterestedSongs(data)
+          }
+        })
+      } else {
+        setInterestedSongs([])
+      }
+    }, [currentUser])
 
   return (
     // <Router>
     <div className="App">
-      <NavBar />
+      <NavBar currentUser={currentUser}/>
       <Switch>
         <Route exact path="/login">
           <Login setCurrentUser={setCurrentUser}/>
@@ -32,10 +68,10 @@ console.log(currentUser)
           <SignUp />
         </Route>
         <Route exact path="/mylibrary">
-          <MyLibrary />
+          <MyLibrary userSongs={userSongs} />
         </Route>
         <Route exact path="/myinterestedsongs">
-          <MyInterestedSongs />
+          <MyInterestedSongs interestedSongs={interestedSongs}/>
         </Route>
         <Route exact path="/">
           <Home currentUser={currentUser}/>

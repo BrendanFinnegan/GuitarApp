@@ -1,6 +1,8 @@
 
 
-function MyLibrary(){
+function MyLibrary({userSongs}){
+
+    
     return(
     <h2>MyLibrary</h2>
     )
