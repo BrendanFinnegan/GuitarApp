@@ -1,25 +1,48 @@
 import logo from './logo.svg';
 import './App.css';
+import Home from './components/Home';
+import NavBar from './components/NavBar';
+import { Route, Switch } from "react-router"
+import Login from './components/Login';
+import SignUp  from './components/SignUp';
+import MyLibrary from './components/MyLibrary';
+import MyInterestedSongs from './components/MyInterestedSongs';
+import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 
 function App() {
+
+  const [currentUser, setCurrentUser] = useState([])
+  const [userSongs, setUserSongs] = useState([])
+  const [interestedSongs, setInterestedSongs] = useState([])
+
+
+console.log(currentUser)
+
   return (
+    // <Router>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit testdeploy <code>src/App.js</code> and save to reload.
-        </p>
-        <iframe src="https://player.vimeo.com/video/585483154?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;h=8131289c0e" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Test Embed With Some weird music vimeo added!"></iframe>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <NavBar />
+      <Switch>
+        <Route exact path="/login">
+          <Login setCurrentUser={setCurrentUser}/>
+        </Route>
+        <Route exact path="/signup">
+          <SignUp />
+        </Route>
+        <Route exact path="/mylibrary">
+          <MyLibrary />
+        </Route>
+        <Route exact path="/myinterestedsongs">
+          <MyInterestedSongs />
+        </Route>
+        <Route exact path="/">
+          <Home currentUser={currentUser}/>
+        </Route>
+      </Switch>
     </div>
+    // </Router>
   );
 }
 

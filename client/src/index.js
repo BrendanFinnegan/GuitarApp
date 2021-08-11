@@ -3,11 +3,20 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import WebFont from 'webfontloader';
+import { BrowserRouter as Router } from "react-router-dom";
+
+
+WebFont.load({
+  google: {
+    families: ['Cinzel','Goldman', 'cursive','sans-serif', 'Reem Kufi']
+  }
+});
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Router>
     <App />
-  </React.StrictMode>,
+    </Router>,
   document.getElementById('root')
 );
 
