@@ -7,6 +7,8 @@ import Login from './components/Login';
 import SignUp  from './components/SignUp';
 import MyLibrary from './components/MyLibrary';
 import MyInterestedSongs from './components/MyInterestedSongs';
+import NewSongForm from './components/NewSongForm';
+import NewInterestedSongForm from './components/NewInterestedSongForm';
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
@@ -78,7 +80,13 @@ function App() {
           <MyLibrary userSongs={userSongs} />
         </Route>
         <Route exact path="/myinterestedsongs">
-          <MyInterestedSongs interestedSongs={interestedSongs}/>
+          <MyInterestedSongs userSongs={userSongs} setUserSongs={setUserSongs} setInterestedSongs={setInterestedSongs} currentUser={currentUser} interestedSongs={interestedSongs}/>
+        </Route>
+        <Route exact path="/newsongform">
+          <NewSongForm userSongs={userSongs} setUserSongs={setUserSongs} currentUser={currentUser}/>
+        </Route>
+        <Route exact path="/newinterestedsongform">
+          <NewInterestedSongForm interestedSongs={interestedSongs} setInterestedSongs={setInterestedSongs} currentUser={currentUser}/>
         </Route>
         <Route exact path="/">
           <Home currentUser={currentUser}/>
