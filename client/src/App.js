@@ -77,7 +77,7 @@ function App() {
           <SignUp setCurrentUser={setCurrentUser}/>
         </Route>
         <Route exact path="/mylibrary">
-          <MyLibrary userSongs={userSongs} />
+          <MyLibrary setUserSongs={setUserSongs} userSongs={userSongs} />
         </Route>
         <Route exact path="/myinterestedsongs">
           <MyInterestedSongs userSongs={userSongs} setUserSongs={setUserSongs} setInterestedSongs={setInterestedSongs} currentUser={currentUser} interestedSongs={interestedSongs}/>

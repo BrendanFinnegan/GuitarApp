@@ -4,12 +4,12 @@ import Box from '@material-ui/core/Box';
 import { useHistory } from "react-router-dom"
 import { Button } from "react-bootstrap"
 
-function MyLibrary({userSongs}){
+function MyLibrary({userSongs, setUserSongs}){
     let history = useHistory()
     let songCards = userSongs.map(song => {
         return <Grid item key={song.id}>
             
-            <SongCard song={song} />
+            <SongCard setUserSongs={setUserSongs} song={song} />
 
                 </Grid>
     })

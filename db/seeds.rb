@@ -8,8 +8,8 @@
 
 User.destroy_all
 User.reset_pk_sequence
-Song.reset_pk_sequence
 Song.destroy_all
+Song.reset_pk_sequence
 InterestedSong.destroy_all
 InterestedSong.reset_pk_sequence
 

@@ -29,8 +29,17 @@ class SongsController < ApplicationController
         end
     end
 
-    def test
-        byebug
+    def update
+        song = Song.find(params[:id])
+        song[:title] = params[:title]
+        song[:artist] = params[:artist]
+        song[:genre] = params[:genre]
+        song[:my_ability_level] = params[:my_ability_level]
+        song[:year_learned] = params[:year_learned]
+        song[:notes] = params[:notes]
+        song[:recording] = params[:recording]
+        song.save
+        render json: Song.all
     end
 
     private
