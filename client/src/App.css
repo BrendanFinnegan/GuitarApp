@@ -115,6 +115,11 @@ a.color-links.nav-link {
   margin: 10px
 }
 
+.accordion {
+  border: none;
+  shadow: none;
+}
+
 button.gameButton.btn.btn-primary {
   margin-top: 1%;
   margin-left: 1%;

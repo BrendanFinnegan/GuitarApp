@@ -37,66 +37,7 @@ function SongCard({song}){
       
         const classes = useStyles();
       
-    // const Accordion = withStyles({
-    //     heading: {
-    //         fontFamily: 'Reem Kufi'
-    //         },
-    //     root: {
-    //         fontWeight: 'bold',
-    //         fontFamily:'Reem Kufi',
-    //       border: 'none',
-        
-    //       boxShadow: 'none',
-    //       '&:not(:last-child)': {
-    //         borderBottom: 0,
-    //       },
-    //       '&:before': {
-    //         display: 'none',
-    //       },
-    //       '&$expanded': {
-    //         margin: 'auto',
-    //       },
-    //     },
-    //     expanded: {},
-    //   })(MuiAccordion);
-      
-    //   const AccordionSummary = withStyles({
-    //       textAlign: 'center',
-    //       heading: {
-    //         fontFamily: 'Reem Kufi'
-    //         },
-    //     // fontFamily:'Reem Kufi',
-    //     // root: {
-    //     //     fontFamily:'Reem Kufi',
-    //     //   backgroundColor: 'rgba(0, 0, 0, .03)',
-    //     //   borderBottom: '1px solid rgba(0, 0, 0, .125)',
-    //     //   marginBottom: -1,
-    //     //   minHeight: 56,
-    //     //   '&$expanded': {
-    //     //     minHeight: 56,
-    //     //   },
-    //     // },
-    //     // content: {
-    //     //   '&$expanded': {
-    //     //     margin: '12px 0',
-    //     //   },
-    //     // },
-    //     // expanded: {},
-    //   })(MuiAccordionSummary);
-      
-    //   const AccordionDetails = withStyles((theme) => ({
-    //     heading: {
-    //         fontFamily: 'Reem Kufi'
-    //         },
-    //     root: {
-    //         fontWeight: 'bold',
-    //         margin: 'auto', align: 'center',
-    //         color: 'red',
-    //         font:'goldman',
-    //       padding: theme.spacing(2),
-    //     },
-    //   }))(MuiAccordionDetails);
-
+   
 
 
 
@@ -127,15 +68,12 @@ function SongCard({song}){
 
             <h4>Year Learned: {song.year_learned}</h4>
                 </Grid>
-                {/* <Grid item xs={12}>
-            <h4>Lyrics: {song.lyrics}</h4>
-                </Grid> */}
             <Grid item xs={12} >
-                <div className={classes.root}>
+                <div >
 
-            <Accordion className={classes.root} >
-        <AccordionSummary className={classes.root} >
-          <Typography  className={classes.heading}>Lyrics</Typography>
+            <Accordion style={{ boxShadow: "none" }}  >
+        <AccordionSummary  >
+          <Typography className={classes.heading} > Click to Show Lyrics</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
