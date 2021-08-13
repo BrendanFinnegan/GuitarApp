@@ -1,77 +1,101 @@
 import { Card, Button } from '@material-ui/core'
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid'
-import MuiAccordion from '@material-ui/core/Accordion';
-import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
-import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
+// import MuiAccordion from '@material-ui/core/Accordion';
+// import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
+// import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
+// import { withStyles } from '@material-ui/core/styles';
 // import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 // import Accordion from 'react-bootstrap/Accordion'
 // import Card from 'react-bootstrap/Card'
 // import Button from 'react-bootstrap/Button'
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import { makeStyles } from '@material-ui/core/styles';
 
 function SongCard({song}){
 
-    const Accordion = withStyles({
-        heading: {
-            fontFamily: 'Reem Kufi'
-            },
+    const useStyles = makeStyles((theme) => ({
         root: {
-            fontWeight: 'bold',
-            fontFamily:'Reem Kufi',
-          border: 'none',
+          width: '100%',
+          border: 'none', 
+          shadow: 'none', 
+          transition: 'none'
+        },
+        heading: {
+          color: 'black',
+          fontFamily: 'Reem Kufi', 
+          justifyContent: 'center', 
+          fontWeight: 'bold', 
+          margin: 'auto',
+          border: 'none', 
+          shadow: 'none'
+        },
+      }));
+      
+        const classes = useStyles();
+      
+    // const Accordion = withStyles({
+    //     heading: {
+    //         fontFamily: 'Reem Kufi'
+    //         },
+    //     root: {
+    //         fontWeight: 'bold',
+    //         fontFamily:'Reem Kufi',
+    //       border: 'none',
         
-          boxShadow: 'none',
-          '&:not(:last-child)': {
-            borderBottom: 0,
-          },
-          '&:before': {
-            display: 'none',
-          },
-          '&$expanded': {
-            margin: 'auto',
-          },
-        },
-        expanded: {},
-      })(MuiAccordion);
+    //       boxShadow: 'none',
+    //       '&:not(:last-child)': {
+    //         borderBottom: 0,
+    //       },
+    //       '&:before': {
+    //         display: 'none',
+    //       },
+    //       '&$expanded': {
+    //         margin: 'auto',
+    //       },
+    //     },
+    //     expanded: {},
+    //   })(MuiAccordion);
       
-      const AccordionSummary = withStyles({
-          textAlign: 'center',
-          heading: {
-            fontFamily: 'Reem Kufi'
-            },
-        // fontFamily:'Reem Kufi',
-        // root: {
-        //     fontFamily:'Reem Kufi',
-        //   backgroundColor: 'rgba(0, 0, 0, .03)',
-        //   borderBottom: '1px solid rgba(0, 0, 0, .125)',
-        //   marginBottom: -1,
-        //   minHeight: 56,
-        //   '&$expanded': {
-        //     minHeight: 56,
-        //   },
-        // },
-        // content: {
-        //   '&$expanded': {
-        //     margin: '12px 0',
-        //   },
-        // },
-        // expanded: {},
-      })(MuiAccordionSummary);
+    //   const AccordionSummary = withStyles({
+    //       textAlign: 'center',
+    //       heading: {
+    //         fontFamily: 'Reem Kufi'
+    //         },
+    //     // fontFamily:'Reem Kufi',
+    //     // root: {
+    //     //     fontFamily:'Reem Kufi',
+    //     //   backgroundColor: 'rgba(0, 0, 0, .03)',
+    //     //   borderBottom: '1px solid rgba(0, 0, 0, .125)',
+    //     //   marginBottom: -1,
+    //     //   minHeight: 56,
+    //     //   '&$expanded': {
+    //     //     minHeight: 56,
+    //     //   },
+    //     // },
+    //     // content: {
+    //     //   '&$expanded': {
+    //     //     margin: '12px 0',
+    //     //   },
+    //     // },
+    //     // expanded: {},
+    //   })(MuiAccordionSummary);
       
-      const AccordionDetails = withStyles((theme) => ({
-        heading: {
-            fontFamily: 'Reem Kufi'
-            },
-        root: {
-            fontWeight: 'bold',
-            margin: 'auto', align: 'center',
-            color: 'red',
-            font:'goldman',
-          padding: theme.spacing(2),
-        },
-      }))(MuiAccordionDetails);
+    //   const AccordionDetails = withStyles((theme) => ({
+    //     heading: {
+    //         fontFamily: 'Reem Kufi'
+    //         },
+    //     root: {
+    //         fontWeight: 'bold',
+    //         margin: 'auto', align: 'center',
+    //         color: 'red',
+    //         font:'goldman',
+    //       padding: theme.spacing(2),
+    //     },
+    //   }))(MuiAccordionDetails);
 
 
 
@@ -107,9 +131,11 @@ function SongCard({song}){
             <h4>Lyrics: {song.lyrics}</h4>
                 </Grid> */}
             <Grid item xs={12} >
-            <Accordion square >
-        <AccordionSummary >
-          <Typography>Lyrics</Typography>
+                <div className={classes.root}>
+
+            <Accordion className={classes.root} >
+        <AccordionSummary className={classes.root} >
+          <Typography  className={classes.heading}>Lyrics</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
@@ -117,6 +143,7 @@ function SongCard({song}){
           </Typography>
         </AccordionDetails>
       </Accordion>
+                </div>
             </Grid>
                 <Grid item xs={12}>
 
