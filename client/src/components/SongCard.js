@@ -36,10 +36,17 @@ function SongCard({song, setUserSongs}){
     const [year, setYear] = useState(song.year_learned)
     const [notes, setNotes] = useState(song.notes)
     const [recording, setRecording] = useState(song.recording)
-    
+    const [lyrics, setLyrics] = useState(song.lyrics)
 
+    console.log(song.lyrics)
+
+    let arrayStr = song.lyrics.split("\n")
+    console.log(arrayStr)
+
+    let lyricList = arrayStr.map(elly => <li>{elly}</li>)
 
     const [open, setOpen] = useState(false);
+    const [openLyricsEdit, setOpenLyricsEdit] = useState(false);
 
     const useStyles = makeStyles((theme) => ({
         root: {
@@ -50,12 +57,11 @@ function SongCard({song, setUserSongs}){
         },
         heading: {
           color: 'black',
-          fontFamily: 'Reem Kufi', 
-          justifyContent: 'center', 
+          fontFamily: 'Reem Kufi',  
           fontWeight: 'bold', 
-          margin: 'auto',
           border: 'none', 
-          shadow: 'none'
+          shadow: 'none',
+          textDecoration: 'underline'
         },
       }));
       
@@ -71,6 +77,15 @@ function SongCard({song, setUserSongs}){
             const handleClose = () => {
               setOpen(false);
             };
+
+            const handleClickLyricsEditOpen = () => {
+              setOpenLyricsEdit(true);
+            };
+          
+            const handleCloseLyricsEdit = () => {
+              setOpenLyricsEdit(false);
+            };
+
 
             function handleEdit (e) {
                 e.preventDefault();
@@ -103,31 +118,52 @@ function SongCard({song, setUserSongs}){
 
             const theme = createTheme({
                 overrides: {
-                    MuiDialog: {},
+                    MuiDialog: {
+                      paperWidthSm: {
+                        width: '600px'
+                      }
+                    },
 
                   // Style sheet name ⚛️
-                  MuiButton: {
-                    outlined: {
-                        padding: '0px'},
-                    // Name of the rule
-                    text: {
-                      // Some CSS
-                      background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-                      borderRadius: 3,
-                      border: 0,
-                      color: 'white',
-                      height: 48,
-                      padding: '0 30px',
-                      boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-                    },
-                    textPrimary: {
-                        color: 'blue',
-                    },
-                },
+                //   MuiButton: {
+                //     outlinedPrimary: {
+                //         border: 'none'},
+                //     // Name of the rule
+                //     text: {
+                //       // Some CSS
+                //       background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+                //       borderRadius: 3,
+                //       border: 0,
+                //       color: 'white',
+                //       height: 48,
+                //       padding: '0 30px',
+                //       boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+                //     },
+                //     textPrimary: {
+                //         color: 'blue',
+                //     },
+                // },
                   },
                 },
               );
               
+              function handleLyricsEdit(e) {
+                e.preventDefault()
+                console.log(e.target)
+
+                let lyricsObj = {
+                    lyrics
+                }
+
+                fetch (`/editLyrics/${song.id}`, { 
+                    method: 'PATCH',
+                    headers: {
+                'Content-Type': 'application/json'
+            }, 
+                body: JSON.stringify(lyricsObj)
+                }).then(setOpenLyricsEdit(false))
+              }
+            
               
             //   function DefaultProps() {
             //     return (
@@ -137,7 +173,7 @@ function SongCard({song, setUserSongs}){
             //     );
             //   }
 
-
+           
     return(
   
     <Card style={{fontFamily:'Reem Kufi', alignItems:'center', flexDirection: 'column', height: '50vh', width: '75vw', overflow: 'auto'}}> 
@@ -166,31 +202,97 @@ function SongCard({song, setUserSongs}){
              <h4>Year Learned: {song.year_learned}</h4>
         </Grid>
 
+        {/* <Grid item xs={12}>
+            <h4>Notes: {song.notes}</h4>
+         */}
         <Grid item xs={12} >
             <Accordion style={{ boxShadow: "none" }}  >
                 <AccordionSummary  >
-                    <Typography className={classes.heading} > Click to Show Lyrics</Typography>
+                    <Typography className={classes.heading} > Show Notes</Typography>
                 </AccordionSummary>
                     <AccordionDetails>
                         <Typography>
-                             {song.lyrics}
+                             {song.notes}
                         </Typography>
+                     </AccordionDetails>
+             </Accordion>
+             </Grid>
+        <Grid item xs={12} style={{alignItems: 'left'}} >
+            <Accordion  >
+                <AccordionSummary  >
+                    <Typography className={classes.heading} > Show Lyrics</Typography>
+                </AccordionSummary>
+                    <AccordionDetails style={{ display: "block" }}>
+                        <Typography >
+                             <ul style={{textAlign: "left",listStyleType: "none"}}>
+                             {lyricList}
+                             </ul>
+                
+                        </Typography>
+         
+                        <Button variant="outlined" color="primary" onClick={handleClickLyricsEditOpen}>
+        Edit or Add Lyrics
+      </Button>
+      <br/>
+      <ThemeProvider theme={theme}>
+      <Dialog
+  open={openLyricsEdit} onClose={handleCloseLyricsEdit} aria-labelledby="form-dialog-title">
+        <DialogTitle  id="form-dialog-title">Edit or Add Lyrics</DialogTitle>
+        <form onSubmit={handleLyricsEdit}>
+        <DialogContent >
+          {/* <DialogContentText>
+            Edit the Song information
+          </DialogContentText> */}
+          
+          <TextField
+                        
+                        multiline
+                        id="standard-textarea"
+                        label="Lyrics"
+                        type="Multilne"
+                        rows={6}
+                        cols={30}
+                        value={lyrics}
+                        fullWidth
+                        onChange={e => setLyrics(e.target.value)}
+                      
+            
+          />
+        
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseLyricsEdit} color="primary">
+            Cancel
+          </Button>
+          <Button type="submit" color="primary">
+            Save
+          </Button>
+          
+        </DialogActions>
+        </form>
+      </Dialog>
+      </ThemeProvider>
+
                      </AccordionDetails>
              </Accordion>
         </Grid>
         <Grid item xs={12}>
-            <h4>Notes: {song.notes}</h4>
-        </Grid>
-        <Grid item xs={12}>
+        <Accordion style={{ boxShadow: "none" }}  >
+        <AccordionSummary  >
+        <Typography className={classes.heading} > Click for Video Recording </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
           <>
-            <h4>Recording: </h4>
             {recordingID ?
             <> 
             <iframe src={`https://player.vimeo.com/video/${recordingID}`} width="640" height="360" frameBorder="0" allow="autoplay; fullscreen; picture-in-picture" allowFullScreen title="Test Embed With Some weird music vimeo added!"></iframe>
             
             </>
              : <h2>There's no recording on file for this song. Add one here:</h2> }
+           
             </>
+            </AccordionDetails>
+            </Accordion>
         </Grid>
 
         <Grid item xs={12}>
@@ -201,7 +303,7 @@ function SongCard({song, setUserSongs}){
 
       {/* <ThemeProvider> */}
       <Dialog 
-  overlayStyle={{backgroundColor: 'transparent'}} open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+  open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle  id="form-dialog-title">Edit Song Information</DialogTitle>
         <form onSubmit={handleEdit}>
         <DialogContent>
@@ -280,7 +382,7 @@ function SongCard({song, setUserSongs}){
                         autoFocus
                         margin="dense"
                         id="recording"
-                        label="recording"
+                        label="Vimeo Recording (link example https://vimeo.com/585483154)"
                         type="text"
                         value={recording}
                         onChange={e => setRecording(e.target.value)}
