@@ -47,6 +47,12 @@ function SongCard({song, setUserSongs}){
 
     const [open, setOpen] = useState(false);
     const [openLyricsEdit, setOpenLyricsEdit] = useState(false);
+    const [openNotesEdit, setOpenNotesEdit] = useState(false);
+
+    let notesArry = song.notes.split("\n")
+
+
+    let notesList = notesArry.map(elly => <li>{elly}</li>)
 
     const useStyles = makeStyles((theme) => ({
         root: {
@@ -86,6 +92,34 @@ function SongCard({song, setUserSongs}){
               setOpenLyricsEdit(false);
             };
 
+
+            const handleClickNotesEditOpen = () => {
+              setOpenNotesEdit(true);
+            };
+          
+            const handleCloseNotesEdit = () => {
+              setOpenNotesEdit(false);
+            };
+
+            function handleNotesEdit(e){
+              e.preventDefault()
+              console.log(e.target)
+
+              let notesObj = {
+                  notes
+              }
+
+              fetch (`/editNotes/${song.id}`, { 
+                  method: 'PATCH',
+                  headers: {
+              'Content-Type': 'application/json'
+          }, 
+              body: JSON.stringify(notesObj)
+              }).then(res => res.json()).then(data => {
+                setOpenNotesEdit(false)
+                setUserSongs(data)
+              })
+            }
 
             function handleEdit (e) {
                 e.preventDefault();
@@ -176,7 +210,7 @@ function SongCard({song, setUserSongs}){
            
     return(
   
-    <Card style={{fontFamily:'Reem Kufi', alignItems:'center', flexDirection: 'column', height: '50vh', width: '75vw', overflow: 'auto'}}> 
+    <Card style={{fontFamily:'Reem Kufi', alignItems:'center', flexDirection: 'column', height: '35vh', width: '75vw', overflow: 'auto'}}> 
         <Grid item container
   direction="row"
   justifyContent="flex-start"
@@ -205,7 +239,7 @@ function SongCard({song, setUserSongs}){
         {/* <Grid item xs={12}>
             <h4>Notes: {song.notes}</h4>
          */}
-        <Grid item xs={12} >
+        {/* <Grid item xs={12} >
             <Accordion style={{ boxShadow: "none" }}  >
                 <AccordionSummary  >
                     <Typography className={classes.heading} > Show Notes</Typography>
@@ -216,7 +250,67 @@ function SongCard({song, setUserSongs}){
                         </Typography>
                      </AccordionDetails>
              </Accordion>
-             </Grid>
+             </Grid> */}
+
+<Grid item xs={12} style={{alignItems: 'left'}} >
+            <Accordion  >
+                <AccordionSummary  >
+                    <Typography className={classes.heading} > Show Notes </Typography>
+                </AccordionSummary>
+                    <AccordionDetails style={{ display: "block" }}>
+                        <Typography >
+                             <ul style={{textAlign: "left",listStyleType: "none"}}>
+                             {notesList}
+                             </ul>
+                
+                        </Typography>
+         
+                        <Button variant="outlined" color="primary" onClick={handleClickNotesEditOpen}>
+        Edit or Add Notes
+      </Button>
+      <br/>
+      <ThemeProvider theme={theme}>
+      <Dialog
+  open={openNotesEdit} onClose={handleCloseNotesEdit} aria-labelledby="form-dialog-title">
+        <DialogTitle  id="notes">Edit or Add Notes</DialogTitle>
+        <form onSubmit={handleNotesEdit}>
+        <DialogContent >
+          {/* <DialogContentText>
+            Edit the Song information
+          </DialogContentText> */}
+          
+          <TextField
+                        
+                        multiline
+                        id="Notes"
+                        label="Notes"
+                        type="Multilne"
+                        rows={6}
+                        cols={30}
+                        value={notes}
+                        fullWidth
+                        onChange={e => setNotes(e.target.value)}
+                      
+            
+          />
+        
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseNotesEdit} color="primary">
+            Cancel
+          </Button>
+          <Button type="submit" color="primary">
+            Save
+          </Button>
+          
+        </DialogActions>
+        </form>
+      </Dialog>
+      </ThemeProvider>
+
+                     </AccordionDetails>
+             </Accordion>
+        </Grid>
         <Grid item xs={12} style={{alignItems: 'left'}} >
             <Accordion  >
                 <AccordionSummary  >

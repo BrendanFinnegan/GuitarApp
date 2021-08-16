@@ -48,6 +48,14 @@ class SongsController < ApplicationController
         song.save
     end
 
+    def editNotes
+        song = Song.find(params[:id])
+        song[:notes] = params[:notes]
+        song.save
+
+        render json: Song.all
+    end
+
     private
 
     def song_params
