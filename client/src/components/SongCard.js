@@ -18,6 +18,16 @@ import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 
 function SongCard({song, setUserSongs}){
 
+  // console.log(song.recording)
+
+  // let videoObj = `https://vimeo.com/api/oembed.json?url=${song.recording}`
+
+  // console.log(videoObj)
+  const [videoObj, setVideoObj] = useState(`https://vimeo.com/api/oembed.json?url=${song.recording}`)
+  const [recordingID, setRecordingID] = useState('')
+  useEffect( () => {fetch(videoObj).then(res => res.json()).then(data => setRecordingID(data.video_id))},[videoObj] )
+
+// console.log(recordingID)
 
     const [title, setTitle] = useState(song.title)
     const [artist, setArtist] = useState(song.artist)
@@ -172,7 +182,15 @@ function SongCard({song, setUserSongs}){
             <h4>Notes: {song.notes}</h4>
         </Grid>
         <Grid item xs={12}>
-            <h4>Recording: {song.recording}</h4>
+          <>
+            <h4>Recording: </h4>
+            {recordingID ?
+            <> 
+            <iframe src={`https://player.vimeo.com/video/${recordingID}`} width="640" height="360" frameBorder="0" allow="autoplay; fullscreen; picture-in-picture" allowFullScreen title="Test Embed With Some weird music vimeo added!"></iframe>
+            
+            </>
+             : <h2>There's no recording on file for this song. Add one here:</h2> }
+            </>
         </Grid>
 
         <Grid item xs={12}>
@@ -181,8 +199,8 @@ function SongCard({song, setUserSongs}){
         Edit this Song Information
       </Button>
 
-      <ThemeProvider >
-      <Dialog style={{width: '200px', marginLeft: '40%', backgroundColor: 'transparent'}}
+      {/* <ThemeProvider> */}
+      <Dialog 
   overlayStyle={{backgroundColor: 'transparent'}} open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle  id="form-dialog-title">Edit Song Information</DialogTitle>
         <form onSubmit={handleEdit}>
@@ -280,7 +298,7 @@ function SongCard({song, setUserSongs}){
         </DialogActions>
         </form>
       </Dialog>
-      </ThemeProvider>
+      {/* </ThemeProvider> */}
     </div>
     </Grid>
         </Grid>   

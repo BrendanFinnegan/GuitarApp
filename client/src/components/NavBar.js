@@ -19,10 +19,16 @@ function NavBar({currentUser, setCurrentUser}){
                 <br/>
                     <Nav.Link style={{color: 'black', fontSize: 'large', fontWeight: 'bold', fontFamily:'Reem Kufi'}} className="color-links" href="/">Home</Nav.Link>
                     <br/>
-                   <Nav.Link style={{color: 'black', fontSize: 'large', fontWeight: 'bold', fontFamily:'Reem Kufi'}} className="color-links" href="/mylibrary">My Library</Nav.Link> 
+                   {currentUser.id ? 
+                   <>
+                   <Nav.Link style={{color: 'black', fontSize: 'large', fontWeight: 'bold', fontFamily:'Reem Kufi'}} className="color-links" href="/mylibrary">My Library</Nav.Link>
                    <br/>
-                    <Nav.Link style={{color: 'black', fontSize: 'large', fontWeight: 'bold', fontFamily:'Reem Kufi'}} className="color-links" href="/myinterestedsongs">My Interested Songs</Nav.Link>
+                   </> : null}
+                   {currentUser.id ? 
+                   <>
+                    <Nav.Link style={{color: 'black', fontSize: 'large', fontWeight: 'bold', fontFamily:'Reem Kufi'}} className="color-links" href="/myinterestedsongs">My Interested Songs</Nav.Link> 
                     <br/>
+                    </> : null}
                    {currentUser.id ? <Nav.Link style={{color: 'black', fontSize: 'large', fontWeight: 'bold', fontFamily:'Reem Kufi'}} className="color-links" href="/login"  onClick={handleLogout}>Logout</Nav.Link> : <Nav.Link style={{color: 'black', fontSize: 'large', fontWeight: 'bold', fontFamily:'Reem Kufi'}} className="color-links" href="/login" >Login</Nav.Link>} 
                     
                 </Nav>
