@@ -1,4 +1,5 @@
-import { Card, Button } from '@material-ui/core'
+import { Card } from '@material-ui/core'
+import { Button } from "react-bootstrap"
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography';
@@ -23,6 +24,7 @@ function SongCard({song, setUserSongs}){
   // let videoObj = `https://vimeo.com/api/oembed.json?url=${song.recording}`
 
   // console.log(videoObj)
+
   const [videoObj, setVideoObj] = useState(`https://vimeo.com/api/oembed.json?url=${song.recording}`)
   const [recordingID, setRecordingID] = useState('')
   useEffect( () => {fetch(videoObj).then(res => res.json()).then(data => setRecordingID(data.video_id))},[videoObj] )
@@ -130,7 +132,6 @@ function SongCard({song, setUserSongs}){
                     genre,
                     my_ability_level: ability,
                     year_learned: year,
-                    notes,
                     recording
                 }
 
@@ -195,7 +196,10 @@ function SongCard({song, setUserSongs}){
                 'Content-Type': 'application/json'
             }, 
                 body: JSON.stringify(lyricsObj)
-                }).then(setOpenLyricsEdit(false))
+                }).then(res => res.json()).then(data => {
+                  setOpenLyricsEdit(false)
+                  setUserSongs(data) 
+                })
               }
             
               
@@ -265,7 +269,7 @@ function SongCard({song, setUserSongs}){
                 
                         </Typography>
          
-                        <Button variant="outlined" color="primary" onClick={handleClickNotesEditOpen}>
+                        <Button className="gameButton" onClick={handleClickNotesEditOpen}>
         Edit or Add Notes
       </Button>
       <br/>
@@ -296,10 +300,10 @@ function SongCard({song, setUserSongs}){
         
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseNotesEdit} color="primary">
+          <Button onClick={handleCloseNotesEdit}className="gameButton">
             Cancel
           </Button>
-          <Button type="submit" color="primary">
+          <Button type="submit" className="gameButton">
             Save
           </Button>
           
@@ -324,7 +328,7 @@ function SongCard({song, setUserSongs}){
                 
                         </Typography>
          
-                        <Button variant="outlined" color="primary" onClick={handleClickLyricsEditOpen}>
+                        <Button className="gameButton" onClick={handleClickLyricsEditOpen}>
         Edit or Add Lyrics
       </Button>
       <br/>
@@ -355,10 +359,10 @@ function SongCard({song, setUserSongs}){
         
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseLyricsEdit} color="primary">
+          <Button onClick={handleCloseLyricsEdit} className="gameButton">
             Cancel
           </Button>
-          <Button type="submit" color="primary">
+          <Button type="submit" className="gameButton">
             Save
           </Button>
           
@@ -391,7 +395,7 @@ function SongCard({song, setUserSongs}){
 
         <Grid item xs={12}>
         <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      <Button className="gameButton" onClick={handleClickOpen}>
         Edit this Song Information
       </Button>
 
@@ -460,18 +464,6 @@ function SongCard({song, setUserSongs}){
                         fullWidth
                     />
 
-
-            <TextField
-                        autoFocus
-                        margin="dense"
-                        id="notes"
-                        label="Notes"
-                        type="text"
-                        value={notes}
-                        onChange={e => setNotes(e.target.value)}
-                        fullWidth
-                    />
-
             <TextField
                         autoFocus
                         margin="dense"
@@ -484,10 +476,10 @@ function SongCard({song, setUserSongs}){
                     />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleClose} className="gameButton">
             Cancel
           </Button>
-          <Button type="submit" color="primary">
+          <Button type="submit" className="gameButton">
             Save
           </Button>
           

@@ -36,6 +36,15 @@ class InterestedSongsController < ApplicationController
         render json: song
     end
 
+    def update
+        song = InterestedSong.find(params[:id])
+        song[:title] = params[:title]
+        song[:artist] = params[:artist]
+        song[:genre] = params[:genre]
+        song.save
+        render json: InterestedSong.all
+    end
+
     private
 
     def song_params

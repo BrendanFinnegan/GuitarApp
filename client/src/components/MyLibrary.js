@@ -8,12 +8,12 @@ import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import { makeStyles } from '@material-ui/core/styles';
-
-
+import { useState } from "react"
+import TextField from '@material-ui/core/TextField';
 
 function MyLibrary({userSongs, setUserSongs}){
     let history = useHistory()
-
+    const [filterInput, setFilterInput] = useState("")
     const useStyles = makeStyles((theme) => ({
         root: {
           width: '100%',
@@ -30,13 +30,21 @@ function MyLibrary({userSongs, setUserSongs}){
           
         },
       }));
+      const classes = useStyles();
+
       
-        const classes = useStyles();
-    let songCards = userSongs.map(song => {
+      function handleSearch(e) {
+        setFilterInput(e.target.value)
+    }
+    
+    let filterCards = userSongs.filter(song => song.title.toLowerCase().includes(filterInput.toLowerCase()) || song.artist.toLowerCase().includes(filterInput.toLocaleLowerCase()))
+    
+       
+    let songCards = filterCards.map(song => {
         return <Grid item key={song.id}>
             <Accordion style={{ boxShadow: "none" }}  >
         <AccordionSummary  >
-        <Typography className={classes.heading} > {song.title}, {song.artist} </Typography>
+        <Typography className={classes.heading} >  {song.artist}, {song.title} </Typography>
         </AccordionSummary>
         <AccordionDetails>
           <>
@@ -54,10 +62,25 @@ function MyLibrary({userSongs, setUserSongs}){
 function handleNewSongFormNavigation() {
     history.push('/newsongform')
 }
+
+
     return(
     <>
+    <Grid container
+  direction="row"
+  justifyContent="flex-start"
+  alignItems="center">
+      <Grid item xs={12}>
     <h2>MyLibrary</h2>
+      </Grid>
+    <Grid item xs={3}>
+    <TextField variant="filled" style={{backgroundColor: 'white', borderRadius: '5px'}} label="Search by Artist or Title" value={filterInput} onChange={handleSearch} />
+    </Grid>
+    <Grid item xs={6}></Grid>
+    <Grid item xs={3}>
     <Button className="gameButton" onClick={handleNewSongFormNavigation}>Add New Song To Library</Button>
+    </Grid>
+    </Grid>
     <Grid container
   direction="column"
   justifyContent="flex-start"

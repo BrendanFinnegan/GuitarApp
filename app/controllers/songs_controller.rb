@@ -36,7 +36,6 @@ class SongsController < ApplicationController
         song[:genre] = params[:genre]
         song[:my_ability_level] = params[:my_ability_level]
         song[:year_learned] = params[:year_learned]
-        song[:notes] = params[:notes]
         song[:recording] = params[:recording]
         song.save
         render json: Song.all
@@ -46,6 +45,8 @@ class SongsController < ApplicationController
         song = Song.find(params[:id])
         song[:lyrics] = params[:lyrics]
         song.save
+
+        render json: Song.all
     end
 
     def editNotes
