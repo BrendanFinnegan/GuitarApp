@@ -19,17 +19,17 @@ import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 
 function SongCard({song, setUserSongs}){
 
-  // console.log(song.recording)
 
-  // let videoObj = `https://vimeo.com/api/oembed.json?url=${song.recording}`
-
-  // console.log(videoObj)
 
   const [videoObj, setVideoObj] = useState(`https://vimeo.com/api/oembed.json?url=${song.recording}`)
   const [recordingID, setRecordingID] = useState('')
-  useEffect( () => {fetch(videoObj).then(res => res.json()).then(data => setRecordingID(data.video_id))},[videoObj] )
+  useEffect( () => {
+  
+  if (song.recording)
+  {fetch(videoObj).then(res => res.json()).then(data => setRecordingID(data.video_id))
+  }},[videoObj] 
+  )
 
-// console.log(recordingID)
 
     const [title, setTitle] = useState(song.title)
     const [artist, setArtist] = useState(song.artist)
@@ -40,10 +40,10 @@ function SongCard({song, setUserSongs}){
     const [recording, setRecording] = useState(song.recording)
     const [lyrics, setLyrics] = useState(song.lyrics)
 
-    console.log(song.lyrics)
+    // console.log(song.lyrics)
 
     let arrayStr = song.lyrics.split("\n")
-    console.log(arrayStr)
+    // console.log(arrayStr)
 
     let lyricList = arrayStr.map(elly => <li>{elly}</li>)
 
@@ -74,9 +74,6 @@ function SongCard({song, setUserSongs}){
       }));
       
         const classes = useStyles();
-      
-
-            
           
             const handleClickOpen = () => {
               setOpen(true);
@@ -158,26 +155,6 @@ function SongCard({song, setUserSongs}){
                         width: '600px'
                       }
                     },
-
-                  // Style sheet name ⚛️
-                //   MuiButton: {
-                //     outlinedPrimary: {
-                //         border: 'none'},
-                //     // Name of the rule
-                //     text: {
-                //       // Some CSS
-                //       background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-                //       borderRadius: 3,
-                //       border: 0,
-                //       color: 'white',
-                //       height: 48,
-                //       padding: '0 30px',
-                //       boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-                //     },
-                //     textPrimary: {
-                //         color: 'blue',
-                //     },
-                // },
                   },
                 },
               );
@@ -202,15 +179,13 @@ function SongCard({song, setUserSongs}){
                 })
               }
             
-              
-            //   function DefaultProps() {
-            //     return (
-            //       <ThemeProvider theme={theme}>
-            //         <Button>Change default props</Button>
-            //       </ThemeProvider>
-            //     );
-            //   }
-
+              function handleImportLyrics(){
+                fetch(`/importlyrics?artist=${artist}&title=${title}`)
+                .then(res => res.json()).then(data => {
+                  console.log(data.lyrics_body)
+                  setLyrics(data.lyrics_body)
+                })
+              }
            
     return(
   
@@ -240,22 +215,6 @@ function SongCard({song, setUserSongs}){
              <h4>Year Learned: {song.year_learned}</h4>
         </Grid>
 
-        {/* <Grid item xs={12}>
-            <h4>Notes: {song.notes}</h4>
-         */}
-        {/* <Grid item xs={12} >
-            <Accordion style={{ boxShadow: "none" }}  >
-                <AccordionSummary  >
-                    <Typography className={classes.heading} > Show Notes</Typography>
-                </AccordionSummary>
-                    <AccordionDetails>
-                        <Typography>
-                             {song.notes}
-                        </Typography>
-                     </AccordionDetails>
-             </Accordion>
-             </Grid> */}
-
 <Grid item xs={12} style={{alignItems: 'left'}} >
             <Accordion  >
                 <AccordionSummary  >
@@ -275,15 +234,11 @@ function SongCard({song, setUserSongs}){
       <br/>
       <ThemeProvider theme={theme}>
       <Dialog
-  open={openNotesEdit} onClose={handleCloseNotesEdit} aria-labelledby="form-dialog-title">
-        <DialogTitle  id="notes">Edit or Add Notes</DialogTitle>
-        <form onSubmit={handleNotesEdit}>
-        <DialogContent >
-          {/* <DialogContentText>
-            Edit the Song information
-          </DialogContentText> */}
-          
-          <TextField
+        open={openNotesEdit} onClose={handleCloseNotesEdit} aria-labelledby="form-dialog-title">
+          <DialogTitle  id="notes">Edit or Add Notes</DialogTitle>
+            <form onSubmit={handleNotesEdit}>
+              <DialogContent >
+                  <TextField
                         
                         multiline
                         id="Notes"
@@ -329,18 +284,19 @@ function SongCard({song, setUserSongs}){
                         </Typography>
          
                         <Button className="gameButton" onClick={handleClickLyricsEditOpen}>
-        Edit or Add Lyrics
-      </Button>
-      <br/>
+                                Edit or Add Lyrics
+                              </Button>
+                              <br/>
+                        <Button className="gameButton" onClick={handleImportLyrics}>
+                                Click to Import Lyrics
+                              </Button>
+                              <br/>
       <ThemeProvider theme={theme}>
       <Dialog
   open={openLyricsEdit} onClose={handleCloseLyricsEdit} aria-labelledby="form-dialog-title">
         <DialogTitle  id="form-dialog-title">Edit or Add Lyrics</DialogTitle>
         <form onSubmit={handleLyricsEdit}>
         <DialogContent >
-          {/* <DialogContentText>
-            Edit the Song information
-          </DialogContentText> */}
           
           <TextField
                         
@@ -386,7 +342,7 @@ function SongCard({song, setUserSongs}){
             <iframe src={`https://player.vimeo.com/video/${recordingID}`} width="640" height="360" frameBorder="0" allow="autoplay; fullscreen; picture-in-picture" allowFullScreen title="Test Embed With Some weird music vimeo added!"></iframe>
             
             </>
-             : <h2>There's no recording on file for this song. Add one here:</h2> }
+             : <h4>There's no recording on file for this song. Add one via the edit song information button </h4> }
            
             </>
             </AccordionDetails>

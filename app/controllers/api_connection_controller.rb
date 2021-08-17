@@ -8,4 +8,12 @@ class ApiConnectionController < ApplicationController
 
     end
 
+    def lyric_fetcher
+        new_request = ApiConnection.new
+        data = new_request.lyric_fetch(params)
+
+        render json: data
+
+    end
+
 end

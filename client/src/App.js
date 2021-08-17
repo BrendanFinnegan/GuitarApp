@@ -90,7 +90,7 @@ function App() {
           <NewInterestedSongForm interestedSongs={interestedSongs} setInterestedSongs={setInterestedSongs} currentUser={currentUser}/>
         </Route>
         <Route exact path="/searchpage">
-          <SearchPage interestedSongs={interestedSongs} setInterestedSongs={setInterestedSongs} currentUser={currentUser} userSongs={userSongs}/>
+          <SearchPage interestedSongs={interestedSongs} setUserSongs={setUserSongs} setInterestedSongs={setInterestedSongs} currentUser={currentUser} userSongs={userSongs}/>
         </Route>
         <Route exact path="/">
           <Home currentUser={currentUser} setCurrentUser={setCurrentUser}/>
