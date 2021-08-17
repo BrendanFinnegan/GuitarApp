@@ -29,8 +29,13 @@ function NavBar({currentUser, setCurrentUser}){
                     <Nav.Link style={{color: 'black', fontSize: 'large', fontWeight: 'bold', fontFamily:'Reem Kufi'}} className="color-links" href="/myinterestedsongs">My Interested Songs</Nav.Link> 
                     <br/>
                     </> : null}
+
+                    {currentUser.id ? <> <Nav.Link style={{color: 'black', fontSize: 'large', fontWeight: 'bold', fontFamily:'Reem Kufi'}} className="color-links" href="/searchpage"  >Search For New Songs</Nav.Link> <br/> </> : null} 
+
                    {currentUser.id ? <Nav.Link style={{color: 'black', fontSize: 'large', fontWeight: 'bold', fontFamily:'Reem Kufi'}} className="color-links" href="/login"  onClick={handleLogout}>Logout</Nav.Link> : <Nav.Link style={{color: 'black', fontSize: 'large', fontWeight: 'bold', fontFamily:'Reem Kufi'}} className="color-links" href="/login" >Login</Nav.Link>} 
                     
+
+
                 </Nav>
             </Container>
         </Navbar>

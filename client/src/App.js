@@ -9,6 +9,7 @@ import MyLibrary from './components/MyLibrary';
 import MyInterestedSongs from './components/MyInterestedSongs';
 import NewSongForm from './components/NewSongForm';
 import NewInterestedSongForm from './components/NewInterestedSongForm';
+import SearchPage from './components/SearchPage';
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
@@ -88,8 +89,11 @@ function App() {
         <Route exact path="/newinterestedsongform">
           <NewInterestedSongForm interestedSongs={interestedSongs} setInterestedSongs={setInterestedSongs} currentUser={currentUser}/>
         </Route>
+        <Route exact path="/searchpage">
+          <SearchPage interestedSongs={interestedSongs} setInterestedSongs={setInterestedSongs} currentUser={currentUser} userSongs={userSongs}/>
+        </Route>
         <Route exact path="/">
-          <Home currentUser={currentUser}/>
+          <Home currentUser={currentUser} setCurrentUser={setCurrentUser}/>
         </Route>
       </Switch>
       </Grid>

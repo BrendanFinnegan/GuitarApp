@@ -1,11 +1,20 @@
+import Login from "./Login";
 
-function Home({currentUser}) {
+
+function Home({currentUser, setCurrentUser}) {
 
     
     return(
         <>
     <h2>Home Page</h2>
-    {currentUser.id ? <p>Welcome {currentUser.name} </p> : null}
+    {currentUser.id ? 
+    <>
+    <p>Welcome {currentUser.name} </p>
+
+        <h4>Carousel Placeholder</h4>
+
+    </>
+     : <Login setCurrentUser={setCurrentUser} />}
         </>
     )
 }
