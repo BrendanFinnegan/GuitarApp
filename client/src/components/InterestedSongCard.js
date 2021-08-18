@@ -135,16 +135,6 @@ function InterestedSongCard({song, currentUser, setInterestedSongs, userSongs, s
                         onChange={e => setTitle(e.target.value)}
                         fullWidth
           />
-          <TextField
-                        autoFocus
-                        margin="dense"
-                        id="genre"
-                        label="Genre"
-                        type="text"
-                        value={genre}
-                        onChange={e => setGenre(e.target.value)}
-                        fullWidth
-                    />
 
             <TextField
                         autoFocus
@@ -154,6 +144,16 @@ function InterestedSongCard({song, currentUser, setInterestedSongs, userSongs, s
                         type="text"
                         value={artist}
                         onChange={e => setArtist(e.target.value)}
+                        fullWidth
+                    />
+          <TextField
+                        autoFocus
+                        margin="dense"
+                        id="genre"
+                        label="Genre"
+                        type="text"
+                        value={genre}
+                        onChange={e => setGenre(e.target.value)}
                         fullWidth
                     />
 

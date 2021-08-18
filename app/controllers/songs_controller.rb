@@ -37,6 +37,7 @@ class SongsController < ApplicationController
         song[:my_ability_level] = params[:my_ability_level]
         song[:year_learned] = params[:year_learned]
         song[:recording] = params[:recording]
+        song[:singable] = params[:singable]
         song.save
         render json: Song.all
     end
@@ -55,6 +56,12 @@ class SongsController < ApplicationController
         song.save
 
         render json: Song.all
+    end
+
+    def songsbeingplayed
+        user = User.find(params[:id])
+        songs = user.songs.sample(3)
+        render json: songs
     end
 
     private

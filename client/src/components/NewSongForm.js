@@ -59,7 +59,7 @@ function NewSongForm ({userSongs, setUserSongs, currentUser}) {
         }
 
     }
-
+        console.log(singableResponse)
     return(
         <div >
         <h3 style={{fontFamily: 'Reem Kufi', color: 'black' }}>Add New Song to Your Library</h3>
@@ -79,10 +79,10 @@ function NewSongForm ({userSongs, setUserSongs, currentUser}) {
                 <Form.Control style={{marginLeft: '10px'}} type="text" placeholder="Enter The Genre" value={genre} onChange={(e) => setGenre(e.target.value)}/>
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicLyrics">
+            {/* <Form.Group className="mb-3" controlId="formBasicLyrics">
                 <Form.Label>Lyrics</Form.Label>
                 <Form.Control style={{marginLeft: '10px'}} type="text" placeholder="Enter The Lyrics" value={lyrics} onChange={(e) => setLyrics(e.target.value)}/>
-            </Form.Group>
+            </Form.Group> */}
 
             <Form.Group className="mb-3" controlId="formBasicYear">
                 <Form.Label>Year Learned </Form.Label>
@@ -94,28 +94,39 @@ function NewSongForm ({userSongs, setUserSongs, currentUser}) {
                 <Form.Control style={{marginLeft: '10px'}} type="number" placeholder="Enter Your Rating For How Well You Play This Song" value={abilityLevel} onChange={(e) => setAbilityLevel(e.target.value)}/>
             </Form.Group>
 
+            <Form.Group className="mb-3" controlId="formBasicSingable">
+                <Form.Label >Singable?</Form.Label>
+                <label style={{marginLeft: '10px'}}>No</label>
+                <input style={{marginLeft: '10px'}} type="radio" id="no" name="singable" value="false" onClick={() => setSingableResponse(false)}/>
+                <label style={{marginLeft: '10px'}}>Yes</label>
+                <input style={{marginLeft: '10px'}} type="radio" id="yes" name="singable" value="true" onClick={() => setSingableResponse(true)}/>
+            </Form.Group>
+            
             <Form.Group className="mb-3" controlId="formBasicAbility">
                 <Form.Label>Notes</Form.Label>
                 <textarea style={{marginLeft: '10px'}} rows="2" cols="25" placeholder="Enter Any Notes you have for playing this song" value={notes} onChange={(e) => setNotes(e.target.value)}/>
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicAbility">
+            {/* <Form.Group className="mb-3" controlId="formBasicAbility">
                 <Form.Label>Tabs/Chords</Form.Label>
                 <textarea style={{marginLeft: '10px'}} rows="2" cols="25" placeholder="Enter Any Tabs or Chords you have for this song" value={tabs} onChange={(e) => setTabs(e.target.value)}/>
-            </Form.Group>
+            </Form.Group> */}
 
             <Form.Group className="mb-3" controlId="formBasicAbility">
-                <Form.Label>Recording Link</Form.Label>
-                <Form.Control style={{marginLeft: '10px'}} type="text" placeholder="Enter a link to a recording, if available " value={recording} onChange={(e) => setRecording(e.target.value)}/>
+                <Form.Label>Vimeo Recording Link</Form.Label>
+                <Form.Control style={{marginLeft: '10px'}} type="text" value={recording} onChange={(e) => setRecording(e.target.value)}/>
+                <Form.Label>Example (https://vimeo.com/1234567)</Form.Label>
             </Form.Group>
             </div>
         
+        <p>(Lyrics can be added once the song is in your library)</p>
         
             <Button type="submit" className="gameButton">Add Song!</Button>
             
         </Form>
+
         
-        {/* {errors.error? errors.error.map(e => <p className="error-message" style={{fontFamily: 'Reem Kufi', color: 'black' }}>{e}</p>) : null} */}
+        {errors.error? errors.error.map(e => <p className="error-message" style={{fontFamily: 'Reem Kufi', color: 'black' }}>{e}</p>) : null}
     </div>
     )
 }

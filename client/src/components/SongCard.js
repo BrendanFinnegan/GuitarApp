@@ -39,13 +39,18 @@ function SongCard({song, setUserSongs}){
     const [notes, setNotes] = useState(song.notes)
     const [recording, setRecording] = useState(song.recording)
     const [lyrics, setLyrics] = useState(song.lyrics)
+    const [singableResponse, setSingableResponse] = useState(song.singable)
 
-    // console.log(song.lyrics)
+    // console.log(singableResponse)
 
+
+    const generateKey = (pre) => {
+      return `${ pre }_${ Math.random() }`;
+  }
     let arrayStr = song.lyrics.split("\n")
     // console.log(arrayStr)
 
-    let lyricList = arrayStr.map(elly => <li>{elly}</li>)
+    let lyricList = arrayStr.map(elly => <li key={generateKey(elly)}>{elly}</li>)
 
     const [open, setOpen] = useState(false);
     const [openLyricsEdit, setOpenLyricsEdit] = useState(false);
@@ -54,7 +59,7 @@ function SongCard({song, setUserSongs}){
     let notesArry = song.notes.split("\n")
 
 
-    let notesList = notesArry.map(elly => <li>{elly}</li>)
+    let notesList = notesArry.map(elly => <li key={generateKey(elly)}>{elly}</li>)
 
     const useStyles = makeStyles((theme) => ({
         root: {
@@ -129,7 +134,8 @@ function SongCard({song, setUserSongs}){
                     genre,
                     my_ability_level: ability,
                     year_learned: year,
-                    recording
+                    recording,
+                    singable: singableResponse
                 }
 
                 fetch (`/songs/${song.id}`, { 
@@ -224,17 +230,17 @@ function SongCard({song, setUserSongs}){
         </Grid>
 
 <Grid item xs={12} style={{alignItems: 'left'}} >
-            <Accordion  >
+            <Accordion style={{ boxShadow: "none" }}  >
                 <AccordionSummary  >
                     <Typography className={classes.heading} > Show Notes </Typography>
                 </AccordionSummary>
                     <AccordionDetails style={{ display: "block" }}>
-                        <Typography >
+                    
                              <ul style={{textAlign: "left",listStyleType: "none"}}>
                              {notesList}
                              </ul>
                 
-                        </Typography>
+            
          
                         <Button className="gameButton" onClick={handleClickNotesEditOpen}>
         Edit or Add Notes
@@ -279,17 +285,17 @@ function SongCard({song, setUserSongs}){
              </Accordion>
         </Grid>
         <Grid item xs={12} style={{alignItems: 'left'}} >
-            <Accordion  >
+            <Accordion style={{ boxShadow: "none" }}  >
                 <AccordionSummary  >
                     <Typography className={classes.heading} > Show Lyrics</Typography>
                 </AccordionSummary>
                     <AccordionDetails style={{ display: "block" }}>
-                        <Typography >
+                 
                              <ul style={{textAlign: "left",listStyleType: "none"}}>
                              {lyricList}
                              </ul>
                 
-                        </Typography>
+                
          
                         <Button className="gameButton" onClick={handleClickLyricsEditOpen}>
                                 Add, Edit, or Import Lyrics
@@ -442,6 +448,14 @@ function SongCard({song, setUserSongs}){
                         onChange={e => setRecording(e.target.value)}
                         fullWidth
                     />
+
+                <div>
+                <label >Singable?</label>
+                <label style={{marginLeft: '10px'}}>No</label>
+                <input style={{marginLeft: '10px'}} type="radio" id="no" name="singable" value="false" defaultChecked={!singableResponse} onClick={() => setSingableResponse(false)}/>
+                <label style={{marginLeft: '10px'}}>Yes</label>
+                <input style={{marginLeft: '10px'}} type="radio" id="yes" name="singable" value="true" defaultChecked={singableResponse} onClick={() => setSingableResponse(true)}/>
+                </div>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} className="gameButton">

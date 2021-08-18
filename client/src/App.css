@@ -114,6 +114,14 @@ a.color-links.nav-link {
   font-size: large;
   margin: 10px
 }
+.carousel-div {
+  margin-top: 2%;
+  margin-left:5rem;
+  margin-right: 5rem;
+  border: 5px solid #000000;
+  border-radius: 3px;
+  box-shadow: 18px 18px 10px rgba(0, 0, 0, 0.637);
+}
 
 .accordion {
   border: none;

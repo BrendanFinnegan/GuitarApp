@@ -75,7 +75,7 @@ function SearchPage({interestedSongs, setUserSongs,setInterestedSongs, currentUs
 
     return(
         <>
-        <h3>Search</h3>
+        <h3>Search by Title, Artist, or Both</h3>
         <form onSubmit={handleSubmit}>
         <TextField variant="filled" style={{backgroundColor: 'white', borderRadius: '5px'}} label="Title" value={titleSearchTerm} onChange={e => setTitleSearchTerm(e.target.value)} />
         <br/>
