@@ -187,9 +187,17 @@ function SongCard({song, setUserSongs}){
                 })
               }
            
+              function searchUltGuitar(){
+                window.open(
+                        `https://www.ultimate-guitar.com/search.php?search_type=title&value=${song.title}`,
+                        '_blank' // <- This is what makes it open in a new window.
+                      );
+                }
+
+
     return(
   
-    <Card style={{fontFamily:'Reem Kufi', alignItems:'center', flexDirection: 'column', height: '35vh', width: '75vw', overflow: 'auto'}}> 
+    <Card style={{fontFamily:'Reem Kufi', alignItems:'center', flexDirection: 'column', height: '50vh', width: '75vw', overflow: 'auto'}}> 
         <Grid item container
   direction="row"
   justifyContent="flex-start"
@@ -284,12 +292,12 @@ function SongCard({song, setUserSongs}){
                         </Typography>
          
                         <Button className="gameButton" onClick={handleClickLyricsEditOpen}>
-                                Edit or Add Lyrics
+                                Add, Edit, or Import Lyrics
                               </Button>
                               <br/>
-                        <Button className="gameButton" onClick={handleImportLyrics}>
+                        {/* <Button className="gameButton" onClick={handleImportLyrics}>
                                 Click to Import Lyrics
-                              </Button>
+                              </Button> */}
                               <br/>
       <ThemeProvider theme={theme}>
       <Dialog
@@ -315,6 +323,9 @@ function SongCard({song, setUserSongs}){
         
         </DialogContent>
         <DialogActions>
+          <Button className="gameButton" onClick={handleImportLyrics}>
+                                Click to Import Lyrics
+                              </Button>
           <Button onClick={handleCloseLyricsEdit} className="gameButton">
             Cancel
           </Button>
@@ -348,12 +359,13 @@ function SongCard({song, setUserSongs}){
             </AccordionDetails>
             </Accordion>
         </Grid>
-
-        <Grid item xs={12}>
+        
+        <Grid item xs={6}>
         <div>
       <Button className="gameButton" onClick={handleClickOpen}>
         Edit this Song Information
       </Button>
+      
 
       {/* <ThemeProvider> */}
       <Dialog 
@@ -445,6 +457,9 @@ function SongCard({song, setUserSongs}){
       {/* </ThemeProvider> */}
     </div>
     </Grid>
+          <Grid item xs={6}>
+                  <Button  className="gameButton" onClick={searchUltGuitar} >Search Ultimate Guitar Tabs</Button>
+          </Grid>
         </Grid>   
     </Card>
 

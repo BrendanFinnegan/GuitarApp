@@ -37,9 +37,10 @@ function NavBar({currentUser, setCurrentUser}){
 
 
                 </Nav>
+                
             </Container>
         </Navbar>
-
+        {/* <img src="https://www.clipartmax.com/png/middle/301-3010680_guitar-logo-vector-png-images-gallery-vertical-guitar-icons.png" /> */}
     </>
     )
 }
