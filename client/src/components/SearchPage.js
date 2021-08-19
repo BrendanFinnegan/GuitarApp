@@ -18,7 +18,7 @@ function SearchPage({interestedSongs, setUserSongs,setInterestedSongs, currentUs
     const [titleSearchTerm, setTitleSearchTerm] = useState('')
     const [artistSearchTerm, setArtistSearchTerm] = useState('')
     const [resultsArray, setResultsArray] = useState([])
-
+    const [errors, setErrors] = useState('')
 
     const useStyles = makeStyles((theme) => ({
         root: {
@@ -50,6 +50,8 @@ function SearchPage({interestedSongs, setUserSongs,setInterestedSongs, currentUs
         </AccordionSummary>
         <AccordionDetails>
         <>
+
+        
         <SearchedSongCard key={song.track.album_id} song={song} interestedSongs={interestedSongs} currentUser={currentUser} setInterestedSongs={setInterestedSongs} userSongs={userSongs} setUserSongs={setUserSongs}/>
         </>
             </AccordionDetails>
@@ -67,8 +69,12 @@ function SearchPage({interestedSongs, setUserSongs,setInterestedSongs, currentUs
         fetch(`/search?artist=${artistSearchTerm}&title=${titleSearchTerm}`)
         .then(res => res.json())
         .then(data => {
-            console.log(data.message.body.track_list)
-            setResultsArray(data.message.body.track_list)
+           if (data.message.body.track_list.length > 0)
+           { setResultsArray(data.message.body.track_list)
+            setErrors('')}
+            else {
+                setResultsArray([])
+                setErrors("No Results")}
         })
 
     }
@@ -88,8 +94,10 @@ function SearchPage({interestedSongs, setUserSongs,setInterestedSongs, currentUs
   direction="column"
   justifyContent="flex-start"
   alignItems="flex-end">
-        {resultCards}
+       {resultCards}
+       
     </Grid>
+    {errors ? <h3 style={{fontFamily: 'Reem Kufi', color: 'black' }}>{errors}</h3> : null} 
         </>
     )
 }

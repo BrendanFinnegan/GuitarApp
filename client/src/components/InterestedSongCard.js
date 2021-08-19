@@ -13,7 +13,7 @@ import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { useEffect, useState } from "react";
 
 
-function InterestedSongCard({song, currentUser, setInterestedSongs, userSongs, setUserSongs}){
+function InterestedSongCard({song, currentUser, interestedSongs, setInterestedSongs, userSongs, setUserSongs}){
         let history = useHistory()
         const [open, setOpen] = useState(false);
         const [title, setTitle] = useState(song.title)
@@ -87,38 +87,45 @@ function InterestedSongCard({song, currentUser, setInterestedSongs, userSongs, s
                     setOpen(false)
                 
                 })
-
             }
+
+            function handleDelete(){
+              fetch (`/destroyer/${song.id}`, {
+                method: 'DELETE',
+                headers: {
+                  'Content-Type': 'application/json'
+                }
+              }).then(res => res.json())
+              .then(data => {
+                let filtered = interestedSongs.filter(item => item.id !== data.id)
+                setInterestedSongs(filtered)
+          })}
     return(
   
         <Card style={{ alignItems:'center', flexDirection: 'column', height: '20vh', width: '75vw', overflow: 'auto'}}> 
         <Grid item container
+        spacing={3}
   direction="row"
   justifyContent="flex-start"
   alignItems="flex-start">
-          <Grid item xs={3}>
+          <Grid item xs={6}>
                 <h3>Title: {song.title}</h3>   
           </Grid>
           <Grid item xs={6}>
                 <h3>Artist: {song.artist}</h3>
           </Grid>
-          <Grid item xs={3}>
-                <h3>Genre: {song.genre}</h3>
-          </Grid>
+
           <Grid item xs={3}>
                   <Button  className="gameButton" onClick={searchUltGuitar} >Search Ultimate Guitar Tabs</Button>
           </Grid>
-          <Grid item xs={6}>
-                  <Button  className="gameButton" onClick={handleTransition} >Add This To My Known Songs!</Button>
-          </Grid>
-          
-          
+
           <Grid item xs={3}>
+            
         <div>
       <Button className="gameButton" onClick={handleClickOpen}>
         Edit this Song Information
       </Button>
-
+   
       <Dialog 
         open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle  id="form-dialog-title">Edit Song Information</DialogTitle>
@@ -146,7 +153,7 @@ function InterestedSongCard({song, currentUser, setInterestedSongs, userSongs, s
                         onChange={e => setArtist(e.target.value)}
                         fullWidth
                     />
-          <TextField
+          {/* <TextField
                         autoFocus
                         margin="dense"
                         id="genre"
@@ -155,7 +162,7 @@ function InterestedSongCard({song, currentUser, setInterestedSongs, userSongs, s
                         value={genre}
                         onChange={e => setGenre(e.target.value)}
                         fullWidth
-                    />
+                    /> */}
 
           </DialogContent>
           <DialogActions>
@@ -171,6 +178,16 @@ function InterestedSongCard({song, currentUser, setInterestedSongs, userSongs, s
           </Dialog>
           </div>
           </Grid>
+          <Grid item xs={3}>
+                  <Button  className="gameButton" onClick={handleTransition} >Add This To My Known Songs!</Button>
+          </Grid>
+          <Grid item xs={3}>
+                  <Button  className="gameButton" onClick={handleDelete} >Delete</Button>
+          </Grid>
+          
+        
+
+
           </Grid>   
         </Card>
     

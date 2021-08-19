@@ -45,6 +45,13 @@ class InterestedSongsController < ApplicationController
         render json: InterestedSong.all
     end
 
+    def destroyer
+        song = InterestedSong.find(params[:id])
+        song.destroy
+
+        render json: song
+    end
+
     private
 
     def song_params

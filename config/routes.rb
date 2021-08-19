@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   get "/search", to: "api_connection#fetcher"
   get "/importlyrics", to: "api_connection#lyric_fetcher"
   get "/Songsbeingplayed/:id", to: "songs#songsbeingplayed"
+  delete "destroyer/:id", to: "interested_songs#destroyer"
+  # delete "/songs/:id", to: "songs#destroy"
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!
   get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }

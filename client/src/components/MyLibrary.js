@@ -48,7 +48,7 @@ function MyLibrary({userSongs, setUserSongs}){
         </AccordionSummary>
         <AccordionDetails>
           <>
-          <SongCard setUserSongs={setUserSongs} song={song} />
+          <SongCard setUserSongs={setUserSongs} userSongs={userSongs} song={song} />
             </>
             </AccordionDetails>
             </Accordion>

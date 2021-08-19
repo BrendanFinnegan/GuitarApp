@@ -17,7 +17,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 
-function SongCard({song, setUserSongs}){
+function SongCard({song, userSongs, setUserSongs}){
 
 
 
@@ -47,20 +47,27 @@ function SongCard({song, setUserSongs}){
     const generateKey = (pre) => {
       return `${ pre }_${ Math.random() }`;
   }
-    let arrayStr = song.lyrics.split("\n")
+
+  let lyricList = []
+  if (song.lyrics)
+    {let arrayStr = song.lyrics.split("\n")
     // console.log(arrayStr)
 
-    let lyricList = arrayStr.map(elly => <li key={generateKey(elly)}>{elly}</li>)
+    lyricList = arrayStr.map(elly => <li key={generateKey(elly)}>{elly}</li>)
+    }
 
     const [open, setOpen] = useState(false);
     const [openLyricsEdit, setOpenLyricsEdit] = useState(false);
     const [openNotesEdit, setOpenNotesEdit] = useState(false);
 
+
+    let notesList = []
+    if (song.notes){
     let notesArry = song.notes.split("\n")
 
 
     let notesList = notesArry.map(elly => <li key={generateKey(elly)}>{elly}</li>)
-
+    }
     const useStyles = makeStyles((theme) => ({
         root: {
           width: '100%',
@@ -188,8 +195,11 @@ function SongCard({song, setUserSongs}){
               function handleImportLyrics(){
                 fetch(`/importlyrics?artist=${artist}&title=${title}`)
                 .then(res => res.json()).then(data => {
-                  console.log(data.lyrics_body)
-                  setLyrics(data.lyrics_body)
+                  if (data.length > 0)
+                 { console.log(data.lyrics_body)
+                  setLyrics(data.lyrics_body)}
+                  else
+                  {alert("Sorry! No lyrics found on MusicMatch to import. Let Google be your guide!")}
                 })
               }
            
@@ -199,7 +209,17 @@ function SongCard({song, setUserSongs}){
                         '_blank' // <- This is what makes it open in a new window.
                       );
                 }
-
+                function handleDelete(){
+                  fetch (`/songs/${song.id}`, {
+                    method: 'DELETE',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    }
+                  }).then(res => res.json())
+                  .then(data => {
+                      let filtered = userSongs.filter(item => item.id !== data.id)
+                      setUserSongs(filtered)
+                })}
 
     return(
   
@@ -208,22 +228,22 @@ function SongCard({song, setUserSongs}){
   direction="row"
   justifyContent="flex-start"
   alignItems="flex-start">
-        <Grid item xs={3}>
+        <Grid item xs={2}>
             <h4>Title: {song.title}</h4>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={2}>
             <h4>Artist: {song.artist}</h4>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={2}>
             <h4>Genre: {song.genre}</h4>
         </Grid>
-        <Grid item xs={3}>
+        {/* <Grid item xs={3}>
             <h4>Is this a singable song? {song.singable? 'Yes': 'No'}</h4>
-        </Grid>
-        <Grid item xs={6}>
+        </Grid> */}
+              <Grid item xs={2}>
                     
-            <h4>My Ability Level for this song: {song.my_ability_level}</h4>
-        </Grid>
+                    <h4>My Ability Level: {song.my_ability_level}</h4>
+                </Grid>
 
         <Grid item xs={3}>
              <h4>Year Learned: {song.year_learned}</h4>
@@ -471,9 +491,12 @@ function SongCard({song, setUserSongs}){
       {/* </ThemeProvider> */}
     </div>
     </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={3}>
                   <Button  className="gameButton" onClick={searchUltGuitar} >Search Ultimate Guitar Tabs</Button>
+          </Grid><Grid item xs={3}>
+                  <Button  className="gameButton" onClick={handleDelete} >Delete</Button>
           </Grid>
+
         </Grid>   
     </Card>
 

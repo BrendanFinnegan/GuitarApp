@@ -51,7 +51,7 @@ function MyInterestedSongs({interestedSongs, currentUser, setInterestedSongs, us
         </AccordionSummary>
         <AccordionDetails>
           <>
-            <InterestedSongCard  userSongs={userSongs} setUserSongs={setUserSongs} setInterestedSongs={setInterestedSongs} currentUser={currentUser} song={song} />
+            <InterestedSongCard  userSongs={userSongs} setUserSongs={setUserSongs} interestedSongs={interestedSongs} setInterestedSongs={setInterestedSongs} currentUser={currentUser} song={song} />
             </>
             </AccordionDetails>
             </Accordion>

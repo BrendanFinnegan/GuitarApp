@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom"
 import { useState } from "react";
 
 
-function SearchedSongCard({song, currentUser, setInterestedSongs, userSongs, setUserSongs}){
+function SearchedSongCard({song, currentUser, interestedSongs, setInterestedSongs, userSongs, setUserSongs}){
         let history = useHistory()
         const [open, setOpen] = useState(false);
         const [title, setTitle] = useState(song.track.track_name)
@@ -45,6 +45,7 @@ function SearchedSongCard({song, currentUser, setInterestedSongs, userSongs, set
                     .then(res => res.json())
                     .then(data => {
                         setUserSongs([...userSongs, data])
+                        history.push('/mylibrary')
                     })
             }
 
@@ -65,7 +66,8 @@ function SearchedSongCard({song, currentUser, setInterestedSongs, userSongs, set
                 body: JSON.stringify(songObj)
                 }).then(res => res.json())
                 .then(data => {
-                    setUserSongs(data)
+                    setInterestedSongs([...interestedSongs, data])
+                    history.push('/myinterestedsongs')
                 })
 
             }
