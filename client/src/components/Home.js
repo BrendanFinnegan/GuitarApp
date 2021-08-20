@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import CarouselCard from "./CarouselCard";
 import {useHistory} from "react-router-dom"
 import 'react-multi-carousel/lib/styles.css';
+import Grid from '@material-ui/core/Grid'
+
 function Home({currentUser, setCurrentUser}) {
 
     const responsive = {
@@ -47,7 +49,21 @@ function Home({currentUser, setCurrentUser}) {
       
 console.log(renderSongs)
     return(
-        <>
+      <>
+
+      <br/>
+      <br/>
+
+ 
+          <Grid container
+direction="row"
+justifyContent="flex-start">
+    <Grid item xs={10}>
+      <h3  style={{margin: 'auto', align: 'center', fontFamily: 'Reem Kufi', color: 'black' }}> Login </h3>
+      <br/>
+      </Grid>
+      <Grid item xs={2}></Grid>
+      <Grid item xs={10}>
     <h2>Home Page</h2>
     {currentUser.id ? 
     <>
@@ -58,6 +74,7 @@ console.log(renderSongs)
     </>
      : <Login setCurrentUser={setCurrentUser} />}
     {currentUser.id?  <> <h4>Whens the last time you played....</h4>
+    
     <div  className="carousel-div"  >
             <Carousel  centerMode="true" responsive={responsive} >
         {renderSongs} 
@@ -66,6 +83,9 @@ console.log(renderSongs)
           </div>
           </>
           : null}
+
+          </Grid>
+          </Grid>
         </>
     )
 }

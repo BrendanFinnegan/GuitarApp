@@ -49,6 +49,7 @@ function CarouselCard({song, currentUser, setInterestedSongs, userSongs, setUser
               border: 'none', 
               shadow: 'none', 
               transition: 'none'
+            
             },
             heading: {
               color: 'black',
@@ -56,8 +57,17 @@ function CarouselCard({song, currentUser, setInterestedSongs, userSongs, setUser
               fontWeight: 'bold', 
               border: 'none', 
               shadow: 'none',
-              textDecoration: 'underline'
+              textDecoration: 'underline',
+              alignItems: 'center',
+              display: 'inline-block'
             },
+            content: {
+                color: 'pink',
+                margin: "10px 0",
+                display: "flex",
+                flexGrow: "1",
+                transition: "margin 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms"
+            }
           }));
           
             const classes = useStyles();
@@ -72,9 +82,9 @@ function CarouselCard({song, currentUser, setInterestedSongs, userSongs, setUser
             <h4>{song.title} , by {song.artist}</h4>
         </Grid>
 
-              <Grid item xs={12}>
+              {/* <Grid item xs={12}>
                     <h4>My Ability Level for this one: {song.my_ability_level}</h4>
-                </Grid>
+                </Grid> */}
 
         <Grid item xs={12}>
              <h4>Year Learned: {song.year_learned}</h4>
@@ -82,8 +92,8 @@ function CarouselCard({song, currentUser, setInterestedSongs, userSongs, setUser
 
 
         <Grid item xs={12}>
-        <Accordion style={{ boxShadow: "none" }}  >
-        <AccordionSummary  >
+        <Accordion style={{ boxShadow: "none", display: 'block' }}  >
+        <AccordionSummary className={classes.heading}  >
         <Typography className={classes.heading} > Click for Video Recording </Typography>
         </AccordionSummary>
         <AccordionDetails>
