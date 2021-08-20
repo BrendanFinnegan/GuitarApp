@@ -7,6 +7,7 @@ import Login from './components/Login';
 import SignUp  from './components/SignUp';
 import MyLibrary from './components/MyLibrary';
 import MyInterestedSongs from './components/MyInterestedSongs';
+import SongCard from './components/SongCard';
 import NewSongForm from './components/NewSongForm';
 import NewInterestedSongForm from './components/NewInterestedSongForm';
 import SearchPage from './components/SearchPage';
@@ -19,7 +20,20 @@ function App() {
   const [currentUser, setCurrentUser] = useState([])
   const [userSongs, setUserSongs] = useState([])
   const [interestedSongs, setInterestedSongs] = useState([])
+  const [randomSongs, setRandomSongs] = useState([])
+  const history = useHistory()
 
+  console.log(randomSongs[0])
+
+    useEffect(() => { 
+        if (currentUser.id)
+      fetch(`/Songsbeingplayed/${currentUser.id}`)
+      .then(res => res.json())
+      .then(data => {
+          setRandomSongs(data)
+          console.log(data)
+     })
+  },[currentUser])
 
   useEffect(() => {
     fetch(`/me`)
@@ -93,8 +107,11 @@ function App() {
         <Route exact path="/searchpage">
           <SearchPage interestedSongs={interestedSongs} setUserSongs={setUserSongs} setInterestedSongs={setInterestedSongs} currentUser={currentUser} userSongs={userSongs}/>
         </Route>
+        <Route exact path="/cardpage">
+        {userSongs[0]? <SongCard setUserSongs={setUserSongs} userSongs={userSongs} song={userSongs[1]} /> : null}
+        </Route>
         <Route exact path="/">
-          <Home currentUser={currentUser} setCurrentUser={setCurrentUser}/>
+          <Home currentUser={currentUser} setCurrentUser={setCurrentUser} randomSongs={randomSongs}/>
         </Route>
       </Switch>
       </Grid>

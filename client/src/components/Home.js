@@ -6,7 +6,7 @@ import {useHistory} from "react-router-dom"
 import 'react-multi-carousel/lib/styles.css';
 import Grid from '@material-ui/core/Grid'
 
-function Home({currentUser, setCurrentUser}) {
+function Home({currentUser, setCurrentUser, randomSongs}) {
 
     const responsive = {
       superLargeDesktop: {
@@ -28,18 +28,18 @@ function Home({currentUser, setCurrentUser}) {
       }
     };
     
-      const [randomSongs, setRandomSongs] = useState([])
-      const history = useHistory()
+      // const [randomSongs, setRandomSongs] = useState([])
+      // const history = useHistory()
   
-        useEffect(() => { 
-            if (currentUser.id)
-          fetch(`/Songsbeingplayed/${currentUser.id}`)
-          .then(res => res.json())
-          .then(data => {
-              setRandomSongs(data)
-              console.log(data)
-         })
-      },[currentUser])
+      //   useEffect(() => { 
+      //       if (currentUser.id)
+      //     fetch(`/Songsbeingplayed/${currentUser.id}`)
+      //     .then(res => res.json())
+      //     .then(data => {
+      //         setRandomSongs(data)
+      //         console.log(data)
+      //    })
+      // },[currentUser])
 
 
   
@@ -47,7 +47,6 @@ function Home({currentUser, setCurrentUser}) {
           return <CarouselCard key={song.id} song={song} />
       })
       
-console.log(renderSongs)
     return(
       <>
 
@@ -58,16 +57,11 @@ console.log(renderSongs)
           <Grid container
 direction="row"
 justifyContent="flex-start">
-    <Grid item xs={10}>
-      <h3  style={{margin: 'auto', align: 'center', fontFamily: 'Reem Kufi', color: 'black' }}> Login </h3>
-      <br/>
-      </Grid>
-      <Grid item xs={2}></Grid>
       <Grid item xs={10}>
-    <h2>Home Page</h2>
+    <h2>My Guitar Space</h2>
     {currentUser.id ? 
     <>
-    <p>Welcome {currentUser.name} </p>
+    <h2>Welcome {currentUser.name} </h2>
 
         
 
@@ -76,7 +70,7 @@ justifyContent="flex-start">
     {currentUser.id?  <> <h4>Whens the last time you played....</h4>
     
     <div  className="carousel-div"  >
-            <Carousel  centerMode="true" responsive={responsive} >
+            <Carousel infinite={true}  responsive={responsive} >
         {renderSongs} 
    
           </Carousel>

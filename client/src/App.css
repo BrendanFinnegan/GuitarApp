@@ -173,3 +173,10 @@ button.gameButton.btn.btn-primary:hover {
   padding-left: 25rem;
   padding-right: 25rem;
 }
+
+.navnav{
+  background: #000000;
+  color: #ffffff;
+  border-color: #ff9900;
+  border-radius: 5px;
+}

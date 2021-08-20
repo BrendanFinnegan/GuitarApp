@@ -19,7 +19,7 @@ import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 
 function SongCard({song, userSongs, setUserSongs}){
 
-
+console.log(song)
 
   const [videoObj, setVideoObj] = useState(`https://vimeo.com/api/oembed.json?url=${song.recording}`)
   const [recordingID, setRecordingID] = useState('')

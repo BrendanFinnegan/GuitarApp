@@ -16,7 +16,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
-
+import { Nav } from "react-bootstrap"
 
 
 
@@ -41,7 +41,6 @@ function CarouselCard({song, currentUser, setInterestedSongs, userSongs, setUser
     }},[videoObj] 
     )
 
-        console.log(song)
 
         const useStyles = makeStyles((theme) => ({
             root: {
@@ -88,6 +87,10 @@ function CarouselCard({song, currentUser, setInterestedSongs, userSongs, setUser
 
         <Grid item xs={12}>
              <h4>Year Learned: {song.year_learned}</h4>
+        </Grid>
+
+        <Grid item xs={12}>
+             <Nav.Link  className="navnav" href="/cardpage">More Details</Nav.Link>
         </Grid>
 
 
