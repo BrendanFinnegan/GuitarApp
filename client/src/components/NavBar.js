@@ -12,25 +12,28 @@ function NavBar({currentUser, setCurrentUser}){
 
     return(
         <>
-        <Navbar className="color-nav" variant="dark" style={{height: '100vh', textAlign: 'left'}}>
+        <Navbar className="color-nav" variant="dark" style={{height: '100vh', textAlign: 'left', paddingTop: '20px'}}>
             <Container className="nav-container">
                 <Navbar.Brand className="color-links" style={{fontFamily:'Reem Kufi', color: 'black', fontSize: 'larger', margin: '10px'}} href="/">My Guitar Space</Navbar.Brand>
                 <Nav className="me-auto">
                 <br/>
                     <Nav.Link style={{color: 'black', fontSize: 'large', fontWeight: 'bold', fontFamily:'Reem Kufi'}} className="color-links" href="/">Home</Nav.Link>
                     <br/>
+                    <br/>
                    {currentUser.id ? 
                    <>
                    <Nav.Link style={{color: 'black', fontSize: 'large', fontWeight: 'bold', fontFamily:'Reem Kufi'}} className="color-links" href="/mylibrary">My Library</Nav.Link>
+                   <br/>
                    <br/>
                    </> : null}
                    {currentUser.id ? 
                    <>
                     <Nav.Link style={{color: 'black', fontSize: 'large', fontWeight: 'bold', fontFamily:'Reem Kufi'}} className="color-links" href="/myinterestedsongs">My Interested Songs</Nav.Link> 
                     <br/>
+                    <br/>
                     </> : null}
 
-                    {currentUser.id ? <> <Nav.Link style={{color: 'black', fontSize: 'large', fontWeight: 'bold', fontFamily:'Reem Kufi'}} className="color-links" href="/searchpage"  >Search For New Songs</Nav.Link> <br/> </> : null} 
+                    {currentUser.id ? <> <Nav.Link style={{color: 'black', fontSize: 'large', fontWeight: 'bold', fontFamily:'Reem Kufi'}} className="color-links" href="/searchpage"  >Search For New Songs</Nav.Link> <br/><br/> </> : null} 
 
                    {currentUser.id ? <Nav.Link style={{color: 'black', fontSize: 'large', fontWeight: 'bold', fontFamily:'Reem Kufi'}} className="color-links" href="/login"  onClick={handleLogout}>Logout</Nav.Link> : <Nav.Link style={{color: 'black', fontSize: 'large', fontWeight: 'bold', fontFamily:'Reem Kufi'}} className="color-links" href="/login" >Login</Nav.Link>} 
                     

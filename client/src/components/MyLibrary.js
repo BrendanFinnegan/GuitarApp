@@ -11,15 +11,24 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useState } from "react"
 import TextField from '@material-ui/core/TextField';
 
-function MyLibrary({userSongs, setUserSongs}){
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import NewSongForm from './NewSongForm'
+
+function MyLibrary({currentUser, userSongs, setUserSongs}){
     let history = useHistory()
     const [filterInput, setFilterInput] = useState("")
+    const [open, setOpen] = useState(false);
     const useStyles = makeStyles((theme) => ({
         root: {
           width: '100%',
           border: 'none', 
           shadow: 'none', 
-          transition: 'none'
+          transition: 'none',
+          padding: '0px'
         },
         heading: {
           color: 'black',
@@ -27,7 +36,7 @@ function MyLibrary({userSongs, setUserSongs}){
           fontWeight: 'bold', 
           border: 'none', 
           shadow: 'none',
-          
+       
         },
       }));
       const classes = useStyles();
@@ -38,12 +47,19 @@ function MyLibrary({userSongs, setUserSongs}){
     }
     
     let filterCards = userSongs.filter(song => song.title.toLowerCase().includes(filterInput.toLowerCase()) || song.artist.toLowerCase().includes(filterInput.toLocaleLowerCase()))
-    
+    let sortedCards = filterCards.sort((a,b) => {
+      
+      if (a.artist[0] < b.artist[0])
+      return -1
+    })
+
+    console.log(userSongs)
+    console.log(sortedCards)
        
-    let songCards = filterCards.map(song => {
+    let songCards = sortedCards.map(song => {
         return <Grid item key={song.id}>
-            <Accordion style={{ boxShadow: "none" }}  >
-        <AccordionSummary  >
+            <Accordion style={{ boxShadow: "none", padding: "0px" }}  >
+        <AccordionSummary  className={classes.root} >
         <Typography className={classes.heading} >  {song.artist}, {song.title} </Typography>
         </AccordionSummary>
         <AccordionDetails>
@@ -59,10 +75,18 @@ function MyLibrary({userSongs, setUserSongs}){
                 </Grid>
     })
     
-function handleNewSongFormNavigation() {
-    history.push('/newsongform')
-}
+// function handleNewSongFormNavigation() {
+//     history.push('/newsongform')
+// }
 
+const handleClickOpen = () => {
+  setOpen(true);
+};
+
+const handleClose = () => {
+  setOpen(false);
+};
+// console.log(currentUser)
 
     return(
     <>
@@ -70,21 +94,35 @@ function handleNewSongFormNavigation() {
   direction="row"
   justifyContent="flex-start"
   alignItems="center">
-      <Grid item xs={12}>
+      <Grid item xs={10}>
     <h2>MyLibrary</h2>
       </Grid>
-    <Grid item xs={3}>
-    <TextField variant="filled" style={{backgroundColor: 'white', borderRadius: '5px'}} label="Search by Artist or Title" value={filterInput} onChange={handleSearch} />
+
+      <Grid item xs={2}></Grid>
+      
+    
+    <Grid item xs={10} style={{paddingBottom: '25px'}}>
+    <TextField  style={{backgroundColor: 'white', borderRadius: '5px'}} label="Search by Artist or Title" value={filterInput} onChange={handleSearch} />
     </Grid>
-    <Grid item xs={6}></Grid>
-    <Grid item xs={3}>
-    <Button className="gameButton" onClick={handleNewSongFormNavigation}>Add New Song To Library</Button>
-    </Grid>
+    <Grid item xs={2}>
+
+    <Button className="gameButton" onClick={handleClickOpen}>
+        Add A New Song
+      </Button>
+      </Grid>
+      <Dialog 
+        open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+        <DialogTitle  id="form-dialog-title">New Song Details</DialogTitle>
+        <Typography id="colortext" style={{marginLeft: '24px'}}>(Lyrics and Notes Can be Added Later)</Typography>
+        <NewSongForm handleClose={handleClose} userSongs={userSongs} setUserSongs={setUserSongs} currentUser={currentUser}/>
+          </Dialog>
+    
+    
     </Grid>
     <Grid container
   direction="column"
   justifyContent="flex-start"
-  alignItems="flex-end">
+>
     {songCards}
     </Grid>
     </>

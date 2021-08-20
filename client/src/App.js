@@ -63,13 +63,14 @@ function App() {
 
     <div className="App">
       <Grid  container
+
   direction="row"
   justifyContent="flex-start"
   alignItems="flex-start">
-    <Grid item xs={2}>
+    <Grid item xs={2} style={{paddingRight: '40px'}}>
       <NavBar currentUser={currentUser}/>
       </Grid>
-      <Grid item xs={9}>
+      <Grid item xs={10}>
       <Switch>
         <Route exact path="/login">
           <Login setCurrentUser={setCurrentUser}/>
@@ -78,17 +79,17 @@ function App() {
           <SignUp setCurrentUser={setCurrentUser}/>
         </Route>
         <Route exact path="/mylibrary">
-          <MyLibrary setUserSongs={setUserSongs} userSongs={userSongs} />
+          <MyLibrary currentUser={currentUser} setUserSongs={setUserSongs} userSongs={userSongs} />
         </Route>
         <Route exact path="/myinterestedsongs">
           <MyInterestedSongs userSongs={userSongs} setUserSongs={setUserSongs} setInterestedSongs={setInterestedSongs} currentUser={currentUser} interestedSongs={interestedSongs}/>
         </Route>
-        <Route exact path="/newsongform">
+        {/* <Route exact path="/newsongform">
           <NewSongForm userSongs={userSongs} setUserSongs={setUserSongs} currentUser={currentUser}/>
-        </Route>
-        <Route exact path="/newinterestedsongform">
+        </Route> */}
+        {/* <Route exact path="/newinterestedsongform">
           <NewInterestedSongForm interestedSongs={interestedSongs} setInterestedSongs={setInterestedSongs} currentUser={currentUser}/>
-        </Route>
+        </Route> */}
         <Route exact path="/searchpage">
           <SearchPage interestedSongs={interestedSongs} setUserSongs={setUserSongs} setInterestedSongs={setInterestedSongs} currentUser={currentUser} userSongs={userSongs}/>
         </Route>

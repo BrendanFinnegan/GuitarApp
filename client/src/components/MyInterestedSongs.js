@@ -10,17 +10,27 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import { makeStyles } from '@material-ui/core/styles';
 import { useState } from "react"
 import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import NewInterestedSongForm from './NewInterestedSongForm'
 
 function MyInterestedSongs({interestedSongs, currentUser, setInterestedSongs, userSongs, setUserSongs}){
 
     const [filterInput, setFilterInput] = useState("")
+    const [open, setOpen] = useState(false);
+    const [title, setTitle] = useState('')
+    const [artist, setArtist] = useState('')
 
     const useStyles = makeStyles((theme) => ({
         root: {
           width: '100%',
           border: 'none', 
           shadow: 'none', 
-          transition: 'none'
+          transition: 'none',
+          padding: '0'
         },
         heading: {
           color: 'black',
@@ -28,7 +38,6 @@ function MyInterestedSongs({interestedSongs, currentUser, setInterestedSongs, us
           fontWeight: 'bold', 
           border: 'none', 
           shadow: 'none',
-          textDecoration: 'underline'
         },
       }));
       
@@ -41,13 +50,18 @@ function MyInterestedSongs({interestedSongs, currentUser, setInterestedSongs, us
     }
     
     let filterCards = interestedSongs.filter(song => song.title.toLowerCase().includes(filterInput.toLowerCase()) || song.artist.toLowerCase().includes(filterInput.toLocaleLowerCase()))
-    
-       
-    let interestedSongCards = filterCards.map(song => {
+    let sortedCards = filterCards.sort((a,b) => {
+      
+      if (a.artist[0] < b.artist[0])
+      return -1
+    })
+
+
+    let interestedSongCards = sortedCards.map(song => {
         return <Grid item key={song.id}>
                 <Accordion style={{ boxShadow: "none" }}  >
-        <AccordionSummary  >
-        <Typography className={classes.heading} > {song.title}, {song.artist} </Typography>
+        <AccordionSummary className={classes.root}  >
+        <Typography className={classes.heading} > {song.artist}, {song.title} </Typography>
         </AccordionSummary>
         <AccordionDetails>
           <>
@@ -58,33 +72,61 @@ function MyInterestedSongs({interestedSongs, currentUser, setInterestedSongs, us
 
                 </Grid>
     })
-    function handleNavigation() {
-        history.push('/newinterestedsongform')
+    // function handleNavigation() {
+    //     history.push('/newinterestedsongform')
+    // }
+
+
+    const handleClickOpen = () => {
+      setOpen(true);
+    };
+  
+    const handleClose = () => {
+      setOpen(false);
+    };
+
+    function handleSubmit() {
+      console.log('click')
     }
+
     return(
     <>
     <Grid container
   direction="row"
   justifyContent="flex-start"
   alignItems="center">
-      <Grid item xs={12}>
+      <Grid item xs={10}>
     <h2>My Interested Songs</h2>
       </Grid>
-      <Grid item xs={3}>
-    <TextField variant="filled" style={{backgroundColor: 'white', borderRadius: '5px'}} label="Search by Artist or Title" value={filterInput} onChange={handleSearch} />
+
+      <Grid item xs={2}></Grid>
+      <Grid item xs={10} style={{paddingBottom: '25px'}}>
+    <TextField style={{backgroundColor: 'white', borderRadius: '5px'}} label="Search by Artist or Title" value={filterInput} onChange={handleSearch} />
     </Grid>
-    <Grid item xs={6}></Grid>
-    <Grid item xs={3}>
-    <Button className="gameButton" onClick={handleNavigation}>Add A New Song To Learn</Button>
-    </Grid>
+    <Grid item xs={2}>
+
+
+<Button className="gameButton" onClick={handleClickOpen}>
+        Add New Interested Song
+      </Button>
+      </Grid>
+      <Dialog 
+        open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+        <DialogTitle  id="form-dialog-title">Add A New Song That You Want To Learn</DialogTitle>
+
+        <NewInterestedSongForm handleClose={handleClose} interestedSongs={interestedSongs} setInterestedSongs={setInterestedSongs} currentUser={currentUser}/>
+       
+          </Dialog>
+
     </Grid>
     <Grid container
   direction="column"
-  justifyContent="flex-start"
-  alignItems="flex-end">
+  justifyContent="flex-start">
     {interestedSongCards}
     </Grid>
     </>
     )
 }
 export default MyInterestedSongs
+
+// <NewInterestedSongForm interestedSongs={interestedSongs} setInterestedSongs={setInterestedSongs} currentUser={currentUser}/>

@@ -1,6 +1,7 @@
 import { Form, Group, Label, Control, Button } from "react-bootstrap"
 import { useState } from "react"
 import { useHistory } from "react-router-dom"
+import Grid from '@material-ui/core/Grid'
 
 function Login({setCurrentUser}){
     const [password, setPassword] = useState('')
@@ -35,19 +36,32 @@ function Login({setCurrentUser}){
         history.push('/signup')
     }
     return(
+        <>
 
-        <div style={{margin: 'auto', align: 'center'}}>
+        <br/>
+        <br/>
+
+   
+            <Grid container
+  direction="row"
+  justifyContent="flex-start">
+      <Grid item xs={10}>
         <h3  style={{margin: 'auto', align: 'center', fontFamily: 'Reem Kufi', color: 'black' }}> Login </h3>
-        <Form onSubmit={handleSubmit} style={{fontFamily: 'Reem Kufi', color: 'black' }}>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Email address</Form.Label>
+        <br/>
+        </Grid>
+        <Grid item xs={2}></Grid>
+        <Grid item xs={10}>
+        <Form onSubmit={handleSubmit} style={{fontFamily: 'Reem Kufi', color: 'black'}}>
+            <Form.Group controlId="formBasicEmail">
+                <Form.Label style={{paddingRight: '10px'}}>Email address</Form.Label>
                 <Form.Control type="email" placeholder="Enter your email address" value={email} onChange={(e) => {
                     setEmail(e.target.value)
                     setErrors([])
                     }}/>
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
+            <br/>
+            <Form.Group controlId="formBasicPassword">
+                <Form.Label style={{paddingRight: '10px'}}>Password</Form.Label>
                 <Form.Control type="password" placeholder="Enter your password" value={password} onChange={(e) => {
                     setPassword(e.target.value)
                     setErrors([])
@@ -61,10 +75,11 @@ function Login({setCurrentUser}){
             
 
         </Form>
-       
+        </Grid>
             {errors.error? errors.error.map(e => <p className="error-message" style={{fontFamily: 'Reem Kufi', color: 'black' }}>{e}</p>): null}
-     </div>
-    
+  
+            </Grid>
+            </>
     )
 }
 export default Login

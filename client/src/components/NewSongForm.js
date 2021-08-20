@@ -1,14 +1,21 @@
 import { Form, Group, Label, Control, Button } from "react-bootstrap"
 import { useState } from "react"
 import { useHistory } from "react-router-dom"
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
-function NewSongForm ({userSongs, setUserSongs, currentUser}) {
+
+function NewSongForm ({handleClose, userSongs, setUserSongs, currentUser}) {
     const [title, setTitle] = useState('')
     const [artist, setArtist] = useState('')
     const [genre, setGenre] = useState('')
     const [lyrics, setLyrics] = useState('')
-    const [yearLearned, setYearLearned] = useState('')
-    const [abilityLevel, setAbilityLevel] = useState(0)
+    const [year, setYear] = useState('')
+    const [ability, setAbility] = useState(0)
     const [notes, setNotes] = useState('')
     const [recording, setRecording] = useState('')
     const [singableResponse, setSingableResponse] = useState(false)
@@ -23,9 +30,9 @@ function NewSongForm ({userSongs, setUserSongs, currentUser}) {
             title,
             artist,
             genre,
-            my_ability_level: abilityLevel,
+            my_ability_level: ability,
             lyrics,
-            year_learned: yearLearned,
+            year_learned: year,
             notes,
             singable: singableResponse,
             recording,
@@ -33,6 +40,7 @@ function NewSongForm ({userSongs, setUserSongs, currentUser}) {
 
 
         }
+
     // t.integer "user_id"
     // t.string "title"
     // t.string "artist"
@@ -60,13 +68,110 @@ function NewSongForm ({userSongs, setUserSongs, currentUser}) {
 
     }
         console.log(singableResponse)
+
+
+        // console.log(currentUser)
+
     return(
         <div >
-        <h3 style={{fontFamily: 'Reem Kufi', color: 'black' }}>Add New Song to Your Library</h3>
+        {/* <h3 style={{fontFamily: 'Reem Kufi', color: 'black' }}>Add New Song to Your Library</h3> */}
         
-        <Form onSubmit={handleSubmit} style={{fontFamily: 'Reem Kufi', color: 'black' }}>
-        <div style={{fontFamily: 'Reem Kufi', color: 'black', textAlign: 'left'}}>
-            <Form.Group className="mb-3" controlId="formBasicTitle">
+
+        <form onSubmit={handleSubmit}>
+        <DialogContent>
+          {/* <DialogContentText>
+            Edit the Song information
+          </DialogContentText> */}
+          
+          <TextField
+                        autoFocus
+                        margin="dense"
+                        id="title"
+                        label="Title"
+                        type="text"
+                        value={title}
+                        onChange={e => setTitle(e.target.value)}
+                        fullWidth
+          />
+           <TextField
+                        autoFocus
+                        margin="dense"
+                        id="artist"
+                        label="Artist"
+                        type="text"
+                        value={artist}
+                        onChange={e => setArtist(e.target.value)}
+                        fullWidth
+          />
+
+            <TextField
+                        autoFocus
+                        margin="dense"
+                        id="genre"
+                        label="Genre"
+                        type="text"
+                        value={genre}
+                        onChange={e => setGenre(e.target.value)}
+                        fullWidth
+                    />
+
+            <TextField
+                        autoFocus
+                        margin="dense"
+                        id="ability"
+                        label="My Ability Level"
+                        type="number"
+                        value={ability}
+                        onChange={e => setAbility(e.target.value)}
+                        fullWidth
+                    />
+
+
+            <TextField
+                        autoFocus
+                        margin="dense"
+                        id="year"
+                        label="Year Learned"
+                        type="number"
+                        value={year}
+                        onChange={e => setYear(e.target.value)}
+                        fullWidth
+                    />
+
+            <TextField
+                        autoFocus
+                        margin="dense"
+                        id="recording"
+                        label="Vimeo Recording (link example https://vimeo.com/585483154)"
+                        type="text"
+                        value={recording}
+                        onChange={e => setRecording(e.target.value)}
+                        fullWidth
+                    />
+
+                {/* <div>
+                <label >Singable?</label>
+                <label style={{marginLeft: '10px'}}>No</label>
+                <input style={{marginLeft: '10px'}} type="radio" id="no" name="singable" value="false" defaultChecked={!singableResponse} onClick={() => setSingableResponse(false)}/>
+                <label style={{marginLeft: '10px'}}>Yes</label>
+                <input style={{marginLeft: '10px'}} type="radio" id="yes" name="singable" value="true" defaultChecked={singableResponse} onClick={() => setSingableResponse(true)}/>
+                </div> */}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} className="gameButton">
+            Cancel
+          </Button>
+          <Button type="submit" onClick={handleClose} className="gameButton">
+            Save
+          </Button>
+          
+        </DialogActions>
+        </form>
+
+
+        {/* <Form onSubmit={handleSubmit} style={{fontFamily: 'Reem Kufi', color: 'black' }}>
+        <div style={{fontFamily: 'Reem Kufi', color: 'black', textAlign: 'left'}}> */}
+            {/* <Form.Group className="mb-3" controlId="formBasicTitle">
                 <Form.Label>Title</Form.Label>
                 <Form.Control style={{marginLeft: '10px'}} type="text" placeholder="Enter The Title" value={title} onChange={(e) => setTitle(e.target.value)}/>
             </Form.Group>
@@ -79,10 +184,10 @@ function NewSongForm ({userSongs, setUserSongs, currentUser}) {
                 <Form.Control style={{marginLeft: '10px'}} type="text" placeholder="Enter The Genre" value={genre} onChange={(e) => setGenre(e.target.value)}/>
             </Form.Group>
 
-            {/* <Form.Group className="mb-3" controlId="formBasicLyrics">
+            <Form.Group className="mb-3" controlId="formBasicLyrics">
                 <Form.Label>Lyrics</Form.Label>
                 <Form.Control style={{marginLeft: '10px'}} type="text" placeholder="Enter The Lyrics" value={lyrics} onChange={(e) => setLyrics(e.target.value)}/>
-            </Form.Group> */}
+            </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicYear">
                 <Form.Label>Year Learned </Form.Label>
@@ -107,10 +212,10 @@ function NewSongForm ({userSongs, setUserSongs, currentUser}) {
                 <textarea style={{marginLeft: '10px'}} rows="2" cols="25" placeholder="Enter Any Notes you have for playing this song" value={notes} onChange={(e) => setNotes(e.target.value)}/>
             </Form.Group>
 
-            {/* <Form.Group className="mb-3" controlId="formBasicAbility">
+            <Form.Group className="mb-3" controlId="formBasicAbility">
                 <Form.Label>Tabs/Chords</Form.Label>
                 <textarea style={{marginLeft: '10px'}} rows="2" cols="25" placeholder="Enter Any Tabs or Chords you have for this song" value={tabs} onChange={(e) => setTabs(e.target.value)}/>
-            </Form.Group> */}
+            </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicAbility">
                 <Form.Label>Vimeo Recording Link</Form.Label>
@@ -123,7 +228,7 @@ function NewSongForm ({userSongs, setUserSongs, currentUser}) {
         
             <Button type="submit" className="gameButton">Add Song!</Button>
             
-        </Form>
+        </Form> */}
 
         
         {errors.error? errors.error.map(e => <p className="error-message" style={{fontFamily: 'Reem Kufi', color: 'black' }}>{e}</p>) : null}

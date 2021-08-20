@@ -1,8 +1,14 @@
 import { Form, Group, Label, Control, Button } from "react-bootstrap"
 import { useState } from "react"
 import { useHistory } from "react-router-dom"
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import TextField from '@material-ui/core/TextField';
 
-function NewInterestedSongForm ({currentUser,interestedSongs, setInterestedSongs}) {
+function NewInterestedSongForm ({handleClose, currentUser,interestedSongs, setInterestedSongs}) {
     const [title, setTitle] = useState('')
     const [artist, setArtist] = useState('')
     const [genre, setGenre] = useState('')
@@ -38,29 +44,54 @@ function NewInterestedSongForm ({currentUser,interestedSongs, setInterestedSongs
 
     return(
         <div >
-        <h3 style={{fontFamily: 'Reem Kufi', color: 'black' }}>Add a New Song That You Want to Learn</h3>
+        {/* <h3 style={{fontFamily: 'Reem Kufi', color: 'black' }}>Add a New Song That You Want to Learn</h3> */}
         
-        <Form onSubmit={handleSubmit} style={{fontFamily: 'Reem Kufi', color: 'black' }}>
-        <div style={{fontFamily: 'Reem Kufi', color: 'black', textAlign: 'left'}}>
-            <Form.Group className="mb-3" controlId="formBasicTitle">
-                <Form.Label>Title</Form.Label>
-                <Form.Control style={{marginLeft: '10px'}} type="text" placeholder="Enter The Title" value={title} onChange={(e) => setTitle(e.target.value)}/>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicArtist">
-                <Form.Label>Artist</Form.Label>
-                <Form.Control style={{marginLeft: '10px'}} type="text" placeholder="Enter The Artist" value={artist} onChange={(e) => setArtist(e.target.value)}/>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicGenre">
-                <Form.Label>Genre</Form.Label>
-                <Form.Control style={{marginLeft: '10px'}} type="text" placeholder="Enter The Genre" value={genre} onChange={(e) => setGenre(e.target.value)}/>
-            </Form.Group>
+        <form onSubmit={handleSubmit}>
+        <DialogContent>
+          
+          <TextField
+                        autoFocus
+                        margin="dense"
+                        id="title"
+                        label="Title"
+                        type="text"
+                        value={title}
+                        onChange={e => setTitle(e.target.value)}
+                        fullWidth
+          />
 
-            </div>
-        
-        
-            <Button type="submit" className="gameButton">Add Song!</Button>
-            
-        </Form>
+            <TextField
+                        autoFocus
+                        margin="dense"
+                        id="artist"
+                        label="Artist"
+                        type="text"
+                        value={artist}
+                        onChange={e => setArtist(e.target.value)}
+                        fullWidth
+                    />
+          {/* <TextField
+                        autoFocus
+                        margin="dense"
+                        id="genre"
+                        label="Genre"
+                        type="text"
+                        value={genre}
+                        onChange={e => setGenre(e.target.value)}
+                        fullWidth
+                    /> */}
+
+          </DialogContent>
+          <DialogActions>
+          <Button className="gameButton" onClick={handleClose}>
+            Cancel
+          </Button>
+          <Button className="gameButton" onClick={handleClose} type="submit" >
+            Save
+          </Button>
+          
+        </DialogActions>
+          </form>
         
         {/* {errors.error? errors.error.map(e => <p className="error-message" style={{fontFamily: 'Reem Kufi', color: 'black' }}>{e}</p>) : null} */}
     </div>
