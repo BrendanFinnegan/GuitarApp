@@ -83,25 +83,25 @@ nav.color-nav.navbar.navbar-expand.navbar-dark {
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.637);
 }
 
-.game-card.card::-webkit-scrollbar {
-  background-color: #0D7377;
+.songcard::-webkit-scrollbar {
+  background-color: #fcfcfc;
 }
 
-.game-card.card::-webkit-scrollbar-track {
-  border: 1px solid #000;
+.songcard::-webkit-scrollbar-track {
+  border: 1px solid rgb(255, 255, 255);
   padding: 2px 0;
-  background-color: #404040;
+  background-color: #ffffff;
 }
 
-.game-card.card::-webkit-scrollbar {
+.songcard::-webkit-scrollbar {
   width: 10px;
 }
 
-.game-card.card::-webkit-scrollbar-thumb {
+.songcard::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-  background-color: #0D7377;
-  border: 1px solid #000;
+  box-shadow: inset 0 0 6px #750000;
+  background-color: #ffffff;
+  border: 2px solid #750000;
 }
 
 
@@ -139,10 +139,12 @@ a.color-links.nav-link {
   margin-left:15rem;
   margin-right: 15rem;
   /* width:900px; */
-  border: 5px solid #000000;
+  border: 5px solid #7e0000;
   border-radius: 3px;
-  box-shadow: 18px 18px 10px rgba(0, 0, 0, 0.637);
+  box-shadow: 1px 1px 2px 3px #750000;
 }
+
+
 .MuiDialog-paperWidthSm {
     width: 700px;
     max-width: 700px;
@@ -151,7 +153,9 @@ a.color-links.nav-link {
   border: none;
 
 }
-
+.test{
+  color: #8d8d8d
+}
 .according {
   display: none;
 }
@@ -174,9 +178,9 @@ button.gameButton.btn.btn-primary {
   /* color: #14FFEC; */
 }
 button.gameButton.btn.btn-primary:hover {
-  background: #000000;
+  background: #750000;
   color: #ffffff;
-  border-color: #a80202;
+  border-color: #960202;
   border-radius: 5px;
 }
 .mb-3.form-group {

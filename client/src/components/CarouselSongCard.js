@@ -18,7 +18,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { useHistory } from "react-router-dom"
 
-function CarouselSongCard({song, userSongs, setUserSongs}){
+function CarouselSongCard({song, userSongs, setUserSongs, handleMoreDetailsFetch}){
     let history = useHistory()
 
 
@@ -131,6 +131,7 @@ function CarouselSongCard({song, userSongs, setUserSongs}){
               }).then(res => res.json()).then(data => {
                 setOpenNotesEdit(false)
                 setUserSongs(data)
+                handleMoreDetailsFetch(song.id)
               })
             }
 
@@ -157,7 +158,7 @@ function CarouselSongCard({song, userSongs, setUserSongs}){
                 .then(data => {
                     setUserSongs(data)
                     setOpen(false)
-                
+                    handleMoreDetailsFetch(song.id)
                 })
 
             }
@@ -190,7 +191,8 @@ function CarouselSongCard({song, userSongs, setUserSongs}){
                 body: JSON.stringify(lyricsObj)
                 }).then(res => res.json()).then(data => {
                   setOpenLyricsEdit(false)
-                  setUserSongs(data) 
+                  setUserSongs(data)
+                  handleMoreDetailsFetch(song.id) 
                 })
               }
             
@@ -229,9 +231,10 @@ function CarouselSongCard({song, userSongs, setUserSongs}){
                 const [tabs, setTabs] = useState(song.tabs)
 
                 function handleAddTabLines () {
-                  let tabLines = '\n \n E-------------------------------------------------------------------------------------  \n A-------------------------------------------------------------------------------------  \n G-------------------------------------------------------------------------------------  \n D-------------------------------------------------------------------------------------  \n B-------------------------------------------------------------------------------------  \n e-------------------------------------------------------------------------------------  \n _____________________________________________________'
-                  setTabs(tabs + tabLines)
-                }
+                    let tabLines = 
+                    '\n \n E------------------------------------------------------------------------------------------------------------------------------------------------------  \n A------------------------------------------------------------------------------------------------------------------------------------------------------  \n G------------------------------------------------------------------------------------------------------------------------------------------------------  \n D------------------------------------------------------------------------------------------------------------------------------------------------------  \n B------------------------------------------------------------------------------------------------------------------------------------------------------  \n e------------------------------------------------------------------------------------------------------------------------------------------------------  \n _____________________________________________________________________________________________'
+                    setTabs(tabs + tabLines)
+                  }
 
                 const handleClickTabsEditOpen = () => {
                   setOpenTabsEdit(true);
@@ -269,11 +272,11 @@ function CarouselSongCard({song, userSongs, setUserSongs}){
                     }).then(res => res.json()).then(data => {
                       setOpenTabsEdit(false)
                       setUserSongs(data) 
-                     
+                      handleMoreDetailsFetch(song.id)
                     })
                   }
 
-
+console.log(song)
 
     return(
   <div  style={{textAlign: 'left'}}>
@@ -283,17 +286,13 @@ function CarouselSongCard({song, userSongs, setUserSongs}){
     <br/>
     <br/>
     <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
 
-    <Card  style={{ textAlign: 'left', margin: 'auto', boxShadow: 'none', fontFamily:'Reem Kufi', flexDirection: 'column', height: '75vh', width: '75vw', overflow: 'auto'}}> 
+    <Card className='songcard' style={{boxShadow: '1px 1px 4px 5px #750000', textAlign: 'center', margin: 'auto', fontFamily:'Reem Kufi', flexDirection: 'column', height: '60vh', width: '70vw', overflow: 'auto'}}> 
         <Grid item container
   direction="row"
   justifyContent="flex-start"
   alignItems="flex-start">
-        <Grid item xs={6}>
+        <Grid item xs={6} style={{ paddingLeft: '10px'}}>
             <h4>Title: {song.title}</h4>
         </Grid>
         <Grid item xs={6}>
@@ -305,7 +304,7 @@ function CarouselSongCard({song, userSongs, setUserSongs}){
         {/* <Grid item xs={3}>
             <h4>Is this a singable song? {song.singable? 'Yes': 'No'}</h4>
         </Grid> */}
-              <Grid item xs={6}>
+              <Grid item xs={6} style={{ paddingLeft: '10px'}}>
                     
                     <h4>My Ability Level: {song.my_ability_level}</h4>
                 </Grid>
@@ -314,7 +313,7 @@ function CarouselSongCard({song, userSongs, setUserSongs}){
              <h4>Year Learned: {song.year_learned}</h4>
         </Grid>
 
-<Grid item xs={12} style={{alignItems: 'left'}} >
+<Grid item xs={12} style={{alignItems: 'left', paddingLeft: '10px'}} >
             <Accordion style={{ boxShadow: "none" }}  >
                 <AccordionSummary className={classes.root}  >
                     <Typography className={classes.heading} > Show Notes </Typography>
@@ -371,7 +370,7 @@ function CarouselSongCard({song, userSongs, setUserSongs}){
         </Grid>
 
 
-        <Grid item xs={12} style={{alignItems: 'left'}} >
+        <Grid item xs={12} style={{alignItems: 'left', paddingLeft: '10px'}} >
             <Accordion style={{ boxShadow: "none" }}  >
                 <AccordionSummary className={classes.root}   >
                     <Typography className={classes.heading} > Show Tabs </Typography>
@@ -389,11 +388,11 @@ function CarouselSongCard({song, userSongs, setUserSongs}){
                 </Button>
                 <br/>
                 <ThemeProvider theme={theme}>
-                <Dialog 
+                <Dialog fullWidth={true} maxWidth={'md'}
                   open={openTabsEdit} onClose={handleCloseTabsEdit} aria-labelledby="form-dialog-title">
                     <DialogTitle  id="tabs">Edit or Add Tabs/Chords</DialogTitle>
                       <form onSubmit={handleTabsEdit}>
-                        <DialogContent style={{height: '300px'}} >
+                        <DialogContent style={{width: '900px', height: '300px'}} >
                             <TextField 
                                   
                                   multiline
@@ -429,7 +428,7 @@ function CarouselSongCard({song, userSongs, setUserSongs}){
         </Grid>
 
 
-        <Grid item xs={12} style={{alignItems: 'left'}} >
+        <Grid item xs={12} style={{alignItems: 'left', paddingLeft: '10px'}} >
             <Accordion style={{ boxShadow: "none" }}  >
                 <AccordionSummary className={classes.root} >
                     <Typography className={classes.heading} > Show Lyrics</Typography>
@@ -492,7 +491,7 @@ function CarouselSongCard({song, userSongs, setUserSongs}){
                      </AccordionDetails>
              </Accordion>
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} style={{ paddingLeft: '10px'}}>
         <Accordion style={{ boxShadow: "none" }}  >
         <AccordionSummary className={classes.root} >
         <Typography className={classes.heading} > Click for Video Recording </Typography>
@@ -504,14 +503,20 @@ function CarouselSongCard({song, userSongs, setUserSongs}){
             <iframe src={`https://player.vimeo.com/video/${recordingID}`} width="640" height="360" frameBorder="0" allow="autoplay; fullscreen; picture-in-picture" allowFullScreen title="Test Embed With Some weird music vimeo added!"></iframe>
             
             </>
-             : <h4>There's no recording on file for this song. Add one via the edit song information button </h4> }
-           
+             : <>
+                <h4>There's no recording on file for this song! </h4>
+                <br/>
+                <h4> Add one via the edit song information button </h4>
+                </> }
+                
             </>
             </AccordionDetails>
             </Accordion>
         </Grid>
-        
-        <Grid item xs={4}>
+        <br/>
+        <br/>
+        <br/>
+        <Grid item xs={6} style={{ paddingLeft: '10px'}}>
         <div>
       <Button className="gameButton" onClick={handleClickOpen}>
         Edit this Song Information
@@ -549,7 +554,7 @@ function CarouselSongCard({song, userSongs, setUserSongs}){
                         fullWidth
           />
 
-            <TextField
+            {/* <TextField
                         autoFocus
                         margin="dense"
                         id="genre"
@@ -558,7 +563,7 @@ function CarouselSongCard({song, userSongs, setUserSongs}){
                         value={genre}
                         onChange={e => setGenre(e.target.value)}
                         fullWidth
-                    />
+                    /> */}
 
             <TextField
                         autoFocus
@@ -594,13 +599,13 @@ function CarouselSongCard({song, userSongs, setUserSongs}){
                         fullWidth
                     />
 
-                <div>
+                {/* <div>
                 <label >Singable?</label>
                 <label style={{marginLeft: '10px'}}>No</label>
                 <input style={{marginLeft: '10px'}} type="radio" id="no" name="singable" value="false" defaultChecked={!singableResponse} onClick={() => setSingableResponse(false)}/>
                 <label style={{marginLeft: '10px'}}>Yes</label>
                 <input style={{marginLeft: '10px'}} type="radio" id="yes" name="singable" value="true" defaultChecked={singableResponse} onClick={() => setSingableResponse(true)}/>
-                </div>
+                </div> */}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} className="gameButton">
@@ -616,13 +621,18 @@ function CarouselSongCard({song, userSongs, setUserSongs}){
       {/* </ThemeProvider> */}
     </div>
     </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={6}>
                   <Button  className="gameButton" onClick={searchUltGuitar} >Search Ultimate Guitar Tabs</Button>
           </Grid>
-          <Grid item xs={1}></Grid>
-          <Grid item xs={3}>
-                  <Button  className="gameButton" onClick={handleDelete} >Delete</Button>
-          </Grid>
+          <br/>
+          <br/>
+          {/* <Grid item xs={4}></Grid> */}
+          {/* <br/>
+          <br/>
+          <br/>
+          <Grid item xs={12}>
+                  <Button  className="gameButton" onClick={handleDelete} >Delete Song From Library</Button>
+          </Grid> */}
 
         </Grid>   
     </Card>

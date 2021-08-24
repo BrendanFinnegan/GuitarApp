@@ -122,7 +122,7 @@ function App() {
           <SearchPage interestedSongs={interestedSongs} setUserSongs={setUserSongs} setInterestedSongs={setInterestedSongs} currentUser={currentUser} userSongs={userSongs}/>
         </Route>
         <Route exact path="/cardpage">
-        <CarouselSongCard setUserSongs={setUserSongs} userSongs={userSongs} song={fetchedSong} />
+        <CarouselSongCard setUserSongs={setUserSongs} userSongs={userSongs} song={fetchedSong} handleMoreDetailsFetch={handleMoreDetailsFetch} />
         </Route>
         <Route exact path="/">
           <Home handleMoreDetailsFetch={handleMoreDetailsFetch} currentUser={currentUser} setCurrentUser={setCurrentUser} randomSongs={randomSongs}/>

@@ -83,7 +83,12 @@ console.log(song)
           border: 'none', 
           shadow: 'none',
           textDecoration: 'underline'
+          // fontSize: 'large'
         },
+        paperWidthSm: {
+          width: '800px',
+          maxWidth: '800px'
+        }
         
       }));
       
@@ -230,7 +235,8 @@ console.log(song)
                 const [tabs, setTabs] = useState(song.tabs)
 
                 function handleAddTabLines () {
-                  let tabLines = '\n \n E-------------------------------------------------------------------------------------  \n A-------------------------------------------------------------------------------------  \n G-------------------------------------------------------------------------------------  \n D-------------------------------------------------------------------------------------  \n B-------------------------------------------------------------------------------------  \n e-------------------------------------------------------------------------------------  \n _____________________________________________________'
+                  let tabLines = 
+                  '\n \n E------------------------------------------------------------------------------------------------------------------------------------------------------  \n A------------------------------------------------------------------------------------------------------------------------------------------------------  \n D------------------------------------------------------------------------------------------------------------------------------------------------------  \n G------------------------------------------------------------------------------------------------------------------------------------------------------  \n B------------------------------------------------------------------------------------------------------------------------------------------------------  \n e------------------------------------------------------------------------------------------------------------------------------------------------------  \n _____________________________________________________________________________________________'
                   setTabs(tabs + tabLines)
                 }
 
@@ -276,12 +282,13 @@ console.log(song)
 
     return(
   <div >
-    <Card style={{ textAlign: 'left', margin: 'auto', boxShadow: 'none', fontFamily:'Reem Kufi', alignItems:'center', flexDirection: 'column', height: '40vh', width: '75vw', overflow: 'auto'}}> 
+    <Card className="songcard" style={{boxShadow: '1px 1px 4px 5px #750000', textAlign: 'center', margin: 'auto',  fontFamily:'Reem Kufi', fontSize: 'large', alignItems:'center', flexDirection: 'column', height: '53vh', width: '75vw', overflow: 'auto'}}> 
         <Grid item container
   direction="row"
   justifyContent="flex-start"
   alignItems="flex-start">
-        <Grid item xs={3}>
+
+        <Grid item xs={3} style={{ paddingLeft: '10px'}}>
             <h4>{song.title}</h4>
         </Grid>
         <Grid item xs={3}>
@@ -301,8 +308,8 @@ console.log(song)
         <Grid item xs={3}>
              <h4>Year Learned: {song.year_learned}</h4>
         </Grid>
-
-<Grid item xs={12} style={{alignItems: 'left'}} >
+       
+<Grid item xs={12} style={{alignItems: 'left', paddingLeft: '10px'}} >
             <Accordion style={{ boxShadow: "none" }}  >
                 <AccordionSummary className={classes.root}   >
                     <Typography className={classes.heading} > Show Notes </Typography>
@@ -360,7 +367,7 @@ console.log(song)
 
 
 
-      <Grid item xs={12} style={{alignItems: 'left'}} >
+      <Grid item xs={12} style={{alignItems: 'left', paddingLeft: '10px'}} >
             <Accordion style={{ boxShadow: "none" }}  >
                 <AccordionSummary className={classes.root}   >
                     <Typography className={classes.heading} > Show Tabs </Typography>
@@ -378,11 +385,11 @@ console.log(song)
                 </Button>
                 <br/>
                 <ThemeProvider theme={theme}>
-                <Dialog 
+                <Dialog fullWidth={true} maxWidth={'md'}
                   open={openTabsEdit} onClose={handleCloseTabsEdit} aria-labelledby="form-dialog-title">
                     <DialogTitle  id="tabs">Edit or Add Tabs/Chords</DialogTitle>
                       <form onSubmit={handleTabsEdit}>
-                        <DialogContent style={{height: '300px'}} >
+                        <DialogContent style={{width: '900px', height: '300px'}} >
                             <TextField 
                                   
                                   multiline
@@ -422,7 +429,7 @@ console.log(song)
 
 
 
-        <Grid item xs={12} style={{alignItems: 'left'}} >
+        <Grid item xs={12} style={{ paddingLeft: '10px'}} >
             <Accordion style={{ boxShadow: "none" }}  >
                 <AccordionSummary className={classes.root}  >
                     <Typography className={classes.heading} > Show Lyrics</Typography>
@@ -485,7 +492,7 @@ console.log(song)
                      </AccordionDetails>
              </Accordion>
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} style={{alignItems: 'left', paddingLeft: '10px'}}>
         <Accordion style={{ boxShadow: "none" }}  >
         <AccordionSummary className={classes.root}  >
         <Typography className={classes.heading} > Click for Video Recording </Typography>
@@ -504,7 +511,7 @@ console.log(song)
             </Accordion>
         </Grid>
         
-        <Grid item xs={4}>
+        <Grid item xs={6} style={{alignItems: 'center', paddingLeft: '10px', paddingBottom: '10px'}}>
         <div>
       <Button className="gameButton" onClick={handleClickOpen}>
         Edit this Song Information
@@ -609,13 +616,15 @@ console.log(song)
       {/* </ThemeProvider> */}
     </div>
     </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={6}>
                   <Button  className="gameButton" onClick={searchUltGuitar} >Search Ultimate Guitar Tabs</Button>
           </Grid>
-          <Grid item xs={1}></Grid>
-          <Grid item xs={3}>
-                  <Button  className="gameButton" onClick={handleDelete} >Delete</Button>
+          <Grid item xs={12}>
+                  <Button  className="gameButton" onClick={handleDelete} >Delete Song From Library</Button>
           </Grid>
+          <br/>
+          <br/>
+          
         </Grid>   
     </Card>
     </div>

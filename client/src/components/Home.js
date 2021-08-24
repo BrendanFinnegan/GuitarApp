@@ -51,7 +51,7 @@ function Home({currentUser, handleMoreDetailsFetch, setCurrentUser, randomSongs}
       <>
 
 
-      <br/>
+
 
  
           <Grid container
@@ -61,13 +61,14 @@ justifyContent="flex-start">
       {currentUser.id ? <h2>My Guitar Space</h2> : null}
     {currentUser.id ? 
     <>
+    <br/>
     <h2>Welcome {currentUser.name} </h2>
 
         
 
     </>
      : <Login setCurrentUser={setCurrentUser} />}
-    {randomSongs.length > 0 ? <> <h4>Whens the last time you played....</h4>
+    {randomSongs.length > 0 ? <> <h4>When's the last time you played....</h4>
     
     <div  className="carousel-div"  >
             <Carousel infinite={true} responsive={responsive} style={{marginLeft: '15%'}} >

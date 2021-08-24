@@ -28,7 +28,8 @@ function MyLibrary({currentUser, userSongs, setUserSongs}){
           border: 'none', 
           shadow: 'none', 
           transition: 'none',
-          padding: '0px'
+          padding: '0px',
+          marginBottom: '0px'
         },
         heading: {
           color: 'black',
@@ -36,6 +37,7 @@ function MyLibrary({currentUser, userSongs, setUserSongs}){
           fontWeight: 'bold', 
           border: 'none', 
           shadow: 'none',
+          fontSize: 'large'
        
         },
       }));
@@ -99,11 +101,13 @@ const handleClose = () => {
       </Grid>
 
       <Grid item xs={2}></Grid>
+      <Grid item xs={4}></Grid>
       
     
-    <Grid item xs={10} style={{paddingBottom: '25px'}}>
+    <Grid item xs={2} style={{paddingBottom: '25px'}}>
     <TextField  style={{backgroundColor: 'white', borderRadius: '5px'}} label="Search by Artist or Title" value={filterInput} onChange={handleSearch} />
     </Grid>
+    <Grid item xs={2}></Grid>
     <Grid item xs={2}>
 
     <Button style={{marginRight: '40px'}} className="gameButton" onClick={handleClickOpen}>

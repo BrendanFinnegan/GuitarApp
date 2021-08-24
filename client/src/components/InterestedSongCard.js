@@ -102,16 +102,16 @@ function InterestedSongCard({song, currentUser, interestedSongs, setInterestedSo
           })}
     return(
   
-        <Card style={{ alignItems:'center', flexDirection: 'column', height: '20vh', width: '75vw', overflow: 'auto'}}> 
+        <Card className='songcard' style={{ alignItems:'center', boxShadow: '1px 1px 4px 5px #750000', flexDirection: 'column', height: '20vh', width: '75vw', overflow: 'auto'}}> 
         <Grid item container
         spacing={3}
   direction="row"
   justifyContent="flex-start"
   alignItems="flex-start">
-          <Grid item xs={6}>
+          <Grid item xs={5}>
                 <h3>Title: {song.title}</h3>   
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={5}>
                 <h3>Artist: {song.artist}</h3>
           </Grid>
 
@@ -181,7 +181,7 @@ function InterestedSongCard({song, currentUser, interestedSongs, setInterestedSo
           <Grid item xs={3}>
                   <Button  className="gameButton" onClick={handleTransition} >Add This To My Known Songs!</Button>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={2}>
                   <Button  className="gameButton" onClick={handleDelete} >Delete</Button>
           </Grid>
           

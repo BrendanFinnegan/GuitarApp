@@ -84,7 +84,7 @@ function CarouselCard({song, handleMoreDetailsFetch, currentUser, setInterestedS
   direction="row"
   justifyContent="flex-start"
   alignItems="flex-center">
-        <Grid item xs={12}>
+        <Grid item xs={12} >
             <h4 className="carousel">{song.title} , by {song.artist}</h4>
         </Grid>
 

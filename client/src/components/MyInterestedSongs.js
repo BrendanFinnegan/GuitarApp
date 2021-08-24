@@ -38,6 +38,8 @@ function MyInterestedSongs({interestedSongs, currentUser, setInterestedSongs, us
           fontWeight: 'bold', 
           border: 'none', 
           shadow: 'none',
+          fontSize: 'large', 
+          textDecoration: 'underline',
         },
       }));
       
@@ -100,12 +102,12 @@ function MyInterestedSongs({interestedSongs, currentUser, setInterestedSongs, us
       </Grid>
 
       <Grid item xs={2}></Grid>
-      <Grid item xs={10} style={{paddingBottom: '25px'}}>
+      <Grid item xs={4}></Grid>
+      <Grid item xs={2} style={{paddingBottom: '25px'}}>
     <TextField style={{backgroundColor: 'white', borderRadius: '5px'}} label="Search by Artist or Title" value={filterInput} onChange={handleSearch} />
     </Grid>
+    <Grid item xs={2}></Grid>
     <Grid item xs={2}>
-
-
 <Button className="gameButton" onClick={handleClickOpen}>
         Add New Interested Song
       </Button>
