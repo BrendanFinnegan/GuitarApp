@@ -12,12 +12,13 @@ class ApiConnection < ApplicationRecord
         )
         
         fixed = JSON.parse(address)
+
         trackID = fixed["message"]["body"]["track_list"][0]["track"]["track_id"]
 
         lyricsRequest = RestClient.get("https://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=#{trackID}&apikey=946d2b6430d666dda5f53a9c42cc0f61")
         lyricParse = JSON.parse(lyricsRequest)
         lyrics = lyricParse["message"]["body"]["lyrics"]
-    
+  
 
     end
 

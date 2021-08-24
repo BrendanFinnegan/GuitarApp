@@ -103,7 +103,7 @@ function NewSongForm ({handleClose, userSongs, setUserSongs, currentUser}) {
                         onChange={e => setArtist(e.target.value)}
                         fullWidth
           />
-
+{/* 
             <TextField
                         autoFocus
                         margin="dense"
@@ -113,7 +113,7 @@ function NewSongForm ({handleClose, userSongs, setUserSongs, currentUser}) {
                         value={genre}
                         onChange={e => setGenre(e.target.value)}
                         fullWidth
-                    />
+                    /> */}
 
             <TextField
                         autoFocus

@@ -57,7 +57,8 @@ h2 {
 
 nav.color-nav.navbar.navbar-expand.navbar-dark {
   background-color: #faac63;
-  height: 4rem;
+  min-height: 100vh;
+  height: 3rem;
 }
 
 .card-header {
@@ -175,7 +176,7 @@ button.gameButton.btn.btn-primary {
 button.gameButton.btn.btn-primary:hover {
   background: #000000;
   color: #ffffff;
-  border-color: #ff9900;
+  border-color: #a80202;
   border-radius: 5px;
 }
 .mb-3.form-group {

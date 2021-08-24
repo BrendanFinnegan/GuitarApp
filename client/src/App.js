@@ -95,10 +95,10 @@ function App() {
   direction="row"
   justifyContent="flex-start"
   alignItems="flex-start">
-    <Grid item xs={2} style={{paddingRight: '40px'}}>
+    <Grid item xs={2} style={{ paddingRight: '15px', }}>
       <NavBar currentUser={currentUser}/>
       </Grid>
-      <Grid item xs={10}>
+      <Grid item xs={10} >
       <Switch>
         <Route exact path="/login">
           <Login setCurrentUser={setCurrentUser}/>

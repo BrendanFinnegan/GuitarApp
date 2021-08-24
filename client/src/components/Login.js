@@ -2,6 +2,7 @@ import { Form, Group, Label, Control, Button } from "react-bootstrap"
 import { useState } from "react"
 import { useHistory } from "react-router-dom"
 import Grid from '@material-ui/core/Grid'
+import TextField from '@material-ui/core/TextField';
 
 function Login({setCurrentUser}){
     const [password, setPassword] = useState('')
@@ -52,25 +53,27 @@ function Login({setCurrentUser}){
         <Grid item xs={2}></Grid>
         <Grid item xs={10}>
         <Form onSubmit={handleSubmit} style={{fontFamily: 'Reem Kufi', color: 'black'}}>
-            <Form.Group controlId="formBasicEmail">
-                <Form.Label style={{paddingRight: '10px'}}>Email address</Form.Label>
-                <Form.Control type="email" placeholder="Enter your email address" value={email} onChange={(e) => {
+      
+     
+            <TextField style={{backgroundColor: 'white', borderRadius: '5px'}} label="Email" value={email} onChange={(e) => {
                     setEmail(e.target.value)
                     setErrors([])
                     }}/>
-            </Form.Group>
+ 
             <br/>
-            <Form.Group controlId="formBasicPassword">
-                <Form.Label style={{paddingRight: '10px'}}>Password</Form.Label>
-                <Form.Control type="password" placeholder="Enter your password" value={password} onChange={(e) => {
+            
+            <TextField style={{backgroundColor: 'white', borderRadius: '5px'}} label="Password" type="password" value={password} onChange={(e) => {
                     setPassword(e.target.value)
                     setErrors([])
                     }}/>
-            </Form.Group>
+  
            <br />
+           <br/>
 
             <Button type="submit" className="gameButton" style={{}}>Login</Button>
+            <br/>
             <Form.Label>Or</Form.Label>
+            <br/>
             <Button onClick={handleClick} className="gameButton">Signup</Button>
             
 

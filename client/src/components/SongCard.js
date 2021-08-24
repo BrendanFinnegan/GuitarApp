@@ -196,7 +196,8 @@ console.log(song)
               function handleImportLyrics(){
                 fetch(`/importlyrics?artist=${artist}&title=${title}`)
                 .then(res => res.json()).then(data => {
-                  if (data.length > 0)
+                  console.log(data)
+                  if (data.status !== 500)
                  { console.log(data.lyrics_body)
                   setLyrics(data.lyrics_body)}
                   else
@@ -541,7 +542,7 @@ console.log(song)
                         fullWidth
           />
 
-            <TextField
+            {/* <TextField
                         autoFocus
                         margin="dense"
                         id="genre"
@@ -550,7 +551,7 @@ console.log(song)
                         value={genre}
                         onChange={e => setGenre(e.target.value)}
                         fullWidth
-                    />
+                    /> */}
 
             <TextField
                         autoFocus
@@ -586,13 +587,13 @@ console.log(song)
                         fullWidth
                     />
 
-                <div>
+                {/* <div>
                 <label >Singable?</label>
                 <label style={{marginLeft: '10px'}}>No</label>
                 <input style={{marginLeft: '10px'}} type="radio" id="no" name="singable" value="false" defaultChecked={!singableResponse} onClick={() => setSingableResponse(false)}/>
                 <label style={{marginLeft: '10px'}}>Yes</label>
                 <input style={{marginLeft: '10px'}} type="radio" id="yes" name="singable" value="true" defaultChecked={singableResponse} onClick={() => setSingableResponse(true)}/>
-                </div>
+                </div> */}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} className="gameButton">

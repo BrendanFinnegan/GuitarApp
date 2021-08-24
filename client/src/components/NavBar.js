@@ -12,30 +12,30 @@ function NavBar({currentUser, setCurrentUser}){
 
     return(
         <>
-        <Navbar className="color-nav" variant="dark" style={{height: '100vh', textAlign: 'left', paddingTop: '20px'}}>
-            <Container className="nav-container">
-                <Navbar.Brand className="color-links" style={{fontFamily:'Reem Kufi', color: 'black', fontSize: 'larger', margin: '10px'}} href="/">My Guitar Space</Navbar.Brand>
+        <Navbar  variant="dark" style={{backgroundImage:'url(https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/spanish-acoustic-guitar-dark-red-background-bigalbaloo-stock.jpg)', height: '100vh', textAlign: 'left', paddingTop: '20px'}}>
+            <Container >
+                <Navbar.Brand className="color-links" style={{fontFamily:'Reem Kufi', color: 'white', fontSize: 'larger', margin: '10px', paddingLeft: '30px'}} href="/">My Guitar Space</Navbar.Brand>
                 <Nav className="me-auto">
                 <br/>
-                    <Nav.Link style={{color: 'black', fontSize: 'large', fontWeight: 'bold', fontFamily:'Reem Kufi'}} className="color-links" href="/">Home</Nav.Link>
+                {currentUser.id ? <Nav.Link style={{color: 'white', fontSize: 'large', fontFamily:'Reem Kufi', paddingLeft: '30px'}} className="color-links" href="/">Home</Nav.Link> : null}
                     <br/>
                     <br/>
                    {currentUser.id ? 
                    <>
-                   <Nav.Link style={{color: 'black', fontSize: 'large', fontWeight: 'bold', fontFamily:'Reem Kufi'}} className="color-links" href="/mylibrary">My Library</Nav.Link>
+                   <Nav.Link style={{color: 'white', fontSize: 'large', fontFamily:'Reem Kufi', paddingLeft: '30px'}} className="color-links" href="/mylibrary">My Library</Nav.Link>
                    <br/>
                    <br/>
                    </> : null}
                    {currentUser.id ? 
                    <>
-                    <Nav.Link style={{color: 'black', fontSize: 'large', fontWeight: 'bold', fontFamily:'Reem Kufi'}} className="color-links" href="/myinterestedsongs">My Interested Songs</Nav.Link> 
+                    <Nav.Link style={{color: 'white', fontSize: 'large', fontFamily:'Reem Kufi', paddingLeft: '30px'}} className="color-links" href="/myinterestedsongs">My Interested Songs</Nav.Link> 
                     <br/>
                     <br/>
                     </> : null}
 
-                    {currentUser.id ? <> <Nav.Link style={{color: 'black', fontSize: 'large', fontWeight: 'bold', fontFamily:'Reem Kufi'}} className="color-links" href="/searchpage"  >Search For New Songs</Nav.Link> <br/><br/> </> : null} 
+                    {currentUser.id ? <> <Nav.Link style={{color: 'white', fontSize: 'large', fontFamily:'Reem Kufi', paddingLeft: '30px'}} className="color-links" href="/searchpage"  >Search For New Songs</Nav.Link> <br/><br/> </> : null} 
 
-                   {currentUser.id ? <Nav.Link style={{color: 'black', fontSize: 'large', fontWeight: 'bold', fontFamily:'Reem Kufi'}} className="color-links" href="/login"  onClick={handleLogout}>Logout</Nav.Link> : <Nav.Link style={{color: 'black', fontSize: 'large', fontWeight: 'bold', fontFamily:'Reem Kufi'}} className="color-links" href="/login" >Login</Nav.Link>} 
+                   {currentUser.id ? <Nav.Link style={{color: 'white', fontSize: 'large', fontFamily:'Reem Kufi', paddingLeft: '30px'}} className="color-links" href="/login"  onClick={handleLogout}>Logout</Nav.Link> : <Nav.Link style={{ paddingLeft: '30px', color: 'white', fontSize: 'large', fontFamily:'Reem Kufi'}} className="color-links" href="/login" >Login / Sign-Up</Nav.Link>} 
                     
 
 

@@ -50,7 +50,7 @@ function Home({currentUser, handleMoreDetailsFetch, setCurrentUser, randomSongs}
     return(
       <>
 
-      <br/>
+
       <br/>
 
  
@@ -58,7 +58,7 @@ function Home({currentUser, handleMoreDetailsFetch, setCurrentUser, randomSongs}
 direction="row"
 justifyContent="flex-start">
       <Grid item xs={10}>
-    <h2>My Guitar Space</h2>
+      {currentUser.id ? <h2>My Guitar Space</h2> : null}
     {currentUser.id ? 
     <>
     <h2>Welcome {currentUser.name} </h2>
