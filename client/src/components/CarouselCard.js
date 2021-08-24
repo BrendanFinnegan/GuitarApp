@@ -20,7 +20,7 @@ import { Nav } from "react-bootstrap"
 
 
 
-function CarouselCard({song, currentUser, setInterestedSongs, userSongs, setUserSongs}) {
+function CarouselCard({song, handleMoreDetailsFetch, currentUser, setInterestedSongs, userSongs, setUserSongs}) {
 
     const [title, setTitle] = useState(song.title)
     const [artist, setArtist] = useState(song.artist)
@@ -70,6 +70,13 @@ function CarouselCard({song, currentUser, setInterestedSongs, userSongs, setUser
           }));
           
             const classes = useStyles();
+
+            function handleMoreDetails (e){
+              handleMoreDetailsFetch(e.target.id)
+            }
+
+
+
     return(
 
         <Card style={{fontFamily:'Reem Kufi',  flexDirection: 'column', overflow: 'auto'}}> 
@@ -78,7 +85,7 @@ function CarouselCard({song, currentUser, setInterestedSongs, userSongs, setUser
   justifyContent="flex-start"
   alignItems="flex-center">
         <Grid item xs={12}>
-            <h4>{song.title} , by {song.artist}</h4>
+            <h4 className="carousel">{song.title} , by {song.artist}</h4>
         </Grid>
 
               {/* <Grid item xs={12}>
@@ -86,11 +93,11 @@ function CarouselCard({song, currentUser, setInterestedSongs, userSongs, setUser
                 </Grid> */}
 
         <Grid item xs={12}>
-             <h4>Year Learned: {song.year_learned}</h4>
+             <h4  className="carousel">Year Learned: {song.year_learned}</h4>
         </Grid>
 
         <Grid item xs={12}>
-             <Nav.Link  className="navnav" href="/cardpage">More Details</Nav.Link>
+             <Button id={song.id} className="gameButton" onClick={handleMoreDetails}>More Details</Button>
         </Grid>
 
 

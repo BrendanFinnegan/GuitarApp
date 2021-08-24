@@ -43,9 +43,9 @@ function SearchPage({interestedSongs, setUserSongs,setInterestedSongs, currentUs
 
     let resultCards = resultsArray.map(song => {
 
-        return   <Grid item key={song.track.track_id}>
+        return   <Grid item xs={10} key={song.track.track_id}>
                 <Accordion style={{ boxShadow: "none" }}  >
-        <AccordionSummary  >
+        <AccordionSummary className={classes.root} >
         <Typography className={classes.heading} > {song.track.track_name}, {song.track.artist_name} </Typography>
         </AccordionSummary>
         <AccordionDetails>
@@ -81,23 +81,34 @@ function SearchPage({interestedSongs, setUserSongs,setInterestedSongs, currentUs
 
     return(
         <>
-        <h3>Search by Title, Artist, or Both</h3>
+        <Grid container
+ 
+ justifyContent="flex-center"
+ alignItems="center">
+
+  
+   <Grid item xs={10}>
+        <h2>Search by Title, Artist, or Both</h2>
         <form onSubmit={handleSubmit}>
-        <TextField variant="filled" style={{backgroundColor: 'white', borderRadius: '5px'}} label="Title" value={titleSearchTerm} onChange={e => setTitleSearchTerm(e.target.value)} />
+        <TextField style={{backgroundColor: 'white', borderRadius: '5px'}} label="Title" value={titleSearchTerm} onChange={e => setTitleSearchTerm(e.target.value)} />
         <br/>
-        <TextField variant="filled" style={{backgroundColor: 'white', borderRadius: '5px'}} label="Artist" value={artistSearchTerm} onChange={e => setArtistSearchTerm(e.target.value)} />
+        <TextField style={{backgroundColor: 'white', borderRadius: '5px'}} label="Artist" value={artistSearchTerm} onChange={e => setArtistSearchTerm(e.target.value)} />
+        <br/>
         <br/>
         <Button type="submit" className="gameButton">Search</Button>
         
         </form>
+        </Grid>
+        <Grid item xs={2}></Grid>
         <Grid container
-  direction="column"
-  justifyContent="flex-start"
-  alignItems="flex-end">
+ 
+  justifyContent="flex-center"
+  alignItems="center">
        {resultCards}
        
     </Grid>
     {errors ? <h3 style={{fontFamily: 'Reem Kufi', color: 'black' }}>{errors}</h3> : null} 
+    </Grid>
         </>
     )
 }

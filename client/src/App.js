@@ -11,6 +11,7 @@ import SongCard from './components/SongCard';
 import NewSongForm from './components/NewSongForm';
 import NewInterestedSongForm from './components/NewInterestedSongForm';
 import SearchPage from './components/SearchPage';
+import CarouselSongCard from './components/CarouselSongCard';
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
@@ -21,9 +22,9 @@ function App() {
   const [userSongs, setUserSongs] = useState([])
   const [interestedSongs, setInterestedSongs] = useState([])
   const [randomSongs, setRandomSongs] = useState([])
+  const [fetchedSong, setFetchedSong] = useState([])
   const history = useHistory()
 
-  console.log(randomSongs[0])
 
     useEffect(() => { 
         if (currentUser.id)
@@ -73,6 +74,19 @@ function App() {
       }
     }, [currentUser])
 
+    function handleMoreDetailsFetch(id) {
+      fetch(`/songs/${id}`)
+      .then(res => res.json())
+      .then(data => {
+        
+        setFetchedSong(data)
+        console.log(data)
+        history.push('/cardpage')
+      })
+
+    }
+    console.log(fetchedSong)
+
   return (
 
     <div className="App">
@@ -108,10 +122,10 @@ function App() {
           <SearchPage interestedSongs={interestedSongs} setUserSongs={setUserSongs} setInterestedSongs={setInterestedSongs} currentUser={currentUser} userSongs={userSongs}/>
         </Route>
         <Route exact path="/cardpage">
-        {userSongs[0]? <SongCard setUserSongs={setUserSongs} userSongs={userSongs} song={userSongs[1]} /> : null}
+        <CarouselSongCard setUserSongs={setUserSongs} userSongs={userSongs} song={fetchedSong} />
         </Route>
         <Route exact path="/">
-          <Home currentUser={currentUser} setCurrentUser={setCurrentUser} randomSongs={randomSongs}/>
+          <Home handleMoreDetailsFetch={handleMoreDetailsFetch} currentUser={currentUser} setCurrentUser={setCurrentUser} randomSongs={randomSongs}/>
         </Route>
       </Switch>
       </Grid>

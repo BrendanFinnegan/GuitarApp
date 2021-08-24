@@ -6,7 +6,7 @@ import {useHistory} from "react-router-dom"
 import 'react-multi-carousel/lib/styles.css';
 import Grid from '@material-ui/core/Grid'
 
-function Home({currentUser, setCurrentUser, randomSongs}) {
+function Home({currentUser, handleMoreDetailsFetch, setCurrentUser, randomSongs}) {
 
     const responsive = {
       superLargeDesktop: {
@@ -44,7 +44,7 @@ function Home({currentUser, setCurrentUser, randomSongs}) {
 
   
       const renderSongs = randomSongs.map(song => {
-          return <CarouselCard key={song.id} song={song} />
+          return <CarouselCard handleMoreDetailsFetch={handleMoreDetailsFetch} key={song.id} song={song} />
       })
       
     return(
@@ -67,10 +67,10 @@ justifyContent="flex-start">
 
     </>
      : <Login setCurrentUser={setCurrentUser} />}
-    {currentUser.id?  <> <h4>Whens the last time you played....</h4>
+    {randomSongs.length > 0 ? <> <h4>Whens the last time you played....</h4>
     
     <div  className="carousel-div"  >
-            <Carousel infinite={true}  responsive={responsive} >
+            <Carousel infinite={true} responsive={responsive} style={{marginLeft: '15%'}} >
         {renderSongs} 
    
           </Carousel>

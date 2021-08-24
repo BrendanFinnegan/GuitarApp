@@ -73,7 +73,7 @@ function SearchedSongCard({song, currentUser, interestedSongs, setInterestedSong
             }
     return(
   
-        <Card style={{ alignItems:'center', flexDirection: 'column', height: '25vh', width: '75vw', overflow: 'auto', marginTop: '15px'}}> 
+        <Card style={{ alignItems:'center', boxShadow: 'none', flexDirection: 'column', height: '15vh', width: '80vw', overflow: 'auto', marginTop: '15px'}}> 
         <Grid item container
   direction="row"
   justifyContent="flex-start"
@@ -86,7 +86,7 @@ function SearchedSongCard({song, currentUser, interestedSongs, setInterestedSong
           </Grid>
           
           <Grid item xs={3}>
-                  <Button  className="gameButton" onClick={handleMoreInfo} >Open for Lyrics and More Information</Button>
+                  <Button  className="gameButton" onClick={handleMoreInfo} >Lyrics and More Information</Button>
           </Grid>
           <Grid item xs={6}>
                   <Button  className="gameButton" onClick={handleTransitionToKnown} >Add This To My Known Songs!</Button>
@@ -96,7 +96,7 @@ function SearchedSongCard({song, currentUser, interestedSongs, setInterestedSong
           <Grid item xs={3}>
         <div>
       <Button className="gameButton" onClick={handleTransitionToInterested}>
-        Add This To My Interested Songs
+        Add To My Interested Songs
       </Button>
         </div>
         </Grid>

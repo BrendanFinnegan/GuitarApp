@@ -16,10 +16,11 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+import { useHistory } from "react-router-dom"
 
-function SongCard({song, userSongs, setUserSongs}){
+function CarouselSongCard({song, userSongs, setUserSongs}){
+    let history = useHistory()
 
-console.log(song)
 
   const [videoObj, setVideoObj] = useState(`https://vimeo.com/api/oembed.json?url=${song.recording}`)
   const [recordingID, setRecordingID] = useState('')
@@ -220,19 +221,31 @@ console.log(song)
                   .then(data => {
                       let filtered = userSongs.filter(item => item.id !== data.id)
                       setUserSongs(filtered)
+                      history.push('./')
                 })}
 
     return(
-  <div >
-    <Card style={{ textAlign: 'left', margin: 'auto', boxShadow: 'none', fontFamily:'Reem Kufi', alignItems:'center', flexDirection: 'column', height: '30vh', width: '75vw', overflow: 'auto'}}> 
+  <div  style={{textAlign: 'left'}}>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+    <Card  style={{ textAlign: 'left', margin: 'auto', boxShadow: 'none', fontFamily:'Reem Kufi', flexDirection: 'column', height: '75vh', width: '75vw', overflow: 'auto'}}> 
         <Grid item container
   direction="row"
   justifyContent="flex-start"
   alignItems="flex-start">
-        <Grid item xs={3}>
+        <Grid item xs={6}>
             <h4>Title: {song.title}</h4>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={6}>
             <h4>Artist: {song.artist}</h4>
         </Grid>
         {/* <Grid item xs={3}>
@@ -241,21 +254,21 @@ console.log(song)
         {/* <Grid item xs={3}>
             <h4>Is this a singable song? {song.singable? 'Yes': 'No'}</h4>
         </Grid> */}
-              <Grid item xs={3}>
+              <Grid item xs={6}>
                     
                     <h4>My Ability Level: {song.my_ability_level}</h4>
                 </Grid>
                 {/* <Grid item xs={1}></Grid> */}
-        <Grid item xs={3}>
+        <Grid item xs={6}>
              <h4>Year Learned: {song.year_learned}</h4>
         </Grid>
 
 <Grid item xs={12} style={{alignItems: 'left'}} >
             <Accordion style={{ boxShadow: "none" }}  >
-                <AccordionSummary className={classes.root}   >
+                <AccordionSummary className={classes.root}  >
                     <Typography className={classes.heading} > Show Notes </Typography>
                 </AccordionSummary>
-                    <AccordionDetails className={classes.root} style={{ display: "block" }}>
+                    <AccordionDetails className={classes.root}  style={{ display: "block" }}>
                     
                              <ul style={{textAlign: "left",listStyleType: "none"}}>
                              {notesList}
@@ -307,7 +320,7 @@ console.log(song)
         </Grid>
         <Grid item xs={12} style={{alignItems: 'left'}} >
             <Accordion style={{ boxShadow: "none" }}  >
-                <AccordionSummary className={classes.root}  >
+                <AccordionSummary className={classes.root} >
                     <Typography className={classes.heading} > Show Lyrics</Typography>
                 </AccordionSummary>
                     <AccordionDetails className={classes.root} style={{ display: "block" }}>
@@ -327,7 +340,7 @@ console.log(song)
                               </Button> */}
                               <br/>
       <ThemeProvider theme={theme}>
-      <Dialog
+      <Dialog style={{fontFamily: 'Reem Kufi', color: 'black'}}
   open={openLyricsEdit} onClose={handleCloseLyricsEdit} aria-labelledby="form-dialog-title">
         <DialogTitle  id="form-dialog-title">Edit or Add Lyrics</DialogTitle>
         <form onSubmit={handleLyricsEdit}>
@@ -370,7 +383,7 @@ console.log(song)
         </Grid>
         <Grid item xs={12}>
         <Accordion style={{ boxShadow: "none" }}  >
-        <AccordionSummary className={classes.root}  >
+        <AccordionSummary className={classes.root} >
         <Typography className={classes.heading} > Click for Video Recording </Typography>
         </AccordionSummary>
         <AccordionDetails>
@@ -499,9 +512,10 @@ console.log(song)
           <Grid item xs={3}>
                   <Button  className="gameButton" onClick={handleDelete} >Delete</Button>
           </Grid>
+
         </Grid>   
     </Card>
     </div>
     )
 }
-export default SongCard
+export default CarouselSongCard

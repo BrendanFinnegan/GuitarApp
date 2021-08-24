@@ -106,7 +106,7 @@ const handleClose = () => {
     </Grid>
     <Grid item xs={2}>
 
-    <Button className="gameButton" onClick={handleClickOpen}>
+    <Button style={{marginRight: '40px'}} className="gameButton" onClick={handleClickOpen}>
         Add A New Song
       </Button>
       </Grid>

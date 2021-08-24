@@ -46,7 +46,7 @@ function Login({setCurrentUser}){
   direction="row"
   justifyContent="flex-start">
       <Grid item xs={10}>
-        <h3  style={{margin: 'auto', align: 'center', fontFamily: 'Reem Kufi', color: 'black' }}> Login </h3>
+        <h2 style={{margin: 'auto', align: 'center', fontFamily: 'Reem Kufi', color: 'black' }}> Login </h2>
         <br/>
         </Grid>
         <Grid item xs={2}></Grid>
