@@ -67,7 +67,7 @@ function CarouselSongCard({song, userSongs, setUserSongs}){
     let notesArry = song.notes.split("\n")
 
 
-    let notesList = notesArry.map(elly => <li key={generateKey(elly)}>{elly}</li>)
+    notesList = notesArry.map(elly => <li key={generateKey(elly)}>{elly}</li>)
     }
     const useStyles = makeStyles((theme) => ({
         root: {
@@ -224,6 +224,57 @@ function CarouselSongCard({song, userSongs, setUserSongs}){
                       history.push('./')
                 })}
 
+
+
+                const [tabs, setTabs] = useState(song.tabs)
+
+                function handleAddTabLines () {
+                  let tabLines = '\n \n E-------------------------------------------------------------------------------------  \n A-------------------------------------------------------------------------------------  \n G-------------------------------------------------------------------------------------  \n D-------------------------------------------------------------------------------------  \n B-------------------------------------------------------------------------------------  \n e-------------------------------------------------------------------------------------  \n _____________________________________________________'
+                  setTabs(tabs + tabLines)
+                }
+
+                const handleClickTabsEditOpen = () => {
+                  setOpenTabsEdit(true);
+                };
+              
+                const handleCloseTabsEdit = () => {
+                  setOpenTabsEdit(false);
+                };
+
+                const [openTabsEdit, setOpenTabsEdit] = useState(false);
+
+                let tabsList = []
+                  if (song.tabs){
+                  let tabsArry = song.tabs.split("\n")
+
+
+                  tabsList = tabsArry.map(elly => <li key={generateKey(elly)}>{elly}</li>)
+                  }
+
+
+                  function handleTabsEdit(e) {
+                    e.preventDefault()
+                    console.log(e.target)
+    
+                    let tabsObj = {
+                        tabs
+                    }
+    
+                    fetch (`/editTabs/${song.id}`, { 
+                        method: 'PATCH',
+                        headers: {
+                    'Content-Type': 'application/json'
+                }, 
+                    body: JSON.stringify(tabsObj)
+                    }).then(res => res.json()).then(data => {
+                      setOpenTabsEdit(false)
+                      setUserSongs(data) 
+                     
+                    })
+                  }
+
+
+
     return(
   <div  style={{textAlign: 'left'}}>
     <br/>
@@ -318,6 +369,66 @@ function CarouselSongCard({song, userSongs, setUserSongs}){
                      </AccordionDetails>
              </Accordion>
         </Grid>
+
+
+        <Grid item xs={12} style={{alignItems: 'left'}} >
+            <Accordion style={{ boxShadow: "none" }}  >
+                <AccordionSummary className={classes.root}   >
+                    <Typography className={classes.heading} > Show Tabs </Typography>
+                </AccordionSummary>
+                    <AccordionDetails className={classes.root} style={{ display: "block" }}>
+                    
+                             <ul style={{textAlign: "left",listStyleType: "none"}}>
+                             {tabsList}
+                             </ul>
+                
+            
+         
+                        <Button className="gameButton" onClick={handleClickTabsEditOpen}>
+                           Edit or Add
+                </Button>
+                <br/>
+                <ThemeProvider theme={theme}>
+                <Dialog 
+                  open={openTabsEdit} onClose={handleCloseTabsEdit} aria-labelledby="form-dialog-title">
+                    <DialogTitle  id="tabs">Edit or Add Tabs/Chords</DialogTitle>
+                      <form onSubmit={handleTabsEdit}>
+                        <DialogContent style={{height: '300px'}} >
+                            <TextField 
+                                  
+                                  multiline
+                                  id="tabs"
+                                  label="Tabs"
+                                  type="Multilne"
+                                  rows={12}
+                                  cols={50}
+                                  value={tabs}
+                                  fullWidth
+                                  onChange={e => setTabs(e.target.value)}
+                      
+            
+          />
+        </DialogContent>
+        <DialogActions>
+        <Button className="gameButton" onClick={handleAddTabLines}>Add More Tab Lines</Button>
+          <Button onClick={handleCloseTabsEdit}className="gameButton">
+            Cancel
+          </Button>
+          <Button type="submit" className="gameButton">
+            Save
+          </Button>
+          
+        </DialogActions>
+        </form>
+      </Dialog>
+      </ThemeProvider>
+
+
+                     </AccordionDetails>
+             </Accordion>
+        </Grid>
+
+
         <Grid item xs={12} style={{alignItems: 'left'}} >
             <Accordion style={{ boxShadow: "none" }}  >
                 <AccordionSummary className={classes.root} >

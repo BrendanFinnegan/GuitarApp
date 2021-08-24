@@ -58,6 +58,14 @@ class SongsController < ApplicationController
         render json: Song.all
     end
 
+    def editTabs
+        song = Song.find(params[:id])
+        song[:tabs] = params[:tabs]
+        song.save
+
+        render json: Song.all
+    end
+
     def songsbeingplayed
         user = User.find(params[:id])
         songs = user.songs.sample(3)
