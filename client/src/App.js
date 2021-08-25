@@ -94,8 +94,8 @@ function App() {
 
   direction="row"
   justifyContent="flex-start"
-  alignItems="flex-start">
-    <Grid item xs={2} style={{ paddingRight: '15px', }}>
+  >
+    <Grid item xs={2} style={{ backgroundImage:'url(https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/spanish-acoustic-guitar-dark-red-background-bigalbaloo-stock.jpg)', backgroundAttachment: 'fixed', paddingRight: '15px', }}>
       <NavBar currentUser={currentUser}/>
       </Grid>
       <Grid item xs={10} >

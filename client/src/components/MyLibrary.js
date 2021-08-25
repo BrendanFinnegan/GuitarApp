@@ -69,7 +69,7 @@ function MyLibrary({currentUser, userSongs, setUserSongs}){
 
     let songCards = sortedCards.map(song => {
         return <Grid item key={song.id}>
-            <Accordion style={{ boxShadow: "none", padding: "0px" }}  >
+            <Accordion style={{ boxShadow: "none", paddingLeft: "20px" }}  >
         <AccordionSummary  className={classes.root} >
         <Typography className={classes.heading} >  {song.artist}, {song.title} </Typography>
         </AccordionSummary>
