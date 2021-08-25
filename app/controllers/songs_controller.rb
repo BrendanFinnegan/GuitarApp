@@ -68,7 +68,7 @@ class SongsController < ApplicationController
 
     def songsbeingplayed
         user = User.find(params[:id])
-        songs = user.songs.sample(3)
+        songs = user.songs.sample(5)
         render json: songs
     end
 
