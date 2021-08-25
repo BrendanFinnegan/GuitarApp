@@ -72,7 +72,7 @@ function MyInterestedSongs({interestedSongs, currentUser, setInterestedSongs, us
 
     let interestedSongCards = sortedCards.map(song => {
         return <Grid item key={song.id}>
-                <Accordion style={{ boxShadow: "none" }}  >
+                <Accordion style={{ boxShadow: "none", paddingLeft: "20px" }}  >
         <AccordionSummary className={classes.root}  >
         <Typography className={classes.heading} > {song.artist}, {song.title} </Typography>
         </AccordionSummary>
@@ -108,17 +108,16 @@ function MyInterestedSongs({interestedSongs, currentUser, setInterestedSongs, us
   direction="row"
   justifyContent="flex-start"
   alignItems="center">
-      <Grid item xs={10}>
+      <Grid item xs={12}>
     <h2>My Interested Songs</h2>
       </Grid>
 
-      <Grid item xs={2}></Grid>
-      <Grid item xs={4}></Grid>
+      <Grid item xs={5}></Grid>
       <Grid item xs={2} style={{paddingBottom: '25px'}}>
     <TextField   className={classes.roots} style={{backgroundColor: 'white', borderRadius: '5px'}} label="Search by Artist or Title" value={filterInput} onChange={handleSearch} />
     </Grid>
-    <Grid item xs={2}></Grid>
-    <Grid item xs={2}>
+    <Grid item xs={1}></Grid>
+    <Grid item xs={3}>
 <Button className="gameButton" onClick={handleClickOpen}>
         Add New Interested Song
       </Button>

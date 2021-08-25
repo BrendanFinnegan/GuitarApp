@@ -134,9 +134,9 @@ function InterestedSongCard({song, currentUser, interestedSongs, setInterestedSo
             const classes = useStyles();
     return(
   
-        <Card className='songcard' style={{ alignItems:'center', boxShadow: '1px 1px 4px 5px #750000', flexDirection: 'column', height: '20vh', width: '75vw', overflow: 'auto'}}> 
+        <Card className='songcard' style={{ alignItems:'center', boxShadow: '1px 1px 4px 5px #750000', flexDirection: 'column', height: '20vh', width: '61vw', overflow: 'auto'}}> 
         <Grid item container
-        spacing={3}
+     
   direction="row"
   justifyContent="flex-start"
   alignItems="flex-start">
@@ -147,11 +147,15 @@ function InterestedSongCard({song, currentUser, interestedSongs, setInterestedSo
                 <h3>Artist: {song.artist}</h3>
           </Grid>
 
-          <Grid item xs={3}>
+          <Grid item xs={2}>
+                  <Button style={{marginTop: '10px'}} className="gameButton" onClick={handleDelete} >Delete</Button>
+          </Grid>
+
+          <Grid item xs={4} >
                   <Button  className="gameButton" onClick={searchUltGuitar} >Search Ultimate Guitar Tabs</Button>
           </Grid>
 
-          <Grid item xs={3}>
+          <Grid item xs={4}>
             
         <div>
       <Button className="gameButton" onClick={handleClickOpen}>
@@ -210,12 +214,10 @@ function InterestedSongCard({song, currentUser, interestedSongs, setInterestedSo
           </Dialog>
           </div>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={4}>
                   <Button  className="gameButton" onClick={handleTransition} >Add This To My Known Songs!</Button>
           </Grid>
-          <Grid item xs={2}>
-                  <Button  className="gameButton" onClick={handleDelete} >Delete</Button>
-          </Grid>
+
           
         
 

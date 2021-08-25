@@ -73,7 +73,7 @@ function SearchedSongCard({song, currentUser, interestedSongs, setInterestedSong
             }
     return(
   
-        <Card style={{ alignItems:'center', boxShadow: 'none', flexDirection: 'column', height: '15vh', width: '80vw', overflow: 'auto', marginTop: '15px'}}> 
+        <Card className="songcard" style={{boxShadow: '1px 1px 4px 5px #750000', alignItems:'center', flexDirection: 'column', height: '15vh', width: '61vw', overflow: 'auto', marginTop: '15px'}}> 
         <Grid item container
   direction="row"
   justifyContent="flex-start"

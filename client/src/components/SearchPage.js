@@ -54,8 +54,8 @@ function SearchPage({interestedSongs, setUserSongs,setInterestedSongs, currentUs
 
     let resultCards = resultsArray.map(song => {
 
-        return   <Grid item xs={10} key={song.track.track_id}>
-                <Accordion style={{ boxShadow: "none" }}  >
+        return   <Grid item key={song.track.track_id}>
+                <Accordion style={{ boxShadow: "none" , paddingLeft: "20px" }}  >
         <AccordionSummary className={classes.root} >
         <Typography className={classes.heading} > {song.track.track_name}, {song.track.artist_name} </Typography>
         </AccordionSummary>
@@ -98,7 +98,7 @@ function SearchPage({interestedSongs, setUserSongs,setInterestedSongs, currentUs
  alignItems="center">
 
   
-   <Grid item xs={10}>
+   <Grid item xs={12}>
         <h2>Search by Title, Artist, or Both</h2>
         <form onSubmit={handleSubmit}>
         <TextField  className={classes.roots} style={{backgroundColor: 'white', borderRadius: '5px'}} label="Title" value={titleSearchTerm} onChange={e => setTitleSearchTerm(e.target.value)} />
@@ -110,7 +110,7 @@ function SearchPage({interestedSongs, setUserSongs,setInterestedSongs, currentUs
         
         </form>
         </Grid>
-        <Grid item xs={2}></Grid>
+
         <Grid container
  
   justifyContent="flex-center"

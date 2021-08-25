@@ -78,7 +78,8 @@ function SignUp({setCurrentUser}){
         <Grid container
   direction="row"
   justifyContent="flex-start">
-      <Grid item xs={10}>
+      <Grid item xs={2}></Grid>
+      <Grid item xs={8}>
         <h2 style={{margin: 'auto', align: 'center', fontFamily: 'Reem Kufi', color: 'black' }}>Signup</h2>
         
         <Form onSubmit={handleSubmit} style={{fontFamily: 'Reem Kufi', color: 'black' }}>

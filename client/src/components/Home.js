@@ -88,7 +88,7 @@ function Home({currentUser, handleMoreDetailsFetch, setCurrentUser, randomSongs}
           <Grid container
 direction="row"
 justifyContent="flex-start">
-      <Grid item xs={10}>
+      <Grid item xs={12}>
       {currentUser.id ? <h2>My Guitar Space</h2> : null}
     {currentUser.id ? 
     <>

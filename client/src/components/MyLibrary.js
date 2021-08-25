@@ -115,12 +115,12 @@ const handleClose = () => {
   direction="row"
   justifyContent="flex-start"
   alignItems="center">
-      <Grid item xs={10}>
+      <Grid item xs={12}>
     <h2>My Library</h2>
       </Grid>
 
-      <Grid item xs={2}></Grid>
-      <Grid item xs={4}></Grid>
+
+      <Grid item xs={5}></Grid>
       
     
     <Grid item xs={2} style={{paddingBottom: '25px'}}>
@@ -129,10 +129,11 @@ const handleClose = () => {
     <Grid item xs={2}></Grid>
     <Grid item xs={2}>
 
-    <Button style={{marginRight: '40px'}} className="gameButton" onClick={handleClickOpen}>
+    <Button  className="gameButton" onClick={handleClickOpen}>
         Add A New Song
       </Button>
       </Grid>
+      <Grid item xs={2}></Grid>
       <Dialog 
         open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle style={{fontFamily: 'Reem Kufi'}} id="form-dialog-title">New Song Details</DialogTitle>
