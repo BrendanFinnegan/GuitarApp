@@ -343,7 +343,7 @@ console.log(song)
                                 <DialogTitle  id="notes">Edit or Add Notes</DialogTitle>
                                   <form onSubmit={handleNotesEdit}>
                                     <DialogContent >
-                                        <TextField
+                                        <TextField className={classes.roots}
                         
                         multiline
                         id="Notes"
@@ -392,7 +392,7 @@ console.log(song)
             
          
                         <Button className="gameButton" onClick={handleClickTabsEditOpen}>
-                           Edit or Add
+                           Edit or Add Tabs
                 </Button>
                 <br/>
                 <ThemeProvider theme={theme}>
@@ -401,7 +401,7 @@ console.log(song)
                     <DialogTitle  id="tabs">Edit or Add Tabs/Chords</DialogTitle>
                       <form onSubmit={handleTabsEdit}>
                         <DialogContent style={{width: '900px', height: '300px'}} >
-                            <TextField 
+                            <TextField className={classes.roots}
                                   
                                   multiline
                                   id="tabs"
@@ -468,13 +468,13 @@ console.log(song)
         <form onSubmit={handleLyricsEdit}>
         <DialogContent >
           
-          <TextField
+          <TextField className={classes.roots}
                         
                         multiline
                         id="standard-textarea"
                         label="Lyrics"
                         type="Multilne"
-                        rows={6}
+                        rows={12}
                         cols={30}
                         value={lyrics}
                         fullWidth
@@ -506,7 +506,7 @@ console.log(song)
         <Grid item xs={12} style={{alignItems: 'left', paddingLeft: '10px'}}>
         <Accordion style={{ boxShadow: "none" }}  >
         <AccordionSummary className={classes.root}  >
-        <Typography className={classes.heading} > Click for Video Recording </Typography>
+        <Typography className={classes.heading} > Show Video Recording </Typography>
         </AccordionSummary>
         <AccordionDetails>
           <>

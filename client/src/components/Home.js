@@ -99,7 +99,7 @@ justifyContent="flex-start">
 
     </>
      : <Login setCurrentUser={setCurrentUser} />}
-    {randomSongs.length > 0 ? <> <h4>When's the last time you played....</h4>
+    {randomSongs.length > 0 ? <> <h4>When's the last time you played...</h4>
     
     <div  className="carousel-div"  >
             <Carousel infinite={true} responsive={responsive} style={{marginLeft: '15%'}} >

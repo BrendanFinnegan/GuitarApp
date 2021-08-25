@@ -85,7 +85,7 @@ function SignUp({setCurrentUser}){
 
                 <TextField className={classes.roots} style={{backgroundColor: 'white', borderRadius: '5px'}} label="Name"  value={name} onChange={(e) => setName(e.target.value)}/>
                 <br/>
-                <TextField className={classes.roots} style={{backgroundColor: 'white', borderRadius: '5px'}} label="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                <TextField className={classes.roots} style={{backgroundColor: 'white', borderRadius: '5px'}} type="email" label="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
                 <br/>
 
                 <TextField className={classes.roots} style={{backgroundColor: 'white', borderRadius: '5px'}} label="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
