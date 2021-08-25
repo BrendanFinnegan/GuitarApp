@@ -7,6 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
+import { makeStyles } from '@material-ui/core/styles';
 
 function NewInterestedSongForm ({handleClose, currentUser,interestedSongs, setInterestedSongs}) {
     const [title, setTitle] = useState('')
@@ -42,6 +43,38 @@ function NewInterestedSongForm ({handleClose, currentUser,interestedSongs, setIn
 
     }
 
+    const useStyles = makeStyles((theme) => ({
+      roots: {
+        '& label.Mui-focused': {
+          color: '#000000',
+        },
+        '& .MuiInput-underline:after': {
+          borderBottomColor: '#000000',
+        },
+        '& .MuiInput-underline:hover:not($disabled):not($focused):not($error):before': {
+          borderBottom: `3px solid #000000`
+      },
+      },  
+      root: {
+          width: '100%',
+          border: 'none', 
+          shadow: 'none', 
+          transition: 'none',
+          padding: '0px',
+          marginBottom: '0px'
+        },
+        heading: {
+          color: 'black',
+          fontFamily: 'Reem Kufi',  
+          fontWeight: 'bold', 
+          border: 'none', 
+          shadow: 'none',
+          fontSize: 'large'
+       
+        },
+      }));
+      const classes = useStyles();
+
     return(
         <div >
         {/* <h3 style={{fontFamily: 'Reem Kufi', color: 'black' }}>Add a New Song That You Want to Learn</h3> */}
@@ -49,7 +82,7 @@ function NewInterestedSongForm ({handleClose, currentUser,interestedSongs, setIn
         <form onSubmit={handleSubmit}>
         <DialogContent>
           
-          <TextField
+          <TextField className={classes.roots}
                         autoFocus
                         margin="dense"
                         id="title"
@@ -60,7 +93,7 @@ function NewInterestedSongForm ({handleClose, currentUser,interestedSongs, setIn
                         fullWidth
           />
 
-            <TextField
+            <TextField className={classes.roots}
                         autoFocus
                         margin="dense"
                         id="artist"

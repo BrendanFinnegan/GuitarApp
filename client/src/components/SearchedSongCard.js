@@ -3,7 +3,7 @@ import Grid from '@material-ui/core/Grid'
 import { Button } from "react-bootstrap"
 import { useHistory } from "react-router-dom"
 import { useState } from "react";
-
+import { makeStyles } from '@material-ui/core/styles';
 
 function SearchedSongCard({song, currentUser, interestedSongs, setInterestedSongs, userSongs, setUserSongs}){
         let history = useHistory()

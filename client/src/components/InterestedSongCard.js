@@ -11,7 +11,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { useEffect, useState } from "react";
-
+import { makeStyles } from '@material-ui/core/styles';
 
 function InterestedSongCard({song, currentUser, interestedSongs, setInterestedSongs, userSongs, setUserSongs}){
         let history = useHistory()
@@ -100,6 +100,38 @@ function InterestedSongCard({song, currentUser, interestedSongs, setInterestedSo
                 let filtered = interestedSongs.filter(item => item.id !== data.id)
                 setInterestedSongs(filtered)
           })}
+
+          const useStyles = makeStyles((theme) => ({
+            roots: {
+              '& label.Mui-focused': {
+                color: '#000000',
+              },
+              '& .MuiInput-underline:after': {
+                borderBottomColor: '#000000',
+              },
+              '& .MuiInput-underline:hover:not($disabled):not($focused):not($error):before': {
+                borderBottom: `3px solid #000000`
+            },
+            },  
+            root: {
+                width: '100%',
+                border: 'none', 
+                shadow: 'none', 
+                transition: 'none',
+                padding: '0px',
+                marginBottom: '0px'
+              },
+              heading: {
+                color: 'black',
+                fontFamily: 'Reem Kufi',  
+                fontWeight: 'bold', 
+                border: 'none', 
+                shadow: 'none',
+                fontSize: 'large'
+             
+              },
+            }));
+            const classes = useStyles();
     return(
   
         <Card className='songcard' style={{ alignItems:'center', boxShadow: '1px 1px 4px 5px #750000', flexDirection: 'column', height: '20vh', width: '75vw', overflow: 'auto'}}> 
@@ -132,7 +164,7 @@ function InterestedSongCard({song, currentUser, interestedSongs, setInterestedSo
         <form onSubmit={handleEdit}>
         <DialogContent>
           
-          <TextField
+          <TextField className={classes.roots}
                         autoFocus
                         margin="dense"
                         id="title"
@@ -143,7 +175,7 @@ function InterestedSongCard({song, currentUser, interestedSongs, setInterestedSo
                         fullWidth
           />
 
-            <TextField
+            <TextField className={classes.roots}
                         autoFocus
                         margin="dense"
                         id="artist"

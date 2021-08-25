@@ -7,7 +7,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-
+import { makeStyles } from '@material-ui/core/styles';
 
 function NewSongForm ({handleClose, userSongs, setUserSongs, currentUser}) {
     const [title, setTitle] = useState('')
@@ -22,6 +22,42 @@ function NewSongForm ({handleClose, userSongs, setUserSongs, currentUser}) {
     const [tabs, setTabs] = useState('')
     const [errors, setErrors] = useState('')
     const history = useHistory()
+
+
+    const useStyles = makeStyles((theme) => ({
+        roots: {
+          '& label.Mui-focused': {
+            color: '#000000',
+          },
+          '& .MuiInput-underline:after': {
+            borderBottomColor: '#000000',
+          },
+          '& .MuiInput-underline:hover:not($disabled):not($focused):not($error):before': {
+            borderBottom: `3px solid #000000`
+        },
+        },  
+        root: {
+            width: '100%',
+            border: 'none', 
+            shadow: 'none', 
+            transition: 'none',
+            padding: '0px',
+            marginBottom: '0px'
+          },
+          heading: {
+            color: 'black',
+            fontFamily: 'Reem Kufi',  
+            fontWeight: 'bold', 
+            border: 'none', 
+            shadow: 'none',
+            fontSize: 'large'
+         
+          },
+        }));
+        const classes = useStyles();
+
+
+
 
     async function handleSubmit(e) {
         e.preventDefault()
@@ -83,7 +119,7 @@ function NewSongForm ({handleClose, userSongs, setUserSongs, currentUser}) {
             Edit the Song information
           </DialogContentText> */}
           
-          <TextField
+          <TextField className={classes.roots}
                         autoFocus
                         margin="dense"
                         id="title"
@@ -93,7 +129,7 @@ function NewSongForm ({handleClose, userSongs, setUserSongs, currentUser}) {
                         onChange={e => setTitle(e.target.value)}
                         fullWidth
           />
-           <TextField
+           <TextField className={classes.roots}
                         autoFocus
                         margin="dense"
                         id="artist"
@@ -104,7 +140,7 @@ function NewSongForm ({handleClose, userSongs, setUserSongs, currentUser}) {
                         fullWidth
           />
 {/* 
-            <TextField
+            <TextField className={classes.roots}
                         autoFocus
                         margin="dense"
                         id="genre"
@@ -115,7 +151,7 @@ function NewSongForm ({handleClose, userSongs, setUserSongs, currentUser}) {
                         fullWidth
                     /> */}
 
-            <TextField
+            <TextField className={classes.roots}
                         autoFocus
                         margin="dense"
                         id="ability"
@@ -127,7 +163,7 @@ function NewSongForm ({handleClose, userSongs, setUserSongs, currentUser}) {
                     />
 
 
-            <TextField
+            <TextField className={classes.roots}
                         autoFocus
                         margin="dense"
                         id="year"
@@ -138,7 +174,7 @@ function NewSongForm ({handleClose, userSongs, setUserSongs, currentUser}) {
                         fullWidth
                     />
 
-            <TextField
+            <TextField className={classes.roots}
                         autoFocus
                         margin="dense"
                         id="recording"

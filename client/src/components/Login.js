@@ -3,7 +3,7 @@ import { useState } from "react"
 import { useHistory } from "react-router-dom"
 import Grid from '@material-ui/core/Grid'
 import TextField from '@material-ui/core/TextField';
-
+import { makeStyles } from '@material-ui/core/styles';
 function Login({setCurrentUser}){
     const [password, setPassword] = useState('')
     const [email, setEmail] = useState('')
@@ -36,6 +36,38 @@ function Login({setCurrentUser}){
     function handleClick(e) {
         history.push('/signup')
     }
+
+    const useStyles = makeStyles((theme) => ({
+        roots: {
+          '& label.Mui-focused': {
+            color: '#000000',
+          },
+          '& .MuiInput-underline:after': {
+            borderBottomColor: '#000000',
+          },
+          '& .MuiInput-underline:hover:not($disabled):not($focused):not($error):before': {
+            borderBottom: `3px solid #000000`
+        },
+        },  
+        root: {
+            width: '100%',
+            border: 'none', 
+            shadow: 'none', 
+            transition: 'none',
+            padding: '0px',
+            marginBottom: '0px'
+          },
+          heading: {
+            color: 'black',
+            fontFamily: 'Reem Kufi',  
+            fontWeight: 'bold', 
+            border: 'none', 
+            shadow: 'none',
+            fontSize: 'large'
+         
+          },
+        }));
+        const classes = useStyles();
     return(
         <>
 
@@ -55,14 +87,14 @@ function Login({setCurrentUser}){
         <Form onSubmit={handleSubmit} style={{fontFamily: 'Reem Kufi', color: 'black'}}>
       
      
-            <TextField style={{backgroundColor: 'white', borderRadius: '5px'}} label="Email" value={email} onChange={(e) => {
+            <TextField className={classes.roots} style={{backgroundColor: 'white', borderRadius: '5px'}} label="Email" value={email} onChange={(e) => {
                     setEmail(e.target.value)
                     setErrors([])
                     }}/>
  
             <br/>
             
-            <TextField style={{backgroundColor: 'white', borderRadius: '5px'}} label="Password" type="password" value={password} onChange={(e) => {
+            <TextField className={classes.roots} style={{backgroundColor: 'white', borderRadius: '5px'}} label="Password" type="password" value={password} onChange={(e) => {
                     setPassword(e.target.value)
                     setErrors([])
                     }}/>

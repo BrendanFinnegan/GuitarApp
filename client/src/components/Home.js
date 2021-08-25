@@ -5,9 +5,40 @@ import CarouselCard from "./CarouselCard";
 import {useHistory} from "react-router-dom"
 import 'react-multi-carousel/lib/styles.css';
 import Grid from '@material-ui/core/Grid'
+import { makeStyles } from '@material-ui/core/styles';
 
 function Home({currentUser, handleMoreDetailsFetch, setCurrentUser, randomSongs}) {
-
+  const useStyles = makeStyles((theme) => ({
+    roots: {
+      '& label.Mui-focused': {
+        color: '#8d0000',
+      },
+      '& .MuiInput-underline:after': {
+        borderBottomColor: '#8d0000',
+      },
+      '& .MuiInput-underline:hover:not($disabled):not($focused):not($error):before': {
+        borderBottom: `3px solid #8d0000`
+    },
+    },  
+    root: {
+        width: '100%',
+        border: 'none', 
+        shadow: 'none', 
+        transition: 'none',
+        padding: '0px',
+        marginBottom: '0px'
+      },
+      heading: {
+        color: 'black',
+        fontFamily: 'Reem Kufi',  
+        fontWeight: 'bold', 
+        border: 'none', 
+        shadow: 'none',
+        fontSize: 'large'
+     
+      },
+    }));
+    const classes = useStyles();
     const responsive = {
       superLargeDesktop: {
         // the naming can be any, depends on you.

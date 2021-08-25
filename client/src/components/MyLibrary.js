@@ -25,11 +25,15 @@ function MyLibrary({currentUser, userSongs, setUserSongs}){
     const useStyles = makeStyles((theme) => ({
       roots: {
         '& label.Mui-focused': {
-          color: '#750000',
+          color: '#8d0000',
         },
         '& .MuiInput-underline:after': {
-          borderBottomColor: '#750000',
-        }},  
+          borderBottomColor: '#8d0000',
+        },
+        '& .MuiInput-underline:hover:not($disabled):not($focused):not($error):before': {
+          borderBottom: `3px solid #8d0000`
+      },
+      },  
       root: {
           width: '100%',
           border: 'none', 
@@ -62,9 +66,7 @@ function MyLibrary({currentUser, userSongs, setUserSongs}){
       return -1
     })
 
-    console.log(userSongs)
-    console.log(sortedCards)
-       
+
     let songCards = sortedCards.map(song => {
         return <Grid item key={song.id}>
             <Accordion style={{ boxShadow: "none", padding: "0px" }}  >
@@ -114,7 +116,7 @@ const handleClose = () => {
   justifyContent="flex-start"
   alignItems="center">
       <Grid item xs={10}>
-    <h2>MyLibrary</h2>
+    <h2>My Library</h2>
       </Grid>
 
       <Grid item xs={2}></Grid>
@@ -133,8 +135,7 @@ const handleClose = () => {
       </Grid>
       <Dialog 
         open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle  id="form-dialog-title">New Song Details</DialogTitle>
-        <Typography id="colortext" style={{marginLeft: '24px'}}>(Lyrics and Notes Can be Added Later)</Typography>
+        <DialogTitle style={{fontFamily: 'Reem Kufi'}} id="form-dialog-title">New Song Details</DialogTitle>
         <NewSongForm handleClose={handleClose} userSongs={userSongs} setUserSongs={setUserSongs} currentUser={currentUser}/>
           </Dialog>
     

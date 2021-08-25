@@ -69,6 +69,17 @@ console.log(song)
     notesList = notesArry.map(elly => <li key={generateKey(elly)}>{elly}</li>)
     }
     const useStyles = makeStyles((theme) => ({
+      roots: {
+        '& label.Mui-focused': {
+          color: '#000000',
+        },
+        '& .MuiInput-underline:after': {
+          borderBottomColor: '#000000',
+        },
+        '& .MuiInput-underline:hover:not($disabled):not($focused):not($error):before': {
+          borderBottom: `3px solid #000000`
+      },
+      },  
         root: {
           width: '100%',
           border: 'none', 
@@ -528,7 +539,7 @@ console.log(song)
             Edit the Song information
           </DialogContentText> */}
           
-          <TextField
+          <TextField className={classes.roots}
                         autoFocus
                         margin="dense"
                         id="title"
@@ -538,7 +549,7 @@ console.log(song)
                         onChange={e => setTitle(e.target.value)}
                         fullWidth
           />
-           <TextField
+           <TextField className={classes.roots}
                         autoFocus
                         margin="dense"
                         id="artist"
@@ -549,7 +560,7 @@ console.log(song)
                         fullWidth
           />
 
-            {/* <TextField
+            {/* <TextField className={classes.roots}
                         autoFocus
                         margin="dense"
                         id="genre"
@@ -560,7 +571,7 @@ console.log(song)
                         fullWidth
                     /> */}
 
-            <TextField
+            <TextField className={classes.roots}
                         autoFocus
                         margin="dense"
                         id="ability"
@@ -572,7 +583,7 @@ console.log(song)
                     />
 
 
-            <TextField
+            <TextField className={classes.roots}
                         autoFocus
                         margin="dense"
                         id="year"
@@ -583,7 +594,7 @@ console.log(song)
                         fullWidth
                     />
 
-            <TextField
+            <TextField className={classes.roots}
                         autoFocus
                         margin="dense"
                         id="recording"

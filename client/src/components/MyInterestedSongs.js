@@ -25,6 +25,17 @@ function MyInterestedSongs({interestedSongs, currentUser, setInterestedSongs, us
     const [artist, setArtist] = useState('')
 
     const useStyles = makeStyles((theme) => ({
+      roots: {
+        '& label.Mui-focused': {
+          color: '#8d0000',
+        },
+        '& .MuiInput-underline:after': {
+          borderBottomColor: '#8d0000',
+        },
+        '& .MuiInput-underline:hover:not($disabled):not($focused):not($error):before': {
+          borderBottom: `3px solid #8d0000`
+      },
+      }, 
         root: {
           width: '100%',
           border: 'none', 
@@ -104,7 +115,7 @@ function MyInterestedSongs({interestedSongs, currentUser, setInterestedSongs, us
       <Grid item xs={2}></Grid>
       <Grid item xs={4}></Grid>
       <Grid item xs={2} style={{paddingBottom: '25px'}}>
-    <TextField style={{backgroundColor: 'white', borderRadius: '5px'}} label="Search by Artist or Title" value={filterInput} onChange={handleSearch} />
+    <TextField   className={classes.roots} style={{backgroundColor: 'white', borderRadius: '5px'}} label="Search by Artist or Title" value={filterInput} onChange={handleSearch} />
     </Grid>
     <Grid item xs={2}></Grid>
     <Grid item xs={2}>

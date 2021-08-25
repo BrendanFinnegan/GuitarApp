@@ -21,6 +21,17 @@ function SearchPage({interestedSongs, setUserSongs,setInterestedSongs, currentUs
     const [errors, setErrors] = useState('')
 
     const useStyles = makeStyles((theme) => ({
+        roots: {
+            '& label.Mui-focused': {
+              color: '#8d0000',
+            },
+            '& .MuiInput-underline:after': {
+              borderBottomColor: '#8d0000',
+            },
+            '& .MuiInput-underline:hover:not($disabled):not($focused):not($error):before': {
+              borderBottom: `3px solid #8d0000`
+          },
+          },
         root: {
           width: '100%',
           border: 'none', 
@@ -90,9 +101,9 @@ function SearchPage({interestedSongs, setUserSongs,setInterestedSongs, currentUs
    <Grid item xs={10}>
         <h2>Search by Title, Artist, or Both</h2>
         <form onSubmit={handleSubmit}>
-        <TextField style={{backgroundColor: 'white', borderRadius: '5px'}} label="Title" value={titleSearchTerm} onChange={e => setTitleSearchTerm(e.target.value)} />
+        <TextField  className={classes.roots} style={{backgroundColor: 'white', borderRadius: '5px'}} label="Title" value={titleSearchTerm} onChange={e => setTitleSearchTerm(e.target.value)} />
         <br/>
-        <TextField style={{backgroundColor: 'white', borderRadius: '5px'}} label="Artist" value={artistSearchTerm} onChange={e => setArtistSearchTerm(e.target.value)} />
+        <TextField  className={classes.roots} style={{backgroundColor: 'white', borderRadius: '5px'}} label="Artist" value={artistSearchTerm} onChange={e => setArtistSearchTerm(e.target.value)} />
         <br/>
         <br/>
         <Button type="submit" className="gameButton">Search</Button>
