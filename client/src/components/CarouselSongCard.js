@@ -301,15 +301,15 @@ console.log(song)
     <br/>
     <br/>
 
-    <Card className='songcard' style={{boxShadow: '1px 1px 4px 5px #750000', textAlign: 'center', margin: 'auto', fontFamily:'Reem Kufi', flexDirection: 'column', height: '60vh', width: '61vw', overflow: 'auto'}}> 
+    <Card className='songcard' style={{boxShadow: '1px 1px 4px 5px #750000', textAlign: 'center', margin: 'auto', fontFamily:'Reem Kufi', flexDirection: 'column', height: '52vh', width: '61vw', overflow: 'auto'}}> 
         <Grid item container
   direction="row"
   justifyContent="flex-start"
   alignItems="flex-start">
-        <Grid item xs={6} style={{ paddingLeft: '10px'}}>
-            <h4>Title: {song.title}</h4>
+        <Grid item xs={3} style={{ paddingLeft: '10px'}}>
+            <h4>{song.title}</h4>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={3}>
             <h4>Artist: {song.artist}</h4>
         </Grid>
         {/* <Grid item xs={3}>
@@ -318,12 +318,12 @@ console.log(song)
         {/* <Grid item xs={3}>
             <h4>Is this a singable song? {song.singable? 'Yes': 'No'}</h4>
         </Grid> */}
-              <Grid item xs={6} style={{ paddingLeft: '10px'}}>
+              <Grid item xs={3} style={{ paddingLeft: '10px'}}>
                     
                     <h4>My Ability Level: {song.my_ability_level}</h4>
                 </Grid>
                 {/* <Grid item xs={1}></Grid> */}
-        <Grid item xs={6}>
+        <Grid item xs={3}>
              <h4>Year Learned: {song.year_learned}</h4>
         </Grid>
 
