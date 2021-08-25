@@ -293,11 +293,10 @@ function CarouselSongCard({song, userSongs, setUserSongs, handleMoreDetailsFetch
 console.log(song)
 
     return(
-  <div  style={{textAlign: 'left'}}>
+  <div  style={{textAlign: 'center'}}>
+      <h2>More Details About {song.title}</h2>
     <br/>
-    <br/>
-    <br/>
-    <br/>
+
     <br/>
     <br/>
 
@@ -398,7 +397,7 @@ console.log(song)
             
          
                         <Button className="gameButton" onClick={handleClickTabsEditOpen}>
-                           Edit or Add
+                           Edit or Add Tabs
                 </Button>
                 <br/>
                 <ThemeProvider theme={theme}>

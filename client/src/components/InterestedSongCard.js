@@ -148,7 +148,7 @@ function InterestedSongCard({song, currentUser, interestedSongs, setInterestedSo
           </Grid>
 
           <Grid item xs={2}>
-                  <Button style={{marginTop: '10px'}} className="gameButton" onClick={handleDelete} >Delete</Button>
+                  <Button style={{marginTop: '15px'}} className="gameButton" onClick={handleDelete} >Delete</Button>
           </Grid>
 
           <Grid item xs={4} >
