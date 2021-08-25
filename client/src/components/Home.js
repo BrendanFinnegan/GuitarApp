@@ -62,7 +62,7 @@ justifyContent="flex-start">
     {currentUser.id ? 
     <>
     <br/>
-    <h2>Welcome {currentUser.name} </h2>
+    <h3>Welcome {currentUser.name} </h3>
 
         
 

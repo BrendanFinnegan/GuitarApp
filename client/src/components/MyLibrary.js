@@ -23,7 +23,14 @@ function MyLibrary({currentUser, userSongs, setUserSongs}){
     const [filterInput, setFilterInput] = useState("")
     const [open, setOpen] = useState(false);
     const useStyles = makeStyles((theme) => ({
-        root: {
+      roots: {
+        '& label.Mui-focused': {
+          color: '#750000',
+        },
+        '& .MuiInput-underline:after': {
+          borderBottomColor: '#750000',
+        }},  
+      root: {
           width: '100%',
           border: 'none', 
           shadow: 'none', 
@@ -89,7 +96,17 @@ const handleClose = () => {
   setOpen(false);
 };
 // console.log(currentUser)
-
+// const CssTextField = withStyles({
+//   roots: {
+//     '& label.Mui-focused': {
+//       color: 'green',
+//     },
+//     '& .MuiInput-underline:after': {
+//       borderBottomColor: 'green',
+//     }}})
+//     function CustomizedInputs() {
+//       const classes = useStyles()
+//     }
     return(
     <>
     <Grid container
@@ -105,7 +122,7 @@ const handleClose = () => {
       
     
     <Grid item xs={2} style={{paddingBottom: '25px'}}>
-    <TextField  style={{backgroundColor: 'white', borderRadius: '5px'}} label="Search by Artist or Title" value={filterInput} onChange={handleSearch} />
+    <TextField className={classes.roots} style={{backgroundColor: 'white', borderRadius: '5px'}} label="Search by Artist or Title" value={filterInput} onChange={handleSearch} />
     </Grid>
     <Grid item xs={2}></Grid>
     <Grid item xs={2}>
