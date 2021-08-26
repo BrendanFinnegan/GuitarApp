@@ -292,6 +292,21 @@ function CarouselSongCard({song, userSongs, setUserSongs, handleMoreDetailsFetch
 
 console.log(song)
 
+const [notesExpand, setNotesExpand] = useState(() => {
+  if (song.notes) {return true}
+  else {return false}
+})
+const [tabsExpand, setTabsExpand] = useState(() => {
+  if (song.tabs) {return true}
+  else {return false}
+})
+const [lyricsExpand, setLyricsExpand] = useState(() => {
+  if (song.lyrics) {return true}
+  else {return false}
+})
+
+const [videoExpand, setVideoExpand] = useState(false)
+
     return(
   <div  style={{textAlign: 'center'}}>
       <h2>More Details About {song.title}</h2>
@@ -300,7 +315,7 @@ console.log(song)
     <br/>
     <br/>
 
-    <Card className='songcard' style={{boxShadow: '1px 1px 4px 5px #750000', textAlign: 'center', margin: 'auto', fontFamily:'Reem Kufi', flexDirection: 'column', height: '52vh', width: '61vw', overflow: 'auto'}}> 
+    <Card className='songcard' style={{boxShadow: '1px 1px 4px 5px #750000', textAlign: 'center', margin: 'auto', fontFamily:'Reem Kufi', flexDirection: 'column', height: 'auto', width: '61vw', overflow: 'auto'}}> 
         <Grid item container
   direction="row"
   justifyContent="flex-start"
@@ -327,9 +342,9 @@ console.log(song)
         </Grid>
 
 <Grid item xs={12} style={{alignItems: 'left', paddingLeft: '10px'}} >
-            <Accordion style={{ boxShadow: "none" }}  >
-                <AccordionSummary className={classes.root}  >
-                    <Typography className={classes.heading} > Show Notes </Typography>
+            <Accordion expanded={notesExpand}  style={{ boxShadow: "none" }}  >
+                <AccordionSummary className={classes.root} onClick={() => setNotesExpand(!notesExpand)}  >
+                {notesExpand ? <Typography className={classes.heading} > Hide Notes </Typography> : <Typography className={classes.heading} > Show Notes</Typography> }
                 </AccordionSummary>
                     <AccordionDetails className={classes.root}  style={{ display: "block" }}>
                     
@@ -384,9 +399,9 @@ console.log(song)
 
 
         <Grid item xs={12} style={{alignItems: 'left', paddingLeft: '10px'}} >
-            <Accordion style={{ boxShadow: "none" }}  >
-                <AccordionSummary className={classes.root}   >
-                    <Typography className={classes.heading} > Show Tabs </Typography>
+            <Accordion expanded={tabsExpand} style={{ boxShadow: "none" }}  >
+                <AccordionSummary className={classes.root} onClick={() => setTabsExpand(!tabsExpand)}  >
+                {tabsExpand ? <Typography className={classes.heading} > Hide Tabs </Typography> : <Typography className={classes.heading} > Show Tabs</Typography> }
                 </AccordionSummary>
                     <AccordionDetails className={classes.root} style={{ display: "block" }}>
                     
@@ -442,9 +457,9 @@ console.log(song)
 
 
         <Grid item xs={12} style={{alignItems: 'left', paddingLeft: '10px'}} >
-            <Accordion style={{ boxShadow: "none" }}  >
-                <AccordionSummary className={classes.root} >
-                    <Typography className={classes.heading} > Show Lyrics</Typography>
+            <Accordion expanded={lyricsExpand}  style={{ boxShadow: "none" }}  >
+                <AccordionSummary className={classes.root} onClick={() => setLyricsExpand(!lyricsExpand)} >
+                {lyricsExpand ? <Typography className={classes.heading} > Hide Lyrics</Typography> : <Typography className={classes.heading} > Show Lyrics</Typography> }
                 </AccordionSummary>
                     <AccordionDetails className={classes.root} style={{ display: "block" }}>
                  
@@ -505,9 +520,9 @@ console.log(song)
              </Accordion>
         </Grid>
         <Grid item xs={12} style={{ paddingLeft: '10px'}}>
-        <Accordion style={{ boxShadow: "none" }}  >
-        <AccordionSummary className={classes.root} >
-        <Typography className={classes.heading} > Click for Video Recording </Typography>
+        <Accordion expanded={videoExpand} style={{ boxShadow: "none" }}  >
+        <AccordionSummary className={classes.root} onClick={() => setVideoExpand(!videoExpand)}  >
+        {videoExpand ? <Typography className={classes.heading} > Hide Video Recording </Typography> : <Typography className={classes.heading} > Show Video Recording</Typography> }
         </AccordionSummary>
         <AccordionDetails>
           <>
