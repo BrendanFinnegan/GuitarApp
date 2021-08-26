@@ -213,7 +213,7 @@ function CarouselSongCard({song, userSongs, setUserSongs, handleMoreDetailsFetch
               function handleImportLyrics(){
                 fetch(`/importlyrics?artist=${artist}&title=${title}`)
                 .then(res => res.json()).then(data => {
-                  if (data.length > 0)
+                  if (data.status !== 500)
                  { 
                   setLyrics(data.lyrics_body)}
                   else
