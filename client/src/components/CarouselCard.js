@@ -104,7 +104,7 @@ function CarouselCard({song, handleMoreDetailsFetch, currentUser, setInterestedS
         <Grid item xs={12}>
         <Accordion style={{ boxShadow: "none", display: 'block' }}  >
         <AccordionSummary className={classes.heading}  >
-        <Typography className={classes.heading} > Click for Video Recording </Typography>
+        <Typography className={classes.heading} > Show Video Recording </Typography>
         </AccordionSummary>
         <AccordionDetails>
           <>
