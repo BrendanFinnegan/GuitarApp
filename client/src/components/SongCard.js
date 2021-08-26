@@ -212,7 +212,6 @@ console.log(song)
               function handleImportLyrics(){
                 fetch(`/importlyrics?artist=${artist}&title=${title}`)
                 .then(res => res.json()).then(data => {
-                  console.log(data)
                   if (data.status !== 500)
                  { console.log(data.lyrics_body)
                   setLyrics(data.lyrics_body)}
