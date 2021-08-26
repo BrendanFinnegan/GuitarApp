@@ -103,10 +103,9 @@ function NewSongForm ({handleClose, userSongs, setUserSongs, currentUser}) {
         }
 
     }
-        console.log(singableResponse)
 
 
-        // console.log(currentUser)
+
 
     return(
         <div >

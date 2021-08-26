@@ -68,7 +68,7 @@ function Home({currentUser, handleMoreDetailsFetch, setCurrentUser, randomSongs}
       //     .then(res => res.json())
       //     .then(data => {
       //         setRandomSongs(data)
-      //         console.log(data)
+      //       
       //    })
       // },[currentUser])
 

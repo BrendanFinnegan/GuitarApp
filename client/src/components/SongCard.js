@@ -19,7 +19,7 @@ import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 
 function SongCard({song, userSongs, setUserSongs}){
 
-console.log(song)
+
 
   const [videoObj, setVideoObj] = useState(`https://vimeo.com/api/oembed.json?url=${song.recording}`)
   const [recordingID, setRecordingID] = useState('')
@@ -41,7 +41,7 @@ console.log(song)
     const [lyrics, setLyrics] = useState(song.lyrics)
     const [singableResponse, setSingableResponse] = useState(song.singable)
     
-    // console.log(singableResponse)
+   
 
 
     const generateKey = (pre) => {
@@ -51,7 +51,7 @@ console.log(song)
   let lyricList = []
   if (song.lyrics)
     {let arrayStr = song.lyrics.split("\n")
-    // console.log(arrayStr)
+
 
     lyricList = arrayStr.map(elly => <li key={generateKey(elly)}>{elly}</li>)
     }
@@ -151,7 +151,7 @@ console.log(song)
 
             function handleEdit (e) {
                 e.preventDefault();
-                console.log(e.target.title.value)
+                
                 let songObj = {
                     title,
                     artist,
@@ -191,7 +191,7 @@ console.log(song)
               
               function handleLyricsEdit(e) {
                 e.preventDefault()
-                console.log(e.target)
+               
 
                 let lyricsObj = {
                     lyrics
@@ -213,7 +213,7 @@ console.log(song)
                 fetch(`/importlyrics?artist=${artist}&title=${title}`)
                 .then(res => res.json()).then(data => {
                   if (data.status !== 500)
-                 { console.log(data.lyrics_body)
+                 {
                   setLyrics(data.lyrics_body)}
                   else
                   {alert("Sorry! No lyrics found on MusicMatch to import. Let Google be your guide!")}
@@ -271,7 +271,7 @@ console.log(song)
 
                   function handleTabsEdit(e) {
                     e.preventDefault()
-                    console.log(e.target)
+                    
     
                     let tabsObj = {
                         tabs

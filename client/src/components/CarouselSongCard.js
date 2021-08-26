@@ -45,7 +45,7 @@ function CarouselSongCard({song, userSongs, setUserSongs, handleMoreDetailsFetch
     const [lyrics, setLyrics] = useState(song.lyrics)
     const [singableResponse, setSingableResponse] = useState(song.singable)
 
-    // console.log(singableResponse)
+
 
 
     const generateKey = (pre) => {
@@ -55,7 +55,7 @@ function CarouselSongCard({song, userSongs, setUserSongs, handleMoreDetailsFetch
   let lyricList = []
   if (song.lyrics)
     {let arrayStr = song.lyrics.split("\n")
-    // console.log(arrayStr)
+
 
     lyricList = arrayStr.map(elly => <li key={generateKey(elly)}>{elly}</li>)
     }
@@ -130,7 +130,7 @@ function CarouselSongCard({song, userSongs, setUserSongs, handleMoreDetailsFetch
 
             function handleNotesEdit(e){
               e.preventDefault()
-              console.log(e.target)
+           
 
               let notesObj = {
                   notes
@@ -151,7 +151,7 @@ function CarouselSongCard({song, userSongs, setUserSongs, handleMoreDetailsFetch
 
             function handleEdit (e) {
                 e.preventDefault();
-                console.log(e.target.title.value)
+            
                 let songObj = {
                     title,
                     artist,
@@ -191,7 +191,7 @@ function CarouselSongCard({song, userSongs, setUserSongs, handleMoreDetailsFetch
               
               function handleLyricsEdit(e) {
                 e.preventDefault()
-                console.log(e.target)
+             
 
                 let lyricsObj = {
                     lyrics
@@ -214,7 +214,7 @@ function CarouselSongCard({song, userSongs, setUserSongs, handleMoreDetailsFetch
                 fetch(`/importlyrics?artist=${artist}&title=${title}`)
                 .then(res => res.json()).then(data => {
                   if (data.length > 0)
-                 { console.log(data.lyrics_body)
+                 { 
                   setLyrics(data.lyrics_body)}
                   else
                   {alert("Sorry! No lyrics found on MusicMatch to import. Let Google be your guide!")}
@@ -271,7 +271,7 @@ function CarouselSongCard({song, userSongs, setUserSongs, handleMoreDetailsFetch
 
                   function handleTabsEdit(e) {
                     e.preventDefault()
-                    console.log(e.target)
+                 
     
                     let tabsObj = {
                         tabs
@@ -290,7 +290,7 @@ function CarouselSongCard({song, userSongs, setUserSongs, handleMoreDetailsFetch
                     })
                   }
 
-console.log(song)
+
 
 const [notesExpand, setNotesExpand] = useState(() => {
   if (song.notes) {return true}

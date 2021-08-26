@@ -99,7 +99,7 @@ function MyInterestedSongs({interestedSongs, currentUser, setInterestedSongs, us
     };
 
     function handleSubmit() {
-      console.log('click')
+
     }
 
     return(

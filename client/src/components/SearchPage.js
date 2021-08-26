@@ -75,8 +75,7 @@ function SearchPage({interestedSongs, setUserSongs,setInterestedSongs, currentUs
 
     function handleSubmit(e) {
         e.preventDefault();
-        console.log(titleSearchTerm)
-        console.log(artistSearchTerm)
+
         fetch(`/search?artist=${artistSearchTerm}&title=${titleSearchTerm}`)
         .then(res => res.json())
         .then(data => {

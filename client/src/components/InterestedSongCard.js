@@ -68,7 +68,7 @@ function InterestedSongCard({song, currentUser, interestedSongs, setInterestedSo
 
               function handleEdit (e) {
                 e.preventDefault();
-                console.log(e.target.title.value)
+            
                 let songObj = {
                     title,
                     artist,

@@ -97,7 +97,7 @@ const handleClickOpen = () => {
 const handleClose = () => {
   setOpen(false);
 };
-// console.log(currentUser)
+
 // const CssTextField = withStyles({
 //   roots: {
 //     '& label.Mui-focused': {
