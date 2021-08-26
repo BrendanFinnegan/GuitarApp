@@ -32,7 +32,7 @@ function App() {
       .then(res => res.json())
       .then(data => {
           setRandomSongs(data)
-          console.log(data)
+     
      })
   },[currentUser])
 
@@ -80,12 +80,12 @@ function App() {
       .then(data => {
         
         setFetchedSong(data)
-        console.log(data)
+   
         history.push('/cardpage')
       })
 
     }
-    console.log(fetchedSong)
+
 
   return (
 

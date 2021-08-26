@@ -39,7 +39,9 @@ class SongsController < ApplicationController
         song[:recording] = params[:recording]
         song[:singable] = params[:singable]
         song.save
-        render json: Song.all
+        user = song.user
+
+        render json: user.songs
     end
 
     def editLyrics
@@ -47,15 +49,18 @@ class SongsController < ApplicationController
         song[:lyrics] = params[:lyrics]
         song.save
 
-        render json: Song.all
+        user = song.user
+
+        render json: user.songs
     end
 
     def editNotes
         song = Song.find(params[:id])
         song[:notes] = params[:notes]
         song.save
+        user = song.user
 
-        render json: Song.all
+        render json: user.songs
     end
 
     def editTabs
@@ -63,7 +68,9 @@ class SongsController < ApplicationController
         song[:tabs] = params[:tabs]
         song.save
 
-        render json: Song.all
+        user = song.user
+
+        render json: user.songs
     end
 
     def songsbeingplayed
