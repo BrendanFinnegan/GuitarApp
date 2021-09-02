@@ -1,6 +1,5 @@
 import { Card } from '@material-ui/core'
 import { Button } from "react-bootstrap"
-import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography';
 import Accordion from '@material-ui/core/Accordion';
@@ -9,36 +8,17 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import { makeStyles } from '@material-ui/core/styles';
 import { useEffect, useState } from "react";
 
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import { createTheme, ThemeProvider } from '@material-ui/core/styles';
-import { Nav } from "react-bootstrap"
+
+function CarouselCard({song, handleMoreDetailsFetch}) {
 
 
-
-function CarouselCard({song, handleMoreDetailsFetch, currentUser, setInterestedSongs, userSongs, setUserSongs}) {
-
-    const [title, setTitle] = useState(song.title)
-    const [artist, setArtist] = useState(song.artist)
-    const [genre, setGenre] = useState(song.genre)
-    const [ability, setAbility] = useState(song.my_ability_level)
-    const [year, setYear] = useState(song.year_learned)
-    const [notes, setNotes] = useState(song.notes)
-    const [recording, setRecording] = useState(song.recording)
-    const [lyrics, setLyrics] = useState(song.lyrics)
-    const [singableResponse, setSingableResponse] = useState(song.singable)
-
-    const [videoObj, setVideoObj] = useState(`https://vimeo.com/api/oembed.json?url=${song.recording}`)
+    const [videoObj] = useState(`https://vimeo.com/api/oembed.json?url=${song.recording}`)
     const [recordingID, setRecordingID] = useState('')
     useEffect( () => {
     
     if (song.recording)
     {fetch(videoObj).then(res => res.json()).then(data => setRecordingID(data.video_id))
-    }},[videoObj] 
+    }},[videoObj, song.recording] 
     )
 
 
@@ -81,16 +61,12 @@ function CarouselCard({song, handleMoreDetailsFetch, currentUser, setInterestedS
 
         <Card style={{fontFamily:'Reem Kufi',  flexDirection: 'column', overflow: 'auto'}}> 
         <Grid item container
-  direction="row"
-  justifyContent="flex-start"
-  alignItems="flex-center">
+          direction="row"
+          justifyContent="flex-start"
+          alignItems="flex-center">
         <Grid item xs={12} >
             <h4 className="carousel">{song.title} , by {song.artist}</h4>
         </Grid>
-
-              {/* <Grid item xs={12}>
-                    <h4>My Ability Level for this one: {song.my_ability_level}</h4>
-                </Grid> */}
 
         <Grid item xs={12}>
              <h4  className="carousel">Year Learned: {song.year_learned}</h4>

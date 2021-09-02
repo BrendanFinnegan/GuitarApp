@@ -1,4 +1,4 @@
-import { Form, Group, Label, Control, Button } from "react-bootstrap"
+import { Form, Button } from "react-bootstrap"
 import { useState } from "react"
 import { useHistory } from "react-router-dom"
 import Grid from '@material-ui/core/Grid'
@@ -119,5 +119,3 @@ function Login({setCurrentUser}){
     )
 }
 export default Login
-
-{/* <Button onClick={handleClick} className="gameButton">Signup</Button> */}

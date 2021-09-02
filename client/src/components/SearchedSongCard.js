@@ -3,22 +3,19 @@ import Grid from '@material-ui/core/Grid'
 import { Button } from "react-bootstrap"
 import { useHistory } from "react-router-dom"
 import { useState } from "react";
-import { makeStyles } from '@material-ui/core/styles';
+
 
 function SearchedSongCard({song, currentUser, interestedSongs, setInterestedSongs, userSongs, setUserSongs}){
         let history = useHistory()
-        const [open, setOpen] = useState(false);
-        const [title, setTitle] = useState(song.track.track_name)
-        const [artist, setArtist] = useState(song.track.artist_name)
-        const [genre, setGenre] = useState('')
+        const [title] = useState(song.track.track_name)
+        const [artist] = useState(song.track.artist_name)
+        const [genre] = useState('')
         function handleMoreInfo(){
                 window.open(
                         `${song.track.track_share_url}`,
-                        '_blank' // <- This is what makes it open in a new window.
+                        '_blank' 
                       );
                 }
-
-
         function handleTransitionToKnown() { 
                 let knownSongObj = {
                     user_id: currentUser.id,
@@ -75,9 +72,9 @@ function SearchedSongCard({song, currentUser, interestedSongs, setInterestedSong
   
         <Card className="songcard" style={{boxShadow: '1px 1px 4px 5px #750000', alignItems:'center', flexDirection: 'column', height: '15vh', width: '61vw', overflow: 'auto', marginTop: '15px'}}> 
         <Grid item container
-  direction="row"
-  justifyContent="flex-start"
-  alignItems="flex-start">
+          direction="row"
+          justifyContent="flex-start"
+          alignItems="flex-start">
           <Grid item xs={6}>
                 <h3>Title: {song.track.track_name}</h3>   
           </Grid>
@@ -92,12 +89,11 @@ function SearchedSongCard({song, currentUser, interestedSongs, setInterestedSong
                   <Button  className="gameButton" onClick={handleTransitionToKnown} >Add This To My Known Songs!</Button>
           </Grid>
           
-          
           <Grid item xs={3}>
         <div>
-      <Button className="gameButton" onClick={handleTransitionToInterested}>
-        Add To My Interested Songs
-      </Button>
+          <Button className="gameButton" onClick={handleTransitionToInterested}>
+            Add To My Interested Songs
+          </Button>
         </div>
         </Grid>
           </Grid>   

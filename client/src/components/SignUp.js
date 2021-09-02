@@ -1,9 +1,10 @@
-import { Form, Group, Label, Control, Button } from "react-bootstrap"
+import { Form, Button } from "react-bootstrap"
 import { useState } from "react"
 import { useHistory } from "react-router-dom"
 import Grid from '@material-ui/core/Grid'
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
+
 function SignUp({setCurrentUser}){
     const [password, setPassword] = useState('')
     const [email, setEmail] = useState('')
@@ -71,37 +72,37 @@ function SignUp({setCurrentUser}){
         const classes = useStyles();
 
     return(
-        < >
-
+        <>
         <br/>
         <br/>
         <Grid container
-  direction="row"
-  justifyContent="flex-start">
+            direction="row"
+            justifyContent="flex-start">
       <Grid item xs={2}></Grid>
+      
       <Grid item xs={8}>
         <h2 style={{margin: 'auto', align: 'center', fontFamily: 'Reem Kufi', color: 'black' }}>Signup</h2>
         
         <Form onSubmit={handleSubmit} style={{fontFamily: 'Reem Kufi', color: 'black' }}>
-
                 <TextField className={classes.roots} style={{backgroundColor: 'white', borderRadius: '5px'}} label="Name"  value={name} onChange={(e) => setName(e.target.value)}/>
                 <br/>
                 <TextField className={classes.roots} style={{backgroundColor: 'white', borderRadius: '5px'}} type="email" label="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
                 <br/>
-
                 <TextField className={classes.roots} style={{backgroundColor: 'white', borderRadius: '5px'}} label="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
-
             <br/>
             <br/>
             <Button type="submit" className="gameButton">Signup</Button>
             <br/>
-            
         </Form>
+
         {errors.error? errors.error.map(e => <p className="error-message" style={{fontFamily: 'Reem Kufi', color: 'black' }}>{e}</p>) : null}
+
         </Grid>
+
         <Grid item xs={2}>
         <Button className="gameButton" onClick={backToLogin}>Back to Login</Button>
         </Grid>
+
         </Grid>
     </>
     )

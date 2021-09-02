@@ -1,17 +1,13 @@
-
 import SearchedSongCard from './SearchedSongCard'
 import Grid from '@material-ui/core/Grid'
 import { useState } from "react"
 import TextField from '@material-ui/core/TextField';
 import { Button } from "react-bootstrap"
-
-import { useHistory } from "react-router-dom"
 import Typography from '@material-ui/core/Typography';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import { makeStyles } from '@material-ui/core/styles';
-
 
 function SearchPage({interestedSongs, setUserSongs,setInterestedSongs, currentUser, userSongs}) {
 
@@ -44,13 +40,11 @@ function SearchPage({interestedSongs, setUserSongs,setInterestedSongs, currentUs
           fontWeight: 'bold', 
           border: 'none', 
           shadow: 'none',
-          textDecoration: 'underline'
+          textDecoration: 'none'
         },
       }));
       
-        const classes = useStyles();
-
-    let history = useHistory()
+    const classes = useStyles();
 
     let resultCards = resultsArray.map(song => {
 
@@ -67,10 +61,8 @@ function SearchPage({interestedSongs, setUserSongs,setInterestedSongs, currentUs
         </>
             </AccordionDetails>
             </Accordion>
-
                 </Grid>
-    
-    
+
     })
 
     function handleSubmit(e) {
@@ -86,17 +78,15 @@ function SearchPage({interestedSongs, setUserSongs,setInterestedSongs, currentUs
                 setResultsArray([])
                 setErrors("No Results")}
         })
-
     }
 
     return(
         <>
         <Grid container
- 
- justifyContent="flex-center"
- alignItems="center">
+          justifyContent="flex-center"
+          alignItems="center"
+          >
 
-  
    <Grid item xs={12}>
         <h2>Search by Title, Artist, or Both</h2>
         <form onSubmit={handleSubmit}>
@@ -108,14 +98,12 @@ function SearchPage({interestedSongs, setUserSongs,setInterestedSongs, currentUs
         <Button type="submit" className="gameButton">Search</Button>
         
         </form>
-        </Grid>
+  </Grid>
 
-        <Grid container
- 
-  justifyContent="flex-center"
-  alignItems="center">
+    <Grid container
+          justifyContent="flex-center"
+          alignItems="center">
        {resultCards}
-       
     </Grid>
     {errors ? <h3 style={{fontFamily: 'Reem Kufi', color: 'black' }}>{errors}</h3> : null} 
     </Grid>

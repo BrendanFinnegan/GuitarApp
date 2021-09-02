@@ -1,6 +1,5 @@
 import { Card } from '@material-ui/core'
 import { Button } from "react-bootstrap"
-import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography';
 import Accordion from '@material-ui/core/Accordion';
@@ -8,42 +7,36 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import { makeStyles } from '@material-ui/core/styles';
 import { useEffect, useState } from "react";
-
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
-import { useHistory } from "react-router-dom"
 
 function CarouselSongCard({song, userSongs, setUserSongs, handleMoreDetailsFetch}){
   
-
-  
-    let history = useHistory()
-
-
-  const [videoObj, setVideoObj] = useState(`https://vimeo.com/api/oembed.json?url=${song.recording}`)
+  const [videoObj] = useState(`https://vimeo.com/api/oembed.json?url=${song.recording}`)
   const [recordingID, setRecordingID] = useState('')
   useEffect( () => {
   
   if (song.recording)
   {fetch(videoObj).then(res => res.json()).then(data => setRecordingID(data.video_id))
-  }},[videoObj] 
+  }},[videoObj, song.recording] 
   )
-
 
     const [title, setTitle] = useState(song.title)
     const [artist, setArtist] = useState(song.artist)
-    const [genre, setGenre] = useState(song.genre)
+    const [genre] = useState(song.genre)
     const [ability, setAbility] = useState(song.my_ability_level)
     const [year, setYear] = useState(song.year_learned)
     const [notes, setNotes] = useState(song.notes)
     const [recording, setRecording] = useState(song.recording)
     const [lyrics, setLyrics] = useState(song.lyrics)
-    const [singableResponse, setSingableResponse] = useState(song.singable)
+    const [singableResponse] = useState(song.singable)
+    const [open, setOpen] = useState(false);
+    const [openLyricsEdit, setOpenLyricsEdit] = useState(false);
+    const [openNotesEdit, setOpenNotesEdit] = useState(false);
 
 
 
@@ -52,26 +45,23 @@ function CarouselSongCard({song, userSongs, setUserSongs, handleMoreDetailsFetch
       return `${ pre }_${ Math.random() }`;
   }
 
-  let lyricList = []
-  if (song.lyrics)
-    {let arrayStr = song.lyrics.split("\n")
+    let lyricList = []
+      if (song.lyrics)
+      {let arrayStr = song.lyrics.split("\n")
 
 
-    lyricList = arrayStr.map(elly => <li key={generateKey(elly)}>{elly}</li>)
-    }
-
-    const [open, setOpen] = useState(false);
-    const [openLyricsEdit, setOpenLyricsEdit] = useState(false);
-    const [openNotesEdit, setOpenNotesEdit] = useState(false);
+      lyricList = arrayStr.map(elly => <li key={generateKey(elly)}>{elly}</li>)
+      }
 
 
     let notesList = []
-    if (song.notes){
-    let notesArry = song.notes.split("\n")
+      if (song.notes){
+      let notesArry = song.notes.split("\n")
 
 
-    notesList = notesArry.map(elly => <li key={generateKey(elly)}>{elly}</li>)
-    }
+      notesList = notesArry.map(elly => <li key={generateKey(elly)}>{elly}</li>)
+      }
+
     const useStyles = makeStyles((theme) => ({
         roots: {
             '& label.Mui-focused': {
@@ -177,7 +167,6 @@ function CarouselSongCard({song, userSongs, setUserSongs, handleMoreDetailsFetch
 
             }
 
-
             const theme = createTheme({
                 overrides: {
                     MuiDialog: {
@@ -224,23 +213,9 @@ function CarouselSongCard({song, userSongs, setUserSongs, handleMoreDetailsFetch
               function searchUltGuitar(){
                 window.open(
                         `https://www.ultimate-guitar.com/search.php?search_type=title&value=${song.title}`,
-                        '_blank' // <- This is what makes it open in a new window.
+                        '_blank' 
                       );
                 }
-                function handleDelete(){
-                  fetch (`/songs/${song.id}`, {
-                    method: 'DELETE',
-                    headers: {
-                      'Content-Type': 'application/json'
-                    }
-                  }).then(res => res.json())
-                  .then(data => {
-                      let filtered = userSongs.filter(item => item.id !== data.id)
-                      setUserSongs(filtered)
-                      history.push('./')
-                })}
-
-
 
                 const [tabs, setTabs] = useState(song.tabs)
 
@@ -264,10 +239,8 @@ function CarouselSongCard({song, userSongs, setUserSongs, handleMoreDetailsFetch
                   if (song.tabs){
                   let tabsArry = song.tabs.split("\n")
 
-
                   tabsList = tabsArry.map(elly => <li key={generateKey(elly)}>{elly}</li>)
                   }
-
 
                   function handleTabsEdit(e) {
                     e.preventDefault()
@@ -292,20 +265,20 @@ function CarouselSongCard({song, userSongs, setUserSongs, handleMoreDetailsFetch
 
 
 
-const [notesExpand, setNotesExpand] = useState(() => {
-  if (song.notes) {return true}
-  else {return false}
-})
-const [tabsExpand, setTabsExpand] = useState(() => {
-  if (song.tabs) {return true}
-  else {return false}
-})
-const [lyricsExpand, setLyricsExpand] = useState(() => {
-  if (song.lyrics) {return true}
-  else {return false}
-})
+                  const [notesExpand, setNotesExpand] = useState(() => {
+                    if (song.notes) {return true}
+                    else {return false}
+                  })
+                  const [tabsExpand, setTabsExpand] = useState(() => {
+                    if (song.tabs) {return true}
+                    else {return false}
+                  })
+                  const [lyricsExpand, setLyricsExpand] = useState(() => {
+                    if (song.lyrics) {return true}
+                    else {return false}
+                  })
 
-const [videoExpand, setVideoExpand] = useState(false)
+                  const [videoExpand, setVideoExpand] = useState(false)
 
     return(
   <div  style={{textAlign: 'center'}}>
@@ -317,21 +290,15 @@ const [videoExpand, setVideoExpand] = useState(false)
 
     <Card className='songcard' style={{boxShadow: '1px 1px 4px 5px #750000', textAlign: 'center', margin: 'auto', fontFamily:'Reem Kufi', flexDirection: 'column', height: 'auto', width: '61vw', overflow: 'auto'}}> 
         <Grid item container
-  direction="row"
-  justifyContent="flex-start"
-  alignItems="flex-start">
-        <Grid item xs={3} style={{ paddingLeft: '10px'}}>
+          direction="row"
+          justifyContent="flex-start"
+          alignItems="flex-start">
+      <Grid item xs={3} style={{ paddingLeft: '10px'}}>
             <h4>{song.title}</h4>
         </Grid>
         <Grid item xs={3}>
             <h4>Artist: {song.artist}</h4>
         </Grid>
-        {/* <Grid item xs={3}>
-            <h4>Genre: {song.genre}</h4>
-        </Grid> */}
-        {/* <Grid item xs={3}>
-            <h4>Is this a singable song? {song.singable? 'Yes': 'No'}</h4>
-        </Grid> */}
               <Grid item xs={3} style={{ paddingLeft: '10px'}}>
                     
                     <h4>My Ability Level: {song.my_ability_level}</h4>
@@ -341,7 +308,7 @@ const [videoExpand, setVideoExpand] = useState(false)
              <h4>Year Learned: {song.year_learned}</h4>
         </Grid>
 
-<Grid item xs={12} style={{alignItems: 'left', paddingLeft: '10px'}} >
+      <Grid item xs={12} style={{alignItems: 'left', paddingLeft: '10px'}} >
             <Accordion expanded={notesExpand}  style={{ boxShadow: "none" }}  >
                 <AccordionSummary className={classes.root} onClick={() => setNotesExpand(!notesExpand)}  >
                 {notesExpand ? <Typography className={classes.heading} > Hide Notes </Typography> : <Typography className={classes.heading} > Show Notes</Typography> }
@@ -355,9 +322,10 @@ const [videoExpand, setVideoExpand] = useState(false)
             
          
                         <Button className="gameButton" onClick={handleClickNotesEditOpen}>
-        Edit or Add Notes
-      </Button>
-      <br/>
+                          Edit or Add Notes
+                        </Button>
+                        <br/>
+      
       <ThemeProvider theme={theme}>
       <Dialog
         open={openNotesEdit} onClose={handleCloseNotesEdit} aria-labelledby="form-dialog-title">
@@ -379,23 +347,23 @@ const [videoExpand, setVideoExpand] = useState(false)
             
           />
         
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseNotesEdit}className="gameButton">
-            Cancel
-          </Button>
-          <Button type="submit" className="gameButton">
-            Save
-          </Button>
-          
-        </DialogActions>
-        </form>
-      </Dialog>
-      </ThemeProvider>
+                  </DialogContent>
+                  <DialogActions>
+                    <Button onClick={handleCloseNotesEdit}className="gameButton">
+                      Cancel
+                    </Button>
+                    <Button type="submit" className="gameButton">
+                      Save
+                    </Button>
+                    
+                  </DialogActions>
+                  </form>
+                </Dialog>
+                </ThemeProvider>
 
-                     </AccordionDetails>
-             </Accordion>
-        </Grid>
+                              </AccordionDetails>
+                      </Accordion>
+                  </Grid>
 
 
         <Grid item xs={12} style={{alignItems: 'left', paddingLeft: '10px'}} >
@@ -434,21 +402,21 @@ const [videoExpand, setVideoExpand] = useState(false)
                                   onChange={e => setTabs(e.target.value)}
                       
             
-          />
-        </DialogContent>
-        <DialogActions>
-        <Button className="gameButton" onClick={handleAddTabLines}>Add More Tab Lines</Button>
-          <Button onClick={handleCloseTabsEdit}className="gameButton">
-            Cancel
-          </Button>
-          <Button type="submit" className="gameButton">
-            Save
-          </Button>
-          
-        </DialogActions>
-        </form>
-      </Dialog>
-      </ThemeProvider>
+                          />
+                        </DialogContent>
+                        <DialogActions>
+                        <Button className="gameButton" onClick={handleAddTabLines}>Add More Tab Lines</Button>
+                          <Button onClick={handleCloseTabsEdit}className="gameButton">
+                            Cancel
+                          </Button>
+                          <Button type="submit" className="gameButton">
+                            Save
+                          </Button>
+                          
+                        </DialogActions>
+                        </form>
+                      </Dialog>
+                      </ThemeProvider>
 
 
                      </AccordionDetails>
@@ -473,9 +441,6 @@ const [videoExpand, setVideoExpand] = useState(false)
                                 Add, Edit, or Import Lyrics
                               </Button>
                               <br/>
-                        {/* <Button className="gameButton" onClick={handleImportLyrics}>
-                                Click to Import Lyrics
-                              </Button> */}
                               <br/>
       <ThemeProvider theme={theme}>
       <Dialog style={{fontFamily: 'Reem Kufi', color: 'black'}}
@@ -497,69 +462,65 @@ const [videoExpand, setVideoExpand] = useState(false)
                         onChange={e => setLyrics(e.target.value)}
                       
             
-          />
+                    />
         
-        </DialogContent>
-        <DialogActions>
-          <Button className="gameButton" onClick={handleImportLyrics}>
-                                Click to Import Lyrics
-                              </Button>
-          <Button onClick={handleCloseLyricsEdit} className="gameButton">
-            Cancel
-          </Button>
-          <Button type="submit" className="gameButton">
-            Save
-          </Button>
-          
-        </DialogActions>
-        </form>
-      </Dialog>
-      </ThemeProvider>
+                    </DialogContent>
+                    <DialogActions>
+                      <Button className="gameButton" onClick={handleImportLyrics}>
+                                            Click to Import Lyrics
+                                          </Button>
+                      <Button onClick={handleCloseLyricsEdit} className="gameButton">
+                        Cancel
+                      </Button>
+                      <Button type="submit" className="gameButton">
+                        Save
+                      </Button>
+                      
+                    </DialogActions>
+                    </form>
+                  </Dialog>
+                  </ThemeProvider>
 
                      </AccordionDetails>
              </Accordion>
         </Grid>
-        <Grid item xs={12} style={{ paddingLeft: '10px'}}>
-        <Accordion expanded={videoExpand} style={{ boxShadow: "none" }}  >
-        <AccordionSummary className={classes.root} onClick={() => setVideoExpand(!videoExpand)}  >
-        {videoExpand ? <Typography className={classes.heading} > Hide Video Recording </Typography> : <Typography className={classes.heading} > Show Video Recording</Typography> }
-        </AccordionSummary>
-        <AccordionDetails>
-          <>
-            {recordingID ?
-            <> 
-            <iframe src={`https://player.vimeo.com/video/${recordingID}`} width="640" height="360" frameBorder="0" allow="autoplay; fullscreen; picture-in-picture" allowFullScreen title="Test Embed With Some weird music vimeo added!"></iframe>
-            
-            </>
-             : <>
-                <h4>There's no recording on file for this song! </h4>
-                <br/>
-                <h4> Add one via the edit song information button </h4>
-                </> }
-                
-            </>
-            </AccordionDetails>
-            </Accordion>
-        </Grid>
-        <br/>
-        <br/>
-        <br/>
-        <Grid item xs={6} style={{ paddingLeft: '10px'}}>
-        <div>
-      <Button className="gameButton" onClick={handleClickOpen}>
-        Edit this Song Information
-      </Button>
-      
 
-      {/* <ThemeProvider> */}
+
+        <Grid item xs={12} style={{ paddingLeft: '10px'}}>
+              <Accordion expanded={videoExpand} style={{ boxShadow: "none" }}  >
+              <AccordionSummary className={classes.root} onClick={() => setVideoExpand(!videoExpand)}  >
+              {videoExpand ? <Typography className={classes.heading} > Hide Video Recording </Typography> : <Typography className={classes.heading} > Show Video Recording</Typography> }
+              </AccordionSummary>
+              <AccordionDetails>
+                <>
+                  {recordingID ?
+                  <> 
+                  <iframe src={`https://player.vimeo.com/video/${recordingID}`} width="640" height="360" frameBorder="0" allow="autoplay; fullscreen; picture-in-picture" allowFullScreen title="Test Embed With Some weird music vimeo added!"></iframe>
+                  
+                  </>
+                  : <>
+                      <h4>There's no recording on file for this song! </h4>
+                      <br/>
+                      <h4> Add one via the edit song information button </h4>
+                      </> }
+                      
+                  </>
+                  </AccordionDetails>
+                  </Accordion>
+              </Grid>
+              <br/>
+              <br/>
+              <br/>
+              <Grid item xs={6} style={{ paddingLeft: '10px'}}>
+              <div>
+            <Button className="gameButton" onClick={handleClickOpen}>
+              Edit this Song Information
+            </Button>
       <Dialog 
-  open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle  id="form-dialog-title">Edit Song Information</DialogTitle>
+          open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+                <DialogTitle  id="form-dialog-title">Edit Song Information</DialogTitle>
         <form onSubmit={handleEdit}>
         <DialogContent>
-          {/* <DialogContentText>
-            Edit the Song information
-          </DialogContentText> */}
           
           <TextField className={classes.roots}
                         autoFocus
@@ -581,17 +542,6 @@ const [videoExpand, setVideoExpand] = useState(false)
                         onChange={e => setArtist(e.target.value)}
                         fullWidth
           />
-
-            {/* <TextField className={classes.roots}
-                        autoFocus
-                        margin="dense"
-                        id="genre"
-                        label="Genre"
-                        type="text"
-                        value={genre}
-                        onChange={e => setGenre(e.target.value)}
-                        fullWidth
-                    /> */}
 
             <TextField className={classes.roots}
                         autoFocus
@@ -627,40 +577,28 @@ const [videoExpand, setVideoExpand] = useState(false)
                         fullWidth
                     />
 
-                {/* <div>
-                <label >Singable?</label>
-                <label style={{marginLeft: '10px'}}>No</label>
-                <input style={{marginLeft: '10px'}} type="radio" id="no" name="singable" value="false" defaultChecked={!singableResponse} onClick={() => setSingableResponse(false)}/>
-                <label style={{marginLeft: '10px'}}>Yes</label>
-                <input style={{marginLeft: '10px'}} type="radio" id="yes" name="singable" value="true" defaultChecked={singableResponse} onClick={() => setSingableResponse(true)}/>
-                </div> */}
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} className="gameButton">
-            Cancel
-          </Button>
-          <Button type="submit" className="gameButton">
-            Save
-          </Button>
+
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleClose} className="gameButton">
+                    Cancel
+                  </Button>
+                  <Button type="submit" className="gameButton">
+                    Save
+                  </Button>
+                  
+                </DialogActions>
+                </form>
+              </Dialog>
+
+               </div>
+          </Grid>
           
-        </DialogActions>
-        </form>
-      </Dialog>
-      {/* </ThemeProvider> */}
-    </div>
-    </Grid>
           <Grid item xs={6}>
                   <Button  className="gameButton" onClick={searchUltGuitar} >Search Ultimate Guitar Tabs</Button>
           </Grid>
           <br/>
           <br/>
-          {/* <Grid item xs={4}></Grid> */}
-          {/* <br/>
-          <br/>
-          <br/>
-          <Grid item xs={12}>
-                  <Button  className="gameButton" onClick={handleDelete} >Delete Song From Library</Button>
-          </Grid> */}
 
         </Grid>   
     </Card>

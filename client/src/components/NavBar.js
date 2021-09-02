@@ -6,7 +6,6 @@ function NavBar({currentUser, setCurrentUser}){
         const res = await fetch('/logout', {
             method: 'DELETE'
         })
-
         setCurrentUser([])
     }
 
@@ -43,13 +42,8 @@ function NavBar({currentUser, setCurrentUser}){
                 
             </Container>
         </Navbar>
-        {/* <img src="https://www.clipartmax.com/png/middle/301-3010680_guitar-logo-vector-png-images-gallery-vertical-guitar-icons.png" /> */}
+        
     </>
     )
 }
 export default NavBar
-
-{/* 
-        {currentGamer.id? <Navbar.Brand style={{color: 'black', fontWeight: 'bold', outlineColor: 'white', fontFamily:'Reem Kufi'}}>Welcome </Navbar.Brand> : null} */}
-
-        // : <Nav.Link style={{color: 'black', fontSize: 'large', fontWeight: 'bold', fontFamily:'Reem Kufi'}} className="color-links" href="/login">Login</Nav.Link>}

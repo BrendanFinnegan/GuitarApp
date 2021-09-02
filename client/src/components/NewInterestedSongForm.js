@@ -1,19 +1,16 @@
-import { Form, Group, Label, Control, Button } from "react-bootstrap"
+import { Button } from "react-bootstrap"
 import { useState } from "react"
 import { useHistory } from "react-router-dom"
-import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 
 function NewInterestedSongForm ({handleClose, currentUser,interestedSongs, setInterestedSongs}) {
     const [title, setTitle] = useState('')
     const [artist, setArtist] = useState('')
-    const [genre, setGenre] = useState('')
-    const [errors, setErrors] = useState('')
+    const [genre] = useState('')
+    const [setErrors] = useState('')
     const history = useHistory()
 
     async function handleSubmit(e) {
@@ -77,7 +74,6 @@ function NewInterestedSongForm ({handleClose, currentUser,interestedSongs, setIn
 
     return(
         <div >
-        {/* <h3 style={{fontFamily: 'Reem Kufi', color: 'black' }}>Add a New Song That You Want to Learn</h3> */}
         
         <form onSubmit={handleSubmit}>
         <DialogContent>
@@ -103,16 +99,6 @@ function NewInterestedSongForm ({handleClose, currentUser,interestedSongs, setIn
                         onChange={e => setArtist(e.target.value)}
                         fullWidth
                     />
-          {/* <TextField
-                        autoFocus
-                        margin="dense"
-                        id="genre"
-                        label="Genre"
-                        type="text"
-                        value={genre}
-                        onChange={e => setGenre(e.target.value)}
-                        fullWidth
-                    /> */}
 
           </DialogContent>
           <DialogActions>
@@ -125,8 +111,6 @@ function NewInterestedSongForm ({handleClose, currentUser,interestedSongs, setIn
           
         </DialogActions>
           </form>
-        
-        {/* {errors.error? errors.error.map(e => <p className="error-message" style={{fontFamily: 'Reem Kufi', color: 'black' }}>{e}</p>) : null} */}
     </div>
     )
 }
